@@ -14,6 +14,7 @@
     --gray: #1a1a1a;
     --light-gray: #252525;
     --white: #f0f0f0;
+    --nav-width: 180px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,24 +24,69 @@
   .stripe-bar .s-red  { flex: 1; background: var(--red); }
   .stripe-bar .s-green{ flex: 1; background: var(--green); }
 
+  /* LAYOUT */
+  .page-layout { display: flex; align-items: flex-start; }
+
+  /* SIDENAV */
+  .sidenav {
+    width: var(--nav-width);
+    position: sticky;
+    top: 20px;
+    flex-shrink: 0;
+    padding: 20px 0 20px 16px;
+  }
+  .sidenav-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 14px;
+    padding-left: 12px;
+  }
+  .sidenav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.82rem;
+    font-family: 'Open Sans', sans-serif;
+    transition: background 0.15s, color 0.15s;
+    border-left: 2px solid transparent;
+    margin-bottom: 3px;
+  }
+  .sidenav a:hover { color: var(--white); background: #1a1a1a; }
+  .sidenav a.active { color: var(--white); border-left-color: var(--red); background: #1a1a1a; }
+  .sidenav a .nav-icon { font-size: 1rem; flex-shrink: 0; }
+
+  /* MAIN CONTENT */
+  .main-content { flex: 1; min-width: 0; }
+
+  /* Hide sidenav on small screens */
+  @media(max-width: 700px) {
+    .sidenav { display: none; }
+  }
+
   /* HERO */
   .hero { position: relative; background: var(--black); text-align: center; padding: 60px 20px 50px; overflow: hidden; }
-  .hero::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:160px; background:linear-gradient(to right, var(--red) 0%, var(--red) 48%, var(--green) 52%, var(--green) 100%); opacity:0.18; pointer-events:none; }
-  .hero-badge { position:relative; display:inline-block; background:var(--red); color:#fff; font-family:'Oswald',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:6px 20px; border-radius:2px; margin-bottom:22px; }
-  .hero h1 { position:relative; font-family:'Oswald',sans-serif; font-size:clamp(2.4rem,7vw,4.5rem); font-weight:700; line-height:1.05; text-transform:uppercase; letter-spacing:3px; }
+  .hero::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:120px; background:linear-gradient(to right, var(--red) 50%, var(--green) 50%); opacity:0.25; pointer-events:none; z-index:0; }
+  .hero-badge { position:relative; z-index:1; display:inline-block; background:var(--red); color:#fff; font-family:'Oswald',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:6px 20px; border-radius:2px; margin-bottom:22px; }
+  .hero h1 { position:relative; z-index:1; font-family:'Oswald',sans-serif; font-size:clamp(2.4rem,7vw,4.5rem); font-weight:700; line-height:1.05; text-transform:uppercase; letter-spacing:3px; }
   .hero h1 .stripe-text { display:inline-block; background:linear-gradient(to right, var(--red) 50%, var(--green) 50%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .hero-sub { position:relative; font-size:1rem; color:#888; margin-top:12px; letter-spacing:1px; }
-  .vs-row { position:relative; display:flex; align-items:center; justify-content:center; gap:40px; margin-top:35px; flex-wrap:wrap; }
+  .hero-sub { position:relative; z-index:1; font-size:1rem; color:#888; margin-top:12px; letter-spacing:1px; }
+  .vs-row { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:60px; margin-top:35px; flex-wrap:wrap; width:100%; }
   .club-badge { display:flex; flex-direction:column; align-items:center; gap:8px; }
   .club-circle { width:85px; height:85px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:1.5rem; font-weight:700; border:3px solid; }
-  .club-nec .club-circle { background:linear-gradient(135deg,#1a0000 50%,#001a08 50%); border-color:#fff; color:#fff; }
   .club-az .club-circle { background:#c8102e; border-color:#fff; color:#fff; }
   .club-name { font-size:0.8rem; color:#888; letter-spacing:2px; text-transform:uppercase; }
   .vs-text { font-family:'Oswald',sans-serif; font-size:2.8rem; font-weight:700; color:#fff; }
 
   /* SECTIONS */
-  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-  section { padding: 50px 0; border-bottom: 1px solid #222; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 50px 0; border-bottom: 1px solid #222; scroll-margin-top: 20px; }
   .section-title { font-family:'Oswald',sans-serif; font-size:1.4rem; font-weight:700; text-transform:uppercase; letter-spacing:3px; color:#fff; margin-bottom:25px; display:flex; align-items:center; gap:14px; }
   .section-title::before { content:''; display:inline-block; width:6px; height:22px; background:linear-gradient(to bottom, var(--red) 50%, var(--green) 50%); border-radius:2px; flex-shrink:0; }
 
@@ -50,55 +96,9 @@
   .cd-block::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right, var(--red), var(--green)); }
   .cd-num { font-family:'Oswald',sans-serif; font-size:3rem; font-weight:700; line-height:1; }
   .cd-days .cd-num, .cd-hours .cd-num { color:var(--red); }
-  .cd-mins .cd-num { color:#0b5; }
-  .cd-secs .cd-num { color:var(--green); }
   .cd-label { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:#666; margin-top:6px; }
 
-  /* WEDSTRIJDINFO */
-  .info-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
-  .info-card { background:var(--gray); border:1px solid #2a2a2a; border-radius:4px; padding:18px; display:flex; align-items:flex-start; gap:14px; position:relative; overflow:hidden; }
-  .info-card::before { content:''; position:absolute; top:0; left:0; bottom:0; width:3px; background:linear-gradient(to bottom, var(--red), var(--green)); }
-  .info-icon { font-size:1.6rem; }
-  .info-label { font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:#666; }
-  .info-value { font-family:'Oswald',sans-serif; font-size:1.05rem; margin-top:4px; }
-
-  /* SPOTIFY + YOUTUBE ROW */
-  .media-row { display:grid; grid-template-columns: 1fr 1fr; gap:20px; align-items:start; }
-  @media(max-width:600px){ .media-row { grid-template-columns:1fr; } }
-
-  .spotify-grid { display:flex; flex-direction:column; gap:12px; }
-  .spotify-card { background:#111; border:1px solid #2a2a2a; border-radius:4px; padding:14px; display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--white); transition:border-color 0.2s,transform 0.2s; }
-  .spotify-card:hover { border-color:#1DB954; transform:translateY(-2px); }
-  .spotify-thumb { width:48px; height:48px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; }
-  .s1 { background:linear-gradient(135deg,var(--red),#800010); }
-  .s2 { background:linear-gradient(135deg,var(--green),#005520); }
-  .s3 { background:linear-gradient(135deg,var(--red) 50%,var(--green) 50%); }
-  .spotify-title { font-weight:600; font-size:0.85rem; }
-  .spotify-sub { font-size:0.72rem; color:#777; margin-top:2px; }
-  .spotify-badge { margin-left:auto; background:#1DB954; color:#000; font-size:0.6rem; font-weight:700; padding:3px 7px; border-radius:10px; flex-shrink:0; }
-
-  /* YOUTUBE */
-  .yt-block { display:flex; flex-direction:column; gap:10px; }
-  .yt-label { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--red); font-weight:700; }
-  .yt-title { font-family:'Oswald',sans-serif; font-size:1rem; margin-bottom:6px; }
-  .yt-embed { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:4px; border:1px solid #2a2a2a; }
-  .yt-embed iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
-
-  /* PODCASTS */
-  .podcast-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
-  .podcast-card {
-    background: #111; border: 1px solid #2a2a2a; border-radius: 4px;
-    padding: 14px 16px; display: flex; align-items: center; gap: 14px;
-    text-decoration: none; color: var(--white);
-    transition: border-color 0.2s, transform 0.2s;
-    position: relative; overflow: hidden;
-  }
-  .podcast-card::before { content:''; position:absolute; top:0; left:0; bottom:0; width:3px; background:linear-gradient(to bottom, var(--red), var(--green)); }
-  .podcast-card:hover { border-color: #555; transform: translateX(3px); }
-  .podcast-icon { width:48px; height:48px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; background: linear-gradient(135deg, #1a0000, #001a08); }
-  .podcast-name { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:600; }
-  .podcast-desc { font-size:0.75rem; color:#777; margin-top:3px; }
-  .podcast-arrow { margin-left:auto; color:#444; flex-shrink:0; font-size:0.9rem; }
+  /* NIEUWS */
   .news-list { display:flex; flex-direction:column; }
   .news-item { display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid #1e1e1e; text-decoration:none; color:var(--white); transition:background 0.15s, padding-left 0.15s; }
   .news-item:first-child { border-top:1px solid #1e1e1e; }
@@ -106,6 +106,34 @@
   .news-favicon { width:20px; height:20px; border-radius:3px; flex-shrink:0; object-fit:contain; background:#222; }
   .news-item-title { flex:1; font-size:0.88rem; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .news-item-meta { font-size:0.7rem; color:#555; flex-shrink:0; white-space:nowrap; }
+  .news-more-btn { margin-top:14px; background:none; border:1px solid #333; color:#888; padding:9px 20px; border-radius:4px; font-family:'Oswald',sans-serif; font-size:0.8rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:border-color 0.2s, color 0.2s; display:none; }
+  .news-more-btn:hover { border-color:var(--red); color:var(--white); }
+
+  /* MUZIEK */
+  .music-section { display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; }
+  @media(max-width:650px){ .music-section { grid-template-columns:1fr; } }
+  .spotify-grid { display:flex; flex-direction:column; gap:12px; }
+  .spotify-card { background:#111; border:1px solid #2a2a2a; border-radius:4px; padding:16px; display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--white); transition:border-color 0.2s, transform 0.2s; }
+  .spotify-card:hover { border-color:#1DB954; transform:translateY(-2px); }
+  .spotify-thumb { width:60px; height:60px; border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0; }
+  .s1 { background:linear-gradient(135deg,var(--red),#800010); }
+  .s2 { background:linear-gradient(135deg,var(--green),#005520); }
+  .s3 { background:linear-gradient(135deg,var(--red) 50%,var(--green) 50%); }
+  .spotify-title { font-weight:600; font-size:0.95rem; }
+  .spotify-sub { font-size:0.75rem; color:#777; margin-top:3px; }
+  .spotify-badge { margin-left:auto; background:#1DB954; color:#000; font-size:0.6rem; font-weight:700; padding:3px 7px; border-radius:10px; flex-shrink:0; }
+  .yt-embed { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:4px; border:1px solid #2a2a2a; }
+  .yt-embed iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+  /* PODCASTS */
+  .podcast-grid { display:flex; flex-direction:column; gap:20px; margin-top:30px; }
+  .podcast-item { background:#111; border:1px solid #2a2a2a; border-radius:4px; overflow:hidden; position:relative; }
+  .podcast-item::before { content:''; position:absolute; top:0; left:0; bottom:0; width:3px; background:linear-gradient(to bottom, var(--red), var(--green)); }
+  .podcast-header { display:flex; align-items:center; gap:12px; padding:14px 16px; }
+  .podcast-icon { font-size:1.4rem; }
+  .podcast-name { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:600; }
+  .podcast-desc { font-size:0.75rem; color:#777; margin-top:2px; }
+  .podcast-embed { padding:0 12px 12px; }
 
   /* WEATHER */
   .weather-intro { display:flex; align-items:center; gap:16px; background:var(--gray); border:1px solid #2a2a2a; border-radius:4px; padding:18px 20px; margin-bottom:16px; position:relative; overflow:hidden; }
@@ -123,45 +151,6 @@
   .wh-rain { font-size:0.65rem; color:#777; margin-top:2px; }
   .weather-note { margin-top:14px; font-size:0.78rem; color:#555; font-style:italic; }
 
-  /* BLESSURES FORMULIER */
-  .injury-edit-btn {
-    margin-bottom: 16px;
-    background: transparent; border: 1px solid #333;
-    color: #888; padding: 8px 16px; border-radius: 4px;
-    font-family: 'Oswald', sans-serif; font-size: 0.8rem;
-    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .injury-edit-btn:hover { border-color: var(--red); color: #fff; }
-  .injury-form {
-    display: none;
-    background: var(--gray); border: 1px solid #2a2a2a;
-    border-radius: 4px; padding: 20px; margin-bottom: 20px;
-  }
-  .injury-form.open { display: block; }
-  .injury-form h3 { font-family:'Oswald',sans-serif; font-size:1rem; margin-bottom:14px; color:#aaa; letter-spacing:1px; }
-  .form-row { display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
-  .form-row select, .form-row input {
-    background: #111; border: 1px solid #333; color: var(--white);
-    padding: 8px 12px; border-radius: 3px; font-size: 0.85rem;
-    font-family: 'Open Sans', sans-serif;
-  }
-  .form-row input { flex: 1; min-width: 140px; }
-  .form-row select { min-width: 130px; }
-  .form-add-btn {
-    background: var(--red); color: #fff; border: none;
-    padding: 8px 18px; border-radius: 3px;
-    font-family: 'Oswald', sans-serif; font-size: 0.85rem;
-    font-weight: 700; letter-spacing: 1px; cursor: pointer;
-  }
-  .form-add-btn:hover { background: #a80015; }
-  .injury-remove {
-    background: none; border: none; color: #444;
-    cursor: pointer; font-size: 1rem; padding: 0 4px;
-    transition: color 0.2s;
-  }
-  .injury-remove:hover { color: var(--red); }
-
   /* BLESSURES */
   .injury-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
   @media(max-width:580px){ .injury-grid { grid-template-columns:1fr; } }
@@ -174,14 +163,19 @@
   .injury-list { display:flex; flex-direction:column; }
   .injury-row { display:flex; align-items:center; gap:10px; padding:10px 16px; border-bottom:1px solid #1e1e1e; }
   .injury-row:last-child { border-bottom:none; }
-  .injury-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-  .dot-out    { background:#D0021B; }
-  .dot-doubt  { background:#f5a623; }
-  .dot-return { background:#008A3C; }
   .injury-name { font-size:0.88rem; font-weight:600; flex:1; }
   .injury-detail { font-size:0.72rem; color:#777; }
-  .injury-legend { display:flex; gap:16px; margin-top:14px; font-size:0.72rem; color:#666; }
-  .injury-legend span { display:flex; align-items:center; gap:5px; }
+  .injury-legend { display:flex; gap:16px; margin-top:14px; font-size:0.72rem; color:#666; flex-wrap:wrap; }
+  .injury-form { display:none; background:var(--gray); border:1px solid #2a2a2a; border-radius:4px; padding:20px; margin-bottom:20px; }
+  .injury-form.open { display:block; }
+  .injury-form h3 { font-family:'Oswald',sans-serif; font-size:1rem; margin-bottom:14px; color:#aaa; letter-spacing:1px; }
+  .form-row { display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+  .form-row select, .form-row input { background:#111; border:1px solid #333; color:var(--white); padding:8px 12px; border-radius:3px; font-size:0.85rem; font-family:'Open Sans',sans-serif; }
+  .form-row input { flex:1; min-width:140px; }
+  .form-row select { min-width:130px; }
+  .form-add-btn { background:var(--red); color:#fff; border:none; padding:8px 18px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.85rem; font-weight:700; cursor:pointer; }
+  .injury-remove { background:none; border:none; color:#444; cursor:pointer; font-size:1rem; padding:0 4px; transition:color 0.2s; }
+  .injury-remove:hover { color:var(--red); }
 
   /* POLL */
   .poll-container { max-width:500px; }
@@ -198,7 +192,21 @@
   .poll-btn:disabled { opacity:0.3; cursor:default; }
   .poll-votes { margin-top:10px; font-size:0.75rem; color:#555; }
 
-  /* FOOTER */
+  /* SUGGESTIE */
+  .suggest-form { background:var(--gray); border:1px solid #2a2a2a; border-radius:4px; padding:24px; max-width:560px; }
+  .suggest-form textarea { width:100%; background:#111; border:1px solid #333; color:var(--white); padding:12px; border-radius:3px; font-size:0.88rem; font-family:'Open Sans',sans-serif; resize:vertical; min-height:100px; margin-bottom:12px; }
+  .suggest-form input[type=text] { width:100%; background:#111; border:1px solid #333; color:var(--white); padding:10px 12px; border-radius:3px; font-size:0.88rem; font-family:'Open Sans',sans-serif; margin-bottom:12px; }
+  .suggest-btn { background:linear-gradient(to right, var(--red), var(--green)); color:#fff; border:none; padding:11px 28px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:700; letter-spacing:1px; cursor:pointer; transition:opacity 0.2s; }
+  .suggest-btn:hover { opacity:0.85; }
+  .suggest-thanks { color:var(--green); font-size:0.9rem; margin-top:12px; display:none; font-weight:600; }
+  /* INBOX */
+  .inbox-item { background:var(--gray); border:1px solid #2a2a2a; border-left:3px solid var(--red); border-radius:4px; padding:14px 16px; margin-bottom:10px; }
+  .inbox-name { font-size:0.72rem; color:var(--red); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+  .inbox-text { font-size:0.88rem; margin-top:5px; line-height:1.5; }
+  .inbox-time { font-size:0.7rem; color:#555; margin-top:5px; }
+  .inbox-delete { float:right; background:none; border:none; color:#444; cursor:pointer; font-size:0.9rem; transition:color 0.2s; }
+  .inbox-delete:hover { color:var(--red); }
+  .inbox-empty { color:#555; font-size:0.85rem; }
   footer { text-align:center; padding:35px 20px 25px; color:#444; font-size:0.8rem; }
   .footer-stripe { display:flex; height:4px; width:100%; margin-bottom:25px; }
   .footer-stripe div { flex:1; }
@@ -217,7 +225,7 @@
   <p class="hero-sub">Jubileumseizoen 2025–2026 · De Kuip, Rotterdam</p>
   <div class="vs-row">
     <div class="club-badge club-nec">
-      <div class="club-circle" style="background:linear-gradient(to right, #D0021B 50%, #008A3C 50%);border:3px solid #fff;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.8)">NEC</div>
+      <div class="club-circle" style="background:linear-gradient(to right,#D0021B 50%,#008A3C 50%);border:3px solid #fff;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.8)">NEC</div>
       <span class="club-name">N.E.C. Nijmegen</span>
     </div>
     <div class="vs-text">VS</div>
@@ -227,174 +235,180 @@
 
 <div class="stripe-bar"><div class="s-red"></div><div class="s-green"></div></div>
 
-<!-- COUNTDOWN -->
-<section>
-  <div class="container">
-    <div class="section-title">⏱ Aftellen tot de finale</div>
-    <div class="countdown-grid">
-      <div class="cd-block cd-days"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Dagen</div></div>
-      <div class="cd-block cd-hours"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Uren</div></div>
-      <div class="cd-block cd-mins"><div class="cd-num" id="cd-mins" style="color:#00C853">00</div><div class="cd-label">Minuten</div></div>
-      <div class="cd-block cd-secs"><div class="cd-num" id="cd-secs" style="color:#00C853">00</div><div class="cd-label">Seconden</div></div>
-    </div>
-  </div>
-</section>
+<div class="page-layout">
 
+  <!-- SIDENAV -->
+  <nav class="sidenav" id="sidenav">
+    <div class="sidenav-title">Navigatie</div>
+    <a href="#aftellen"  class="nav-link"><span class="nav-icon">⏱</span> Aftellen</a>
+    <a href="#nieuws"    class="nav-link"><span class="nav-icon">📰</span> Nieuws</a>
+    <a href="#podcasts"  class="nav-link"><span class="nav-icon">🎙</span> Podcasts</a>
+    <a href="#muziek"    class="nav-link"><span class="nav-icon">🎵</span> Muziek</a>
+    <a href="#weer"      class="nav-link"><span class="nav-icon">🌤</span> Weer</a>
+    <a href="#blessures" class="nav-link"><span class="nav-icon">🏥</span> Blessures</a>
+    <a href="#poll"      class="nav-link"><span class="nav-icon">🗳</span> Poll</a>
+    <a href="#suggestie" class="nav-link"><span class="nav-icon">💡</span> Suggestie</a>
+  </nav>
 
+  <!-- MAIN -->
+  <div class="main-content">
 
-<!-- SPOTIFY + YOUTUBE -->
-<section>
-  <div class="container">
-    <div class="section-title">🎵 Muziek & Video</div>
-    <div class="media-row">
-      <!-- SPOTIFY -->
-      <div>
-        <div class="spotify-grid">
-          <a class="spotify-card" href="https://open.spotify.com/search/NEC%20Nijmegen" target="_blank">
-            <div class="spotify-thumb s1">⚽</div>
-            <div><div class="spotify-title">NEC Nijmegen Clubsongs</div><div class="spotify-sub">Zoek op Spotify</div></div>
-            <span class="spotify-badge">SPOTIFY</span>
-          </a>
-          <a class="spotify-card" href="https://open.spotify.com/search/KNVB%20Beker" target="_blank">
-            <div class="spotify-thumb s2">🏆</div>
-            <div><div class="spotify-title">KNVB Beker Sfeer</div><div class="spotify-sub">Bekerfinale vibes</div></div>
-            <span class="spotify-badge">SPOTIFY</span>
-          </a>
-          <a class="spotify-card" href="https://open.spotify.com/search/Nederlands%20voetbal%20hits" target="_blank">
-            <div class="spotify-thumb s3">🎶</div>
-            <div><div class="spotify-title">Voetbal Stadionhits</div><div class="spotify-sub">Nederlandse classics</div></div>
-            <span class="spotify-badge">SPOTIFY</span>
-          </a>
+    <!-- COUNTDOWN -->
+    <section id="aftellen">
+      <div class="container">
+        <div class="section-title">⏱ Aftellen tot de finale</div>
+        <div class="countdown-grid">
+          <div class="cd-block cd-days"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Dagen</div></div>
+          <div class="cd-block cd-hours"><div class="cd-num" id="cd-hours" style="color:#D0021B">00</div><div class="cd-label">Uren</div></div>
+          <div class="cd-block cd-mins"><div class="cd-num" id="cd-mins" style="color:#00C853">00</div><div class="cd-label">Minuten</div></div>
+          <div class="cd-block cd-secs"><div class="cd-num" id="cd-secs" style="color:#00C853">00</div><div class="cd-label">Seconden</div></div>
         </div>
       </div>
-      <!-- YOUTUBE WINNAAR HIT CONTEST -->
-      <div class="yt-block">
-        <div class="yt-label">🏆 Winnaar Hit Contest NEC</div>
-        <div class="yt-title">Officiële bekerfinale song</div>
-        <div class="yt-embed">
-          <iframe src="https://www.youtube.com/embed/ANRLJ1nbitc" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        </div>
+    </section>
+
+    <!-- NIEUWS -->
+    <section id="nieuws">
+      <div class="container">
+        <div class="section-title">📰 NEC Nieuws</div>
+        <div id="news-container"><div style="color:#666;font-size:0.9rem;padding:20px 0">Laden...</div></div>
+        <button class="news-more-btn" id="news-more-btn" onclick="showAllNews()">Meer nieuws →</button>
+        <button class="news-more-btn" id="news-less-btn" onclick="showLessNews()" style="display:none">← Minder nieuws</button>
       </div>
-      <!-- PODCASTS -->
-      <div style="margin-top:30px">
-        <div class="section-title" style="font-size:1.1rem;margin-bottom:14px">🎙 Podcasts</div>
+    </section>
+
+    <!-- PODCASTS -->
+    <section id="podcasts">
+      <div class="container">
+        <div class="section-title">🎙 Podcasts</div>
         <div class="podcast-grid">
-          <!-- Jarda Podcast -->
-          <div class="podcast-card" style="flex-direction:column;align-items:flex-start;gap:10px;cursor:default">
-            <div style="display:flex;align-items:center;gap:14px;width:100%">
-              <div class="podcast-icon">🎙</div>
-              <div>
-                <div class="podcast-name">Jarda Podcast</div>
-                <div class="podcast-desc">De NEC-podcast van Nijmeegse supporters</div>
-              </div>
-            </div>
-            <iframe style="border-radius:8px;width:100%;border:0" src="https://open.spotify.com/embed/show/6UxgSyyJdWKCNHiRH6HMd9?utm_source=generator" height="352" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <div class="podcast-item">
+            <div class="podcast-header"><span class="podcast-icon">🎙</span><div><div class="podcast-name">Jarda Podcast</div><div class="podcast-desc">De NEC-podcast van Nijmeegse supporters</div></div></div>
+            <div class="podcast-embed"><iframe style="border-radius:8px;width:100%;border:0" src="https://open.spotify.com/embed/show/6UxgSyyJdWKCNHiRH6HMd9?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
-          <!-- Over RoodGroenZwart -->
-          <div class="podcast-card" style="flex-direction:column;align-items:flex-start;gap:10px;cursor:default">
-            <div style="display:flex;align-items:center;gap:14px;width:100%">
-              <div class="podcast-icon">🟢</div>
-              <div>
-                <div class="podcast-name">Over RoodGroenZwart</div>
-                <div class="podcast-desc">Diepgaande analyses en interviews over NEC</div>
-              </div>
-            </div>
-            <iframe style="border-radius:8px;width:100%;border:0" src="https://open.spotify.com/embed/show/0Y8GrJXVyiqMYaJeJjbpmb?utm_source=generator" height="352" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <div class="podcast-item">
+            <div class="podcast-header"><span class="podcast-icon">🟢</span><div><div class="podcast-name">Over RoodGroenZwart</div><div class="podcast-desc">Diepgaande analyses en interviews over NEC</div></div></div>
+            <div class="podcast-embed"><iframe style="border-radius:8px;width:100%;border:0" src="https://open.spotify.com/embed/show/0Y8GrJXVyiqMYaJeJjbpmb?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
-          <!-- RN7 NEC Update -->
-          <div class="podcast-card" style="flex-direction:column;align-items:flex-start;gap:10px;cursor:default">
-            <div style="display:flex;align-items:center;gap:14px;width:100%">
-              <div class="podcast-icon">📻</div>
-              <div>
-                <div class="podcast-name">RN7 – NEC Update</div>
-                <div class="podcast-desc">Luister direct hieronder</div>
-              </div>
-            </div>
-            <iframe style="border-radius:8px;width:100%;border:0" src="https://open.spotify.com/embed/show/4pBHkxC4pPj3Dsbg7BgBjI/video?utm_source=generator" height="352" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <div class="podcast-item">
+            <div class="podcast-header"><span class="podcast-icon">📻</span><div><div class="podcast-name">RN7 – NEC Update</div><div class="podcast-desc">Regionale omroep Nijmegen</div></div></div>
+            <div class="podcast-embed"><iframe style="border-radius:8px;width:100%;border:0" src="https://open.spotify.com/embed/show/4pBHkxC4pPj3Dsbg7BgBjI?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
         </div>
       </div>
-<section>
-  <div class="container">
-    <div class="section-title">📰 NEC Nieuws</div>
-    <div id="news-container">
-      <div style="color:#666;font-size:0.9rem;padding:20px 0">Laden...</div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- WEATHER -->
-<section>
-  <div class="container">
-    <div class="section-title">🌤 Weer op 19 april – Rotterdam</div>
-    <div class="weather-intro">
-      <div style="font-size:2rem">📍</div>
-      <div>
-        <div class="weather-intro-label">Locatie</div>
-        <div class="weather-intro-val">De Kuip, Rotterdam &nbsp;·&nbsp; Aftrap 18:00 uur ⚽</div>
+    <!-- MUZIEK & VIDEO -->
+    <section id="muziek">
+      <div class="container">
+        <div class="section-title">🎵 Muziek & Video</div>
+        <div class="music-section">
+          <div class="spotify-grid">
+            <a class="spotify-card" href="https://open.spotify.com/search/NEC%20Nijmegen" target="_blank">
+              <div class="spotify-thumb s1">⚽</div>
+              <div><div class="spotify-title">NEC Nijmegen Clubsongs</div><div class="spotify-sub">Zoek op Spotify</div></div>
+              <span class="spotify-badge">SPOTIFY</span>
+            </a>
+            <a class="spotify-card" href="https://open.spotify.com/search/KNVB%20Beker" target="_blank">
+              <div class="spotify-thumb s2">🏆</div>
+              <div><div class="spotify-title">KNVB Beker Sfeer</div><div class="spotify-sub">Bekerfinale vibes</div></div>
+              <span class="spotify-badge">SPOTIFY</span>
+            </a>
+            <a class="spotify-card" href="https://open.spotify.com/search/Nederlands%20voetbal%20hits" target="_blank">
+              <div class="spotify-thumb s3">🎶</div>
+              <div><div class="spotify-title">Voetbal Stadionhits</div><div class="spotify-sub">Nederlandse classics</div></div>
+              <span class="spotify-badge">SPOTIFY</span>
+            </a>
+          </div>
+          <div class="yt-embed">
+            <iframe src="https://www.youtube.com/embed/ANRLJ1nbitc" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="weather-hourly" id="weather-hourly"></div>
-    <p class="weather-note">* Indicatie op basis van Rotterdamse aprilgemiddelden. Wordt nauwkeuriger naarmate de datum nadert.</p>
-  </div>
-</section>
+    </section>
 
-<!-- BLESSURES -->
-<section>
-  <div class="container">
-    <div class="section-title">🏥 Blessure-update</div>
-    <div class="injury-form" id="injury-form">
-      <h3>Speler toevoegen</h3>
-      <div class="form-row">
-        <select id="f-club">
-          <option value="nec">NEC Nijmegen</option>
-          <option value="az">AZ Alkmaar</option>
-        </select>
-        <input id="f-name" type="text" placeholder="Naam speler" />
-        <input id="f-detail" type="text" placeholder="Blessure / reden" />
-        <select id="f-status">
-          <option value="out">Afwezig</option>
-          <option value="doubt">Twijfelachtig</option>
-          <option value="fit">Fit</option>
-        </select>
-        <button class="form-add-btn" onclick="addInjury()">+ Voeg toe</button>
+    <!-- WEATHER -->
+    <section id="weer">
+      <div class="container">
+        <div class="section-title">🌤 Weer op 19 april – Rotterdam</div>
+        <div class="weather-intro">
+          <div style="font-size:2rem">📍</div>
+          <div><div class="weather-intro-label">Locatie</div><div class="weather-intro-val">De Kuip, Rotterdam &nbsp;·&nbsp; Aftrap 18:00 uur ⚽</div></div>
+        </div>
+        <div class="weather-hourly" id="weather-hourly"></div>
+        <p class="weather-note">* Indicatie op basis van Rotterdamse aprilgemiddelden. Wordt nauwkeuriger naarmate de datum nadert.</p>
       </div>
-    </div>
-    <div class="injury-grid" id="injury-grid"></div>
-    <div class="injury-legend">
-      <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#D0021B;margin-right:5px"></span>Afwezig</span>
-      <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#f5a623;margin-right:5px"></span>Twijfelachtig</span>
-      <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#008A3C;margin-right:5px"></span>Fit</span>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- POLL -->
-<section>
-  <div class="container">
-    <div class="section-title">🗳 Wat wordt de eindstand?</div>
-    <div class="poll-container">
-      <div class="poll-question">Jouw voorspelling voor NEC – AZ:</div>
-      <div class="poll-options">
-        <div class="poll-option" data-val="0" onclick="selectPoll(this)"><div class="poll-bar"></div><span class="poll-text">NEC wint na 90 min. ⚽</span><span class="poll-pct"></span></div>
-        <div class="poll-option" data-val="1" onclick="selectPoll(this)"><div class="poll-bar"></div><span class="poll-text">NEC wint na verlengingen ⏱</span><span class="poll-pct"></span></div>
-        <div class="poll-option" data-val="2" onclick="selectPoll(this)"><div class="poll-bar"></div><span class="poll-text">NEC wint na penalty's 🎯</span><span class="poll-pct"></span></div>
-        <div class="poll-option" data-val="3" onclick="selectPoll(this)"><div class="poll-bar"></div><span class="poll-text">AZ wint 😬</span><span class="poll-pct"></span></div>
+    <!-- BLESSURES -->
+    <section id="blessures">
+      <div class="container">
+        <div class="section-title">🏥 Blessure-update</div>
+        <div class="injury-form" id="injury-form">
+          <h3>Speler toevoegen</h3>
+          <div class="form-row">
+            <select id="f-club"><option value="nec">NEC Nijmegen</option><option value="az">AZ Alkmaar</option></select>
+            <input id="f-name" type="text" placeholder="Naam speler" />
+            <input id="f-detail" type="text" placeholder="Blessure / reden" />
+            <select id="f-status"><option value="out">Afwezig</option><option value="doubt">Twijfelachtig</option><option value="fit">Fit</option></select>
+            <button class="form-add-btn" onclick="addInjury()">+ Voeg toe</button>
+          </div>
+        </div>
+        <div class="injury-grid" id="injury-grid"></div>
+        <div class="injury-legend">
+          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#D0021B;margin-right:5px"></span>Afwezig</span>
+          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#f5a623;margin-right:5px"></span>Twijfelachtig</span>
+          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#008A3C;margin-right:5px"></span>Fit</span>
+        </div>
       </div>
-      <button class="poll-btn" id="poll-btn" onclick="submitPoll()" disabled>Stem nu</button>
-      <div class="poll-votes" id="poll-votes"></div>
-    </div>
-  </div>
-</section>
+    </section>
+
+    <!-- POLL -->
+    <section id="poll">
+      <div class="container">
+        <div class="section-title">🗳 Wat wordt de eindstand?</div>
+        <div class="poll-container">
+          <div class="poll-question">Jouw voorspelling voor NEC – AZ:</div>
+          <div class="poll-options">
+            <div class="poll-option" data-val="0" onclick="selectPoll(this)"><div class="poll-bar"></div><span class="poll-text">NEC wint na 90 min. ⚽</span><span class="poll-pct"></span></div>
+            <div class="poll-option" data-val="1" onclick="selectPoll(this)"><div class="poll-bar"></div><span class="poll-text">NEC wint na verlengingen ⏱</span><span class="poll-pct"></span></div>
+            <div class="poll-option" data-val="2" onclick="selectPoll(this)"><div class="poll-bar"></div><span class="poll-text">NEC wint na penalty's 🎯</span><span class="poll-pct"></span></div>
+            <div class="poll-option" data-val="3" onclick="selectPoll(this)"><div class="poll-bar"></div><span class="poll-text">AZ wint 😬</span><span class="poll-pct"></span></div>
+          </div>
+          <button class="poll-btn" id="poll-btn" onclick="submitPoll()" disabled>Stem nu</button>
+          <div class="poll-votes" id="poll-votes"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUGGESTIE -->
+    <section id="suggestie">
+      <div class="container">
+        <div class="section-title">💡 Suggestie</div>
+        <div class="suggest-form">
+          <p style="font-size:0.85rem;color:#888;margin-bottom:16px">Heb je een idee of opmerking voor deze pagina? Laat het weten!</p>
+          <input type="text" id="suggest-name" placeholder="Jouw naam (optioneel)" />
+          <textarea id="suggest-text" placeholder="Jouw suggestie..."></textarea>
+          <button class="suggest-btn" onclick="submitSuggestie()">Verstuur suggestie</button>
+          <div class="suggest-thanks" id="suggest-thanks">✅ Bedankt voor je suggestie!</div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /main-content -->
+</div><!-- /page-layout -->
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-stripe"><div class="fs-r"></div><div class="fs-g"></div></div>
   <p>Gemaakt met ❤️ voor <span class="r">NEC</span> <span class="g">Nijmegen</span> supporters</p>
   <p style="margin-top:6px;letter-spacing:1px">KNVB Beker Finale 2026 · Jubileumseizoen 2025–2026</p>
-  <p style="margin-top:10px;font-size:0.7rem;color:#2a2a2a">
-    <button onclick="toggleForm()" style="background:none;border:none;color:#2a2a2a;font-size:0.7rem;cursor:pointer;padding:0">beheer</button>
+  <p style="margin-top:10px;font-size:0.7rem;color:#1a1a1a">
+    <button onclick="toggleForm()" style="background:none;border:none;color:#1a1a1a;font-size:0.7rem;cursor:pointer;padding:0">beheer</button>
   </p>
+  <div id="beheer-inbox" style="display:none;max-width:600px;margin:20px auto 0;text-align:left">
+    <div style="font-family:'Oswald',sans-serif;font-size:1rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;border-top:1px solid #222;padding-top:16px">📬 Suggesties inbox</div>
+    <div id="inbox-container"></div>
+  </div>
 </footer>
 
 <script>
@@ -403,10 +417,10 @@
   function updateCountdown() {
     const diff = finaleDate - new Date();
     if (diff <= 0) return;
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
     document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
     document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
     document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
@@ -434,7 +448,7 @@
   });
 
   // NIEUWS
-  const nieuws = [
+  const allNieuws = [
     {titel:'Bekerfinale in gevaar voor AZ\'er Kasius',bron:'voetbalprimeur.nl',tijd:'2u geleden',url:'https://www.voetbalprimeur.nl'},
     {titel:'Over RoodGroenZwart: NEC gaat Feyenoord achterna in De Kuip',bron:'gelderlander.nl',tijd:'3u geleden',url:'https://www.gelderlander.nl/nec'},
     {titel:'Iedereen kan op de elftalfoto van NEC, zo doe je mee',bron:'rn7.nl',tijd:'5u geleden',url:'https://www.rn7.nl/sport/voetbal/nec'},
@@ -449,99 +463,175 @@
   ];
   const favicons = {};
   ['gelderlander.nl','nec-nijmegen.nl','voetbalzone.nl','voetbalprimeur.nl','rn7.nl','vi.nl','ad.nl','knvb.nl','nos.nl'].forEach(d => favicons[d] = `https://www.google.com/s2/favicons?domain=${d}&sz=32`);
-  document.getElementById('news-container').innerHTML = '<div class="news-list">' +
-    nieuws.map(n => `<a class="news-item" href="${n.url}" target="_blank">
-      <img class="news-favicon" src="${favicons[n.bron]||''}" alt="" onerror="this.style.display='none'">
-      <span class="news-item-title">${n.titel}</span>
-      <span class="news-item-meta">${n.bron} · ${n.tijd}</span>
-    </a>`).join('') + '</div>';
+
+  function renderNews(items) {
+    return '<div class="news-list">' + items.map(n => `
+      <a class="news-item" href="${n.url}" target="_blank">
+        <img class="news-favicon" src="${favicons[n.bron]||''}" alt="" onerror="this.style.display='none'">
+        <span class="news-item-title">${n.titel}</span>
+        <span class="news-item-meta">${n.bron} · ${n.tijd}</span>
+      </a>`).join('') + '</div>';
+  }
+
+  document.getElementById('news-container').innerHTML = renderNews(allNieuws.slice(0, 8));
+  if (allNieuws.length > 8) document.getElementById('news-more-btn').style.display = 'inline-block';
+
+  function showAllNews() {
+    document.getElementById('news-container').innerHTML = renderNews(allNieuws);
+    document.getElementById('news-more-btn').style.display = 'none';
+  }
+
+  // NIEUWS meer/minder
+  function showAllNews() {
+    document.getElementById('news-container').innerHTML = renderNews(allNieuws);
+    document.getElementById('news-more-btn').style.display = 'none';
+    document.getElementById('news-less-btn').style.display = 'inline-block';
+  }
+  function showLessNews() {
+    document.getElementById('news-container').innerHTML = renderNews(allNieuws.slice(0,8));
+    document.getElementById('news-more-btn').style.display = 'inline-block';
+    document.getElementById('news-less-btn').style.display = 'none';
+  }
+  const sections = ['aftellen','nieuws','muziek','weer','blessures','poll'];
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 100) current = id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
 
   // BLESSURES
   let injuries = { nec: [], az: [] };
   const dotColor = { out:'#D0021B', doubt:'#f5a623', fit:'#008A3C' };
   const statusLabel = { out:'Afwezig', doubt:'Twijfelachtig', fit:'Fit' };
-
   async function loadInjuries() {
-    try {
-      const r = await window.storage.get('injuries');
-      if (r) injuries = JSON.parse(r.value);
-    } catch(e) {}
+    try { const r = await window.storage.get('injuries'); if (r) injuries = JSON.parse(r.value); } catch(e) {}
     renderInjuries();
   }
-
   async function saveInjuries() {
     try { await window.storage.set('injuries', JSON.stringify(injuries)); } catch(e) {}
   }
-
   function renderInjuries() {
     const now = new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long'});
-    const grid = document.getElementById('injury-grid');
     const clubs = [
-      { key:'nec', name:'N.E.C. Nijmegen', icon:'🟢', cls:'injury-header-nec' },
-      { key:'az',  name:'AZ Alkmaar',       icon:'🔴', cls:'injury-header-az'  },
+      {key:'nec',name:'N.E.C. Nijmegen',icon:'🟢',cls:'injury-header-nec'},
+      {key:'az', name:'AZ Alkmaar',      icon:'🔴',cls:'injury-header-az'},
     ];
-    grid.innerHTML = clubs.map(c => `
+    document.getElementById('injury-grid').innerHTML = clubs.map(c => `
       <div class="injury-team">
         <div class="injury-header ${c.cls}">
           <span style="font-size:1.2rem">${c.icon}</span>
           <span class="injury-club-name">${c.name}</span>
-          <span class="injury-count">Bijgewerkt: ${now}</span>
+          <span class="injury-count">${now}</span>
         </div>
-        <div class="injury-list" id="list-${c.key}">
+        <div class="injury-list">
           ${injuries[c.key].length === 0
             ? `<div class="injury-row" style="color:#555;font-size:0.82rem">Geen blessures ingevoerd</div>`
             : injuries[c.key].map((p,i) => `
               <div class="injury-row">
-                <div class="injury-dot" style="background:${dotColor[p.status]};width:8px;height:8px;border-radius:50%;flex-shrink:0"></div>
-                <div style="flex:1">
-                  <div class="injury-name">${p.name}</div>
-                  <div class="injury-detail">${p.detail} · ${statusLabel[p.status]}</div>
-                </div>
-                <button class="injury-remove" onclick="removeInjury('${c.key}',${i})" title="Verwijder">✕</button>
-              </div>`).join('')
-          }
+                <div style="width:8px;height:8px;border-radius:50%;background:${dotColor[p.status]};flex-shrink:0"></div>
+                <div style="flex:1"><div class="injury-name">${p.name}</div><div class="injury-detail">${p.detail} · ${statusLabel[p.status]}</div></div>
+                <button class="injury-remove" onclick="removeInjury('${c.key}',${i})">✕</button>
+              </div>`).join('')}
         </div>
       </div>`).join('');
   }
-
-  const WACHTWOORD = 'nec2026'; // ← verander dit naar jouw eigen wachtwoord
+  const WACHTWOORD = 'nec2026';
   let isUnlocked = false;
-
   function toggleForm() {
-    if (isUnlocked) {
-      document.getElementById('injury-form').classList.toggle('open');
-      return;
-    }
-    const invoer = prompt('🔒 Voer het wachtwoord in om te bewerken:');
-    if (invoer === WACHTWOORD) {
-      isUnlocked = true;
-      document.getElementById('injury-form').classList.add('open');
-      document.querySelector('.injury-edit-btn').textContent = '✏️ Blessures bewerken (ontgrendeld 🔓)';
-    } else if (invoer !== null) {
-      alert('Verkeerd wachtwoord.');
-    }
+    if (isUnlocked) { document.getElementById('injury-form').classList.toggle('open'); return; }
+    const invoer = prompt('🔒 Voer het wachtwoord in:');
+    if (invoer === WACHTWOORD) { isUnlocked = true; document.getElementById('injury-form').classList.add('open'); }
+    else if (invoer !== null) { alert('Verkeerd wachtwoord.'); }
   }
-
   async function addInjury() {
-    const name   = document.getElementById('f-name').value.trim();
+    const name = document.getElementById('f-name').value.trim();
     const detail = document.getElementById('f-detail').value.trim();
-    const club   = document.getElementById('f-club').value;
+    const club = document.getElementById('f-club').value;
     const status = document.getElementById('f-status').value;
     if (!name) return;
-    injuries[club].push({ name, detail, status });
+    injuries[club].push({name,detail,status});
     document.getElementById('f-name').value = '';
     document.getElementById('f-detail').value = '';
-    await saveInjuries();
-    renderInjuries();
+    await saveInjuries(); renderInjuries();
   }
-
   async function removeInjury(club, idx) {
-    injuries[club].splice(idx, 1);
-    await saveInjuries();
-    renderInjuries();
+    injuries[club].splice(idx,1);
+    await saveInjuries(); renderInjuries();
+  }
+  loadInjuries();
+
+  // SUGGESTIES
+  async function submitSuggestie() {
+    const name = document.getElementById('suggest-name').value.trim() || 'Anoniem';
+    const text = document.getElementById('suggest-text').value.trim();
+    if (!text) return;
+    const item = { name, text, time: new Date().toLocaleString('nl-NL') };
+    try {
+      let suggestions = [];
+      try { const r = await window.storage.get('suggestions'); if (r) suggestions = JSON.parse(r.value); } catch(e) {}
+      suggestions.unshift(item);
+      await window.storage.set('suggestions', JSON.stringify(suggestions));
+    } catch(e) {}
+    document.getElementById('suggest-text').value = '';
+    document.getElementById('suggest-name').value = '';
+    document.getElementById('suggest-thanks').style.display = 'block';
+    setTimeout(() => document.getElementById('suggest-thanks').style.display = 'none', 3000);
   }
 
-  loadInjuries();
+  // INBOX (zichtbaar na beheer-unlock)
+  async function loadInbox() {
+    const container = document.getElementById('inbox-container');
+    if (!container) return;
+    try {
+      let suggestions = [];
+      try { const r = await window.storage.get('suggestions'); if (r) suggestions = JSON.parse(r.value); } catch(e) {}
+      if (!suggestions.length) { container.innerHTML = '<p class="inbox-empty">Nog geen suggesties ontvangen.</p>'; return; }
+      container.innerHTML = suggestions.map((s,i) => `
+        <div class="inbox-item" id="inbox-${i}">
+          <button class="inbox-delete" onclick="deleteSuggestie(${i})">✕ verwijder</button>
+          <div class="inbox-name">${s.name}</div>
+          <div class="inbox-text">${s.text}</div>
+          <div class="inbox-time">${s.time}</div>
+        </div>`).join('');
+    } catch(e) { container.innerHTML = '<p class="inbox-empty">Kon suggesties niet laden.</p>'; }
+  }
+  async function deleteSuggestie(idx) {
+    try {
+      let suggestions = [];
+      try { const r = await window.storage.get('suggestions'); if (r) suggestions = JSON.parse(r.value); } catch(e) {}
+      suggestions.splice(idx, 1);
+      await window.storage.set('suggestions', JSON.stringify(suggestions));
+      loadInbox();
+    } catch(e) {}
+  }
+
+  // BEHEER uitbreiden met inbox
+  const origToggleForm = toggleForm;
+  function toggleForm() {
+    if (!isUnlocked) {
+      const invoer = prompt('🔒 Voer het wachtwoord in:');
+      if (invoer === WACHTWOORD) {
+        isUnlocked = true;
+        document.getElementById('injury-form').classList.add('open');
+        document.getElementById('beheer-inbox').style.display = 'block';
+        loadInbox();
+      } else if (invoer !== null) { alert('Verkeerd wachtwoord.'); }
+    } else {
+      document.getElementById('injury-form').classList.toggle('open');
+      document.getElementById('beheer-inbox').style.display =
+        document.getElementById('beheer-inbox').style.display === 'none' ? 'block' : 'none';
+      if (document.getElementById('beheer-inbox').style.display === 'block') loadInbox();
+    }
+  }
+  // Shows: Jarda=6UxgSyyJdWKCNHiRH6HMd9 | RGZ=0Y8GrJXVyiqMYaJeJjbpmb | RN7=4pBHkxC4pPj3Dsbg7BgBjI
+
+  // POLL
   let votes = [12,8,15,4], selected = null, hasVoted = false;
   function selectPoll(el) {
     if (hasVoted) return;
@@ -554,16 +644,58 @@
     if (selected === null || hasVoted) return;
     hasVoted = true;
     votes[selected]++;
-    const total = votes.reduce((a,b) => a+b, 0);
+    const total = votes.reduce((a,b)=>a+b,0);
     document.querySelectorAll('.poll-option').forEach((opt,i) => {
       const pct = Math.round(votes[i]/total*100);
       opt.querySelector('.poll-bar').style.width = pct+'%';
       const p = opt.querySelector('.poll-pct');
-      p.style.display = 'block'; p.textContent = pct+'%';
-      opt.classList.add('voted'); opt.onclick = null;
+      p.style.display='block'; p.textContent=pct+'%';
+      opt.classList.add('voted'); opt.onclick=null;
     });
     document.getElementById('poll-btn').disabled = true;
     document.getElementById('poll-votes').textContent = `${total} stemmen uitgebracht`;
+    startConfetti();
+    playClublied();
+  }
+
+  // CONFETTI
+  function startConfetti() {
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999';
+    document.body.appendChild(canvas);
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    const colors = ['#D0021B','#008A3C','#ffffff','#D0021B','#008A3C','#333'];
+    const pieces = Array.from({length:200},()=>({
+      x:Math.random()*canvas.width, y:-20-Math.random()*canvas.height,
+      w:8+Math.random()*10, h:5+Math.random()*7,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      speed:4+Math.random()*5, angle:Math.random()*360,
+      spin:(Math.random()-.5)*8, drift:(Math.random()-.5)*2,
+    }));
+    const start = Date.now();
+    (function draw() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p => {
+        p.y+=p.speed; p.x+=p.drift; p.angle+=p.spin;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle*Math.PI/180);
+        ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+      });
+      if (Date.now()-start<5000) requestAnimationFrame(draw); else canvas.remove();
+    })();
+  }
+
+  // CLUBLIED
+  function playClublied() {
+    const audio = new Audio('https://www.nec-nijmegen.nl/media/clublied.mp3');
+    audio.volume = 0.6;
+    audio.play().catch(()=>{
+      const btn = document.createElement('a');
+      btn.href='https://www.youtube.com/results?search_query=NEC+Nijmegen+clublied';
+      btn.target='_blank'; btn.textContent='🎵 Speel het clublied af!';
+      btn.style.cssText='display:block;margin-top:12px;color:#00C853;font-weight:700;font-size:0.9rem;';
+      document.getElementById('poll-votes').after(btn);
+    });
   }
 </script>
 </body>
