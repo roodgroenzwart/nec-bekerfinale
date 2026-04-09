@@ -6,71 +6,43 @@
 <title>NEC Bekerfinale 2026 🏆</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
-
-  :root {
-    --red: #D0021B;
-    --green: #008A3C;
-    --black: #0d0d0d;
-    --gray: #1a1a1a;
-    --light-gray: #252525;
-    --white: #f0f0f0;
-    --border: #2a2a2a;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--black); color: var(--white); font-family: 'Open Sans', sans-serif; min-height: 100vh; }
-
-  /* STRIPE */
-  .stripe-bar { display: flex; height: 5px; width: 100%; }
-  .stripe-bar .s-red  { flex: 1; background: var(--red); }
-  .stripe-bar .s-green{ flex: 1; background: var(--green); }
-
-  /* HERO */
-  .hero { position: relative; background: var(--black); text-align: center; padding: 60px 24px 50px; overflow: hidden; }
-  .hero::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:120px; background:linear-gradient(to right, var(--red) 50%, var(--green) 50%); opacity:0.25; pointer-events:none; z-index:0; }
+  :root { --red:#D0021B; --green:#008A3C; --black:#0d0d0d; --gray:#1a1a1a; --white:#f0f0f0; --border:#2a2a2a; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--black); color:var(--white); font-family:'Open Sans',sans-serif; min-height:100vh; }
+  body::before { content:''; position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%); width:80px; background:linear-gradient(to right,var(--red) 50%,var(--green) 50%); opacity:0.25; pointer-events:none; z-index:0; }
+  .stripe-bar { display:flex; height:5px; width:100%; }
+  .stripe-bar .s-red { flex:1; background:var(--red); }
+  .stripe-bar .s-green { flex:1; background:var(--green); }
+  .hero { position:relative; background:var(--black); text-align:center; padding:60px 24px 50px; overflow:hidden; z-index:1; }
   .hero-badge { position:relative; z-index:1; display:inline-block; background:var(--red); color:#fff; font-family:'Oswald',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:6px 20px; border-radius:2px; margin-bottom:22px; }
   .hero h1 { position:relative; z-index:1; font-family:'Oswald',sans-serif; font-size:clamp(2.4rem,7vw,4.5rem); font-weight:700; line-height:1.05; text-transform:uppercase; letter-spacing:3px; }
-  .hero h1 .stripe-text { display:inline-block; background:linear-gradient(to right, var(--red) 50%, var(--green) 50%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .stripe-text { display:inline-block; background:linear-gradient(to right,var(--red) 50%,var(--green) 50%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
   .hero-sub { position:relative; z-index:1; font-size:1rem; color:#888; margin-top:12px; letter-spacing:1px; }
-  .vs-row { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:60px; margin-top:35px; flex-wrap:wrap; }
+  .vs-row { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:40px; margin-top:35px; flex-wrap:nowrap; margin-left:-3px; }
   .club-badge { display:flex; flex-direction:column; align-items:center; gap:10px; }
-  .club-circle { width:88px; height:88px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:1.5rem; font-weight:700; border:3px solid #fff; }
+  .club-circle { width:88px; height:88px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:1.5rem; font-weight:700; border:3px solid #fff; flex-shrink:0; }
   .club-az .club-circle { background:#c8102e; color:#fff; }
   .club-name { font-size:0.75rem; color:#888; letter-spacing:2px; text-transform:uppercase; }
-  .vs-text { font-family:'Oswald',sans-serif; font-size:2.8rem; font-weight:700; color:#fff; }
-
-  /* LAYOUT */
-  .page-layout { display: flex; align-items: flex-start; max-width: 1100px; margin: 0 auto; }
-
-  /* SIDENAV */
-  .sidenav { width: 170px; flex-shrink:0; position: sticky; top: 24px; padding: 24px 0 24px 16px; }
+  .page-layout { display:flex; align-items:flex-start; max-width:1100px; margin:0 auto; position:relative; z-index:1; }
+  .sidenav { width:170px; flex-shrink:0; position:sticky; top:24px; padding:24px 0 24px 16px; }
   .sidenav-title { font-family:'Oswald',sans-serif; font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; color:#444; margin-bottom:12px; padding-left:10px; }
-  .sidenav a { display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:4px; text-decoration:none; color:#666; font-size:0.8rem; transition:background 0.15s, color 0.15s; border-left:2px solid transparent; margin-bottom:2px; }
+  .sidenav a { display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:4px; text-decoration:none; color:#666; font-size:0.8rem; transition:background 0.15s,color 0.15s; border-left:2px solid transparent; margin-bottom:2px; }
   .sidenav a:hover { color:var(--white); background:#1a1a1a; }
   .sidenav a.active { color:var(--white); border-left-color:var(--red); background:#1a1a1a; }
   .nav-icon { font-size:0.9rem; flex-shrink:0; width:18px; text-align:center; }
   @media(max-width:700px){ .sidenav { display:none; } }
-
-  /* MAIN */
   .main-content { flex:1; min-width:0; }
-
-  /* SECTIONS */
-  .container { max-width: 820px; padding: 0 24px; }
-  section { padding: 48px 0; border-bottom: 1px solid #1e1e1e; scroll-margin-top: 24px; }
-  section:last-child { border-bottom: none; }
-
+  .container { max-width:820px; padding:0 24px; }
+  section { padding:48px 0; border-bottom:1px solid #1e1e1e; scroll-margin-top:24px; position:relative; z-index:1; }
+  section:last-child { border-bottom:none; }
   .section-title { font-family:'Oswald',sans-serif; font-size:1.2rem; font-weight:700; text-transform:uppercase; letter-spacing:3px; color:#fff; margin-bottom:22px; display:flex; align-items:center; gap:12px; }
-  .section-title::before { content:''; display:inline-block; width:4px; height:20px; background:linear-gradient(to bottom, var(--red) 50%, var(--green) 50%); border-radius:0; flex-shrink:0; }
-
-  /* COUNTDOWN */
+  .section-title::before { content:''; display:inline-block; width:4px; height:20px; background:linear-gradient(to bottom,var(--red) 50%,var(--green) 50%); flex-shrink:0; }
   .countdown-grid { display:flex; gap:12px; justify-content:flex-start; flex-wrap:wrap; }
-  .cd-block { background:var(--gray); border:1px solid var(--border); border-top:3px solid transparent; border-radius:4px; padding:20px 16px 14px; min-width:86px; text-align:center; position:relative; overflow:hidden; }
-  .cd-block::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right, var(--red), var(--green)); }
+  .cd-block { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:20px 16px 14px; min-width:86px; text-align:center; position:relative; overflow:hidden; }
+  .cd-block::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--red),var(--green)); }
   .cd-num { font-family:'Oswald',sans-serif; font-size:2.8rem; font-weight:700; line-height:1; }
   .cd-days .cd-num, .cd-hours .cd-num { color:var(--red); }
   .cd-label { font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-top:6px; }
-
-  /* NIEUWS */
   .news-list { display:flex; flex-direction:column; }
   .news-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #1e1e1e; text-decoration:none; color:var(--white); transition:padding-left 0.15s; }
   .news-item:first-child { border-top:1px solid #1e1e1e; }
@@ -79,57 +51,52 @@
   .news-item-title { flex:1; font-size:0.85rem; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .news-item-meta { font-size:0.68rem; color:#555; flex-shrink:0; white-space:nowrap; }
   .news-btn-row { display:flex; gap:10px; margin-top:14px; }
-  .news-more-btn { background:none; border:1px solid var(--border); color:#666; padding:8px 16px; border-radius:4px; font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:border-color 0.2s, color 0.2s; }
+  .news-more-btn { background:none; border:1px solid var(--border); color:#666; padding:8px 16px; border-radius:4px; font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:border-color 0.2s,color 0.2s; }
   .news-more-btn:hover { border-color:var(--red); color:var(--white); }
-
-  /* MUZIEK */
+  .podcast-list { display:flex; flex-direction:column; gap:16px; }
+  .podcast-card { background:var(--gray); border:1px solid var(--border); border-left:3px solid var(--red); border-radius:4px; overflow:hidden; }
+  .podcast-header { display:flex; align-items:center; gap:12px; padding:10px 14px 8px; }
+  .podcast-icon { font-size:1rem; width:20px; text-align:center; flex-shrink:0; }
+  .podcast-name { font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:600; }
+  .podcast-desc { font-size:0.68rem; color:#666; margin-top:1px; }
+  .podcast-embed { padding:0 10px 10px; }
   .music-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
   @media(max-width:600px){ .music-grid { grid-template-columns:1fr; } }
   .spotify-list { display:flex; flex-direction:column; gap:10px; }
-  .spotify-card { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:14px; display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--white); transition:border-color 0.2s; }
+  .spotify-card { background:var(--gray); border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; gap:12px; color:var(--white); transition:border-color 0.2s; overflow:hidden; }
   .spotify-card:hover { border-color:#1DB954; }
+  .spotify-card-inner { display:flex; align-items:center; gap:12px; padding:14px; width:100%; cursor:pointer; }
   .spotify-thumb { width:52px; height:52px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; }
   .s1 { background:linear-gradient(135deg,var(--red),#800010); }
   .s2 { background:linear-gradient(135deg,var(--green),#005520); }
   .s3 { background:linear-gradient(135deg,var(--red) 50%,var(--green) 50%); }
   .spotify-title { font-weight:600; font-size:0.88rem; }
   .spotify-sub { font-size:0.72rem; color:#666; margin-top:2px; }
-  .spotify-badge { margin-left:auto; background:#1DB954; color:#000; font-size:0.58rem; font-weight:700; padding:3px 7px; border-radius:10px; flex-shrink:0; letter-spacing:0.5px; }
+  .spotify-badge { margin-left:auto; background:#1DB954; color:#000; font-size:0.58rem; font-weight:700; padding:3px 7px; border-radius:10px; flex-shrink:0; }
+  .spotify-embed-wrap { padding:0 10px 10px; }
   .yt-embed { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:4px; border:1px solid var(--border); }
   .yt-embed iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
-
-  /* PODCASTS */
-  .podcast-list { display:flex; flex-direction:column; gap:16px; }
-  .podcast-card { background:var(--gray); border:1px solid var(--border); border-left:3px solid var(--red); border-radius:4px; overflow:hidden; }
-  .podcast-header { display:flex; align-items:center; gap:12px; padding:14px 16px 10px; }
-  .podcast-icon { font-size:1.2rem; width:24px; text-align:center; flex-shrink:0; }
-  .podcast-name { font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; }
-  .podcast-desc { font-size:0.72rem; color:#666; margin-top:2px; }
-  .podcast-embed { padding:0 12px 12px; }
-
-  /* WEATHER */
+  .weather-groups { display:flex; flex-direction:column; gap:20px; }
+  .weather-group-title { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:8px; }
   .weather-header { display:flex; align-items:center; gap:14px; background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:16px 18px; margin-bottom:14px; position:relative; overflow:hidden; }
-  .weather-header::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right, var(--red), var(--green)); }
+  .weather-header::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--red),var(--green)); }
   .weather-label { font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:#555; }
   .weather-val { font-family:'Oswald',sans-serif; font-size:1rem; margin-top:3px; }
   .weather-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(72px,1fr)); gap:8px; }
   .wh-block { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:10px 6px; text-align:center; position:relative; overflow:hidden; }
   .wh-block.kickoff { border-color:var(--red); }
   .wh-block.kickoff::after { content:'⚽'; position:absolute; top:2px; right:3px; font-size:0.55rem; }
-  .wh-block::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right, var(--red), var(--green)); }
+  .wh-block::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,var(--red),var(--green)); }
   .wh-time { font-family:'Oswald',sans-serif; font-size:0.78rem; color:var(--red); font-weight:600; }
   .wh-icon { font-size:1.3rem; margin:3px 0; }
   .wh-temp { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:700; }
   .wh-rain { font-size:0.6rem; color:#666; margin-top:2px; }
-  .weather-note { margin-top:12px; font-size:0.75rem; color:#444; font-style:italic; }
-
-  /* BLESSURES */
   .injury-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   @media(max-width:560px){ .injury-grid { grid-template-columns:1fr; } }
   .injury-team { background:var(--gray); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
   .injury-header { padding:12px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; }
   .injury-header-nec { border-top:3px solid var(--red); }
-  .injury-header-az  { border-top:3px solid #c8102e; }
+  .injury-header-az { border-top:3px solid #c8102e; }
   .injury-club-name { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:700; }
   .injury-date { margin-left:auto; font-size:0.65rem; color:#555; }
   .injury-list { display:flex; flex-direction:column; }
@@ -139,9 +106,6 @@
   .injury-name { font-size:0.85rem; font-weight:600; flex:1; }
   .injury-detail { font-size:0.7rem; color:#666; }
   .injury-legend { display:flex; gap:16px; margin-top:12px; font-size:0.7rem; color:#666; flex-wrap:wrap; }
-  .injury-legend span { display:flex; align-items:center; gap:5px; }
-
-  /* BLESSURES FORM */
   .injury-form { display:none; background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:18px; margin-bottom:16px; }
   .injury-form.open { display:block; }
   .injury-form h3 { font-family:'Oswald',sans-serif; font-size:0.9rem; margin-bottom:12px; color:#888; letter-spacing:1px; text-transform:uppercase; }
@@ -150,10 +114,8 @@
   .form-row input { flex:1; min-width:120px; }
   .form-row select { min-width:120px; }
   .form-add-btn { background:var(--red); color:#fff; border:none; padding:8px 16px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer; white-space:nowrap; }
-  .injury-remove { background:none; border:none; color:#333; cursor:pointer; font-size:0.9rem; padding:0 2px; transition:color 0.2s; }
+  .injury-remove { background:none; border:none; color:#333; cursor:pointer; font-size:0.9rem; padding:0 2px; }
   .injury-remove:hover { color:var(--red); }
-
-  /* POLL */
   .poll-container { max-width:480px; }
   .poll-question { font-family:'Oswald',sans-serif; font-size:1.1rem; margin-bottom:16px; color:#ccc; }
   .poll-options { display:flex; flex-direction:column; gap:8px; }
@@ -163,59 +125,38 @@
   .poll-bar { position:absolute; left:0; top:0; bottom:0; background:rgba(208,2,27,0.1); transition:width 0.6s ease; width:0%; }
   .poll-text { position:relative; z-index:1; flex:1; font-size:0.88rem; }
   .poll-pct { position:relative; z-index:1; font-family:'Oswald',sans-serif; font-size:0.95rem; color:var(--red); min-width:38px; text-align:right; display:none; }
-  .poll-btn { margin-top:12px; background:linear-gradient(to right, var(--red), var(--green)); color:#fff; border:none; padding:12px 28px; font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; border-radius:3px; cursor:pointer; transition:opacity 0.2s; }
+  .poll-btn { margin-top:12px; background:linear-gradient(to right,var(--red),var(--green)); color:#fff; border:none; padding:12px 28px; font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; border-radius:3px; cursor:pointer; transition:opacity 0.2s; }
   .poll-btn:hover { opacity:0.85; }
   .poll-btn:disabled { opacity:0.3; cursor:default; }
   .poll-votes { margin-top:8px; font-size:0.72rem; color:#555; }
-
-  /* SUGGESTIE */
   .suggest-box { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:20px; max-width:520px; }
   .suggest-box p { font-size:0.82rem; color:#666; margin-bottom:14px; line-height:1.6; }
   .suggest-box input, .suggest-box textarea { width:100%; background:#111; border:1px solid #333; color:var(--white); padding:10px 12px; border-radius:3px; font-size:0.85rem; font-family:'Open Sans',sans-serif; margin-bottom:10px; display:block; }
   .suggest-box textarea { resize:vertical; min-height:90px; }
-  .suggest-btn { background:linear-gradient(to right, var(--red), var(--green)); color:#fff; border:none; padding:10px 24px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.88rem; font-weight:700; letter-spacing:1px; cursor:pointer; transition:opacity 0.2s; }
-  .suggest-btn:hover { opacity:0.85; }
+  .suggest-btn { background:linear-gradient(to right,var(--red),var(--green)); color:#fff; border:none; padding:10px 24px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.88rem; font-weight:700; cursor:pointer; }
   .suggest-thanks { color:var(--green); font-size:0.85rem; margin-top:10px; display:none; font-weight:600; }
-
-  /* SHIRT STREPEN ACHTERGROND */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    background: linear-gradient(to right, var(--red) 50%, var(--green) 50%);
-    opacity: 0.25;
-    pointer-events: none;
-    z-index: 0;
-  }
-  body::after { display: none; }
-  .page-layout, .hero, footer { position: relative; z-index: 1; }
-  section { position: relative; z-index: 1; }
-  .weather-groups { display:flex; flex-direction:column; gap:20px; }
-  .weather-group-title { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:8px; }
-  footer { text-align:center; padding:32px 24px 24px; color:#333; font-size:0.78rem; }
+  footer { text-align:center; padding:32px 24px 24px; color:#333; font-size:0.78rem; position:relative; z-index:1; }
   .footer-stripe { display:flex; height:4px; width:100%; margin-bottom:22px; }
   .footer-stripe div { flex:1; }
-  .fs-r { background:var(--red); } .fs-g { background:var(--green); }
-  footer .r { color:var(--red); } footer .g { color:var(--green); }
+  .fs-r { background:var(--red); }
+  .fs-g { background:var(--green); }
+  footer .r { color:var(--red); }
+  footer .g { color:var(--green); }
 </style>
 </head>
 <body>
 
 <div class="stripe-bar"><div class="s-red"></div><div class="s-green"></div></div>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-badge">🏆 KNVB Beker Finale · 19 April 2026</div>
   <h1>NEC naar<br><span class="stripe-text">de Kuip!</span></h1>
   <p class="hero-sub">Jubileumseizoen 2025–2026 · De Kuip, Rotterdam</p>
   <div class="vs-row">
     <div class="club-badge club-nec">
-      <div class="club-circle" style="background:linear-gradient(to right,#D0021B 50%,#008A3C 50%);text-shadow:0 1px 4px rgba(0,0,0,0.8)">NEC</div>      <span class="club-name">N.E.C. Nijmegen</span>
+      <div class="club-circle" style="background:linear-gradient(to right,#D0021B 50%,#008A3C 50%);text-shadow:0 1px 4px rgba(0,0,0,0.8)">NEC</div>
+      <span class="club-name">N.E.C. Nijmegen</span>
     </div>
-
     <div class="club-badge club-az">
       <div class="club-circle">AZ</div>
       <span class="club-name">AZ Alkmaar</span>
@@ -223,27 +164,21 @@
   </div>
 </div>
 
-<div class="stripe-bar"><div class="s-red"></div><div class="s-green"></div></div>
-
 <div class="page-layout">
-
-  <!-- SIDENAV -->
   <nav class="sidenav">
     <div class="sidenav-title">Navigatie</div>
-    <a href="#aftellen"  class="nav-link"><span class="nav-icon">⏱</span> Aftellen</a>
-    <a href="#nieuws"    class="nav-link"><span class="nav-icon">📰</span> Nieuws</a>
-    <a href="#podcasts"  class="nav-link"><span class="nav-icon">🎙</span> Podcasts</a>
-    <a href="#muziek"    class="nav-link"><span class="nav-icon">🎵</span> Muziek</a>
-    <a href="#weer"      class="nav-link"><span class="nav-icon">🌤</span> Weer</a>
+    <a href="#aftellen" class="nav-link"><span class="nav-icon">⏱</span> Aftellen</a>
+    <a href="#nieuws" class="nav-link"><span class="nav-icon">📰</span> Nieuws</a>
+    <a href="#podcasts" class="nav-link"><span class="nav-icon">🎙</span> Podcasts</a>
+    <a href="#muziek" class="nav-link"><span class="nav-icon">🎵</span> Muziek</a>
+    <a href="#weer" class="nav-link"><span class="nav-icon">🌤</span> Weer</a>
     <a href="#blessures" class="nav-link"><span class="nav-icon">🏥</span> Blessures</a>
-    <a href="#poll"      class="nav-link"><span class="nav-icon">🗳</span> Poll</a>
+    <a href="#poll" class="nav-link"><span class="nav-icon">🗳</span> Poll</a>
     <a href="#suggestie" class="nav-link"><span class="nav-icon">💡</span> Suggestie</a>
   </nav>
 
-  <!-- MAIN -->
   <div class="main-content">
 
-    <!-- AFTELLEN -->
     <section id="aftellen">
       <div class="container">
         <div class="section-title">⏱ Aftellen tot de finale</div>
@@ -256,19 +191,17 @@
       </div>
     </section>
 
-    <!-- NIEUWS -->
     <section id="nieuws">
       <div class="container">
         <div class="section-title">📰 NEC Nieuws</div>
-        <div id="news-container"></div>
+        <div id="news-container"><div style="color:#555;font-size:0.85rem;padding:10px 0">Nieuws laden...</div></div>
         <div class="news-btn-row">
-          <button class="news-more-btn" id="news-more-btn" onclick="showAllNews()">Meer nieuws →</button>
+          <button class="news-more-btn" id="news-more-btn" onclick="showAllNews()" style="display:none">Meer nieuws →</button>
           <button class="news-more-btn" id="news-less-btn" onclick="showLessNews()" style="display:none">← Minder nieuws</button>
         </div>
       </div>
     </section>
 
-    <!-- PODCASTS -->
     <section id="podcasts">
       <div class="container">
         <div class="section-title">🎙 Podcasts</div>
@@ -293,43 +226,46 @@
       </div>
     </section>
 
-    <!-- MUZIEK -->
     <section id="muziek">
       <div class="container">
         <div class="section-title">🎵 Muziek & Video</div>
         <div class="music-grid">
           <div class="spotify-list">
-            <div class="spotify-card" onclick="toggleEmbed('e1')" style="cursor:pointer;flex-direction:column;align-items:stretch;padding:0;overflow:hidden">
-              <div style="display:flex;align-items:center;gap:12px;padding:14px">
+            <div class="spotify-card" onclick="toggleEmbed('e1')">
+              <div class="spotify-card-inner">
                 <div class="spotify-thumb s1">🎵</div>
-                <div><div class="spotify-title">Wij gaan naar de Kuip!</div><div class="spotify-sub">Michiel Kok · Winnaar hit contest</div></div>
+                <div><div class="spotify-title">Weer trekken wij ten strijde</div><div class="spotify-sub">Lily de Vos</div></div>
                 <span class="spotify-badge">SPOTIFY</span>
               </div>
-              <div id="e1" style="display:none;padding:0 10px 10px">
+              <div id="e1" style="display:none;padding:0 10px 10px;width:100%">
                 <iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/track/20R21oRKZdJ1YhrKFL0LQL?utm_source=generator" height="80" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
               </div>
             </div>
-            <div class="spotify-card" onclick="toggleEmbed('e2')" style="cursor:pointer;flex-direction:column;align-items:stretch;padding:0;overflow:hidden">
-              <div style="display:flex;align-items:center;gap:12px;padding:14px">
+            <div class="spotify-card" onclick="toggleEmbed('e2')">
+              <div class="spotify-card-inner">
                 <div class="spotify-thumb s2">🎶</div>
-                <div><div class="spotify-title">NEC Bekerfinale 2026</div><div class="spotify-sub">Officieel nummer</div></div>
+                <div><div class="spotify-title">Go N.E.C. - We gaan Europa in</div><div class="spotify-sub">Jochem van Gelder & Fons de Poel</div></div>
                 <span class="spotify-badge">SPOTIFY</span>
               </div>
-              <div id="e2" style="display:none;padding:0 10px 10px">
+              <div id="e2" style="display:none;padding:0 10px 10px;width:100%">
                 <iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/track/0nMBh1xQBryJaC1WDHNCYy?utm_source=generator" height="80" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
               </div>
             </div>
-            <div class="spotify-card" onclick="toggleEmbed('e3')" style="cursor:pointer;flex-direction:column;align-items:stretch;padding:0;overflow:hidden">
-              <div style="display:flex;align-items:center;gap:12px;padding:14px">
+            <div class="spotify-card" onclick="toggleEmbed('e3')">
+              <div class="spotify-card-inner">
                 <div class="spotify-thumb s3">🏆</div>
                 <div><div class="spotify-title">NEC Bekerfinale Playlist</div><div class="spotify-sub">Alle sfeer nummers</div></div>
                 <span class="spotify-badge">SPOTIFY</span>
               </div>
-              <div id="e3" style="display:none;padding:0 10px 10px">
+              <div id="e3" style="display:none;padding:0 10px 10px;width:100%">
                 <iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/playlist/0KjhzELLy1hSUdb9SUuFmO?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
               </div>
             </div>
           </div>
+          <div class="yt-embed" style="margin-bottom:12px">
+            <iframe src="https://www.youtube.com/embed/FDoKGTTjq0c?si=s7Xi-FwgEOeZH8_J" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+          <div style="font-size:0.75rem;color:#666;margin-bottom:12px;padding-left:2px">Dans je de hele nacht met mij (Bekerfinale editie) · Ronnie Ruysdael</div>
           <div class="yt-embed">
             <iframe src="https://www.youtube.com/embed/ANRLJ1nbitc" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           </div>
@@ -337,7 +273,6 @@
       </div>
     </section>
 
-    <!-- WEER -->
     <section id="weer">
       <div class="container">
         <div class="section-title">🌤 Weer op 19 april – Rotterdam</div>
@@ -346,11 +281,9 @@
           <div><div class="weather-label">Locatie</div><div class="weather-val">De Kuip, Rotterdam · Aftrap 18:00 uur ⚽</div></div>
         </div>
         <div class="weather-groups" id="weather-hourly"></div>
-
       </div>
     </section>
 
-    <!-- BLESSURES -->
     <section id="blessures">
       <div class="container">
         <div class="section-title">🏥 Blessure-update</div>
@@ -373,7 +306,6 @@
       </div>
     </section>
 
-    <!-- POLL -->
     <section id="poll">
       <div class="container">
         <div class="section-title">🗳 Wat wordt de eindstand?</div>
@@ -390,7 +322,6 @@
       </div>
     </section>
 
-    <!-- SUGGESTIE -->
     <section id="suggestie">
       <div class="container">
         <div class="section-title">💡 Suggestie</div>
@@ -407,7 +338,6 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-stripe"><div class="fs-r"></div><div class="fs-g"></div></div>
   <p>Gemaakt met ❤️ voor <span class="r">NEC</span> <span class="g">Nijmegen</span> supporters</p>
@@ -418,236 +348,189 @@
 </footer>
 
 <script>
-  // ============================================
-  // BLESSURES — HIER AANPASSEN
-  // status: "out" = afwezig, "doubt" = twijfelachtig, "fit" = fit
-  // ============================================
-  const necBlessures = [
-    // { name: "Spelernaam", detail: "Hamstring", status: "out" },
-  ];
-  const azBlessures = [
-    { name: "Koopmeiners", detail: "Kuitblessure", status: "doubt" },
-    { name: "Kasius", detail: "Bovenbeenblessure", status: "doubt" },
-  ];
-  // ============================================
-
-  let injuries = { nec: [...necBlessures], az: [...azBlessures] };
-
   // COUNTDOWN
   const finaleDate = new Date('2026-04-19T18:00:00');
   function updateCountdown() {
     const diff = finaleDate - new Date();
     if (diff <= 0) return;
-    const d = Math.floor(diff/86400000);
-    const h = Math.floor((diff%86400000)/3600000);
-    const m = Math.floor((diff%3600000)/60000);
-    const s = Math.floor((diff%60000)/1000);
-    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
     document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // WEATHER — live via Open-Meteo
-  async function loadWeather() {
-    const container = document.getElementById('weather-hourly');
-    container.innerHTML = '<div style="color:#555;font-size:0.85rem;padding:10px 0">Weer laden...</div>';
+  // NIEUWS
+  var allNieuws_live = [];
+  function timeAgo(dateStr) {
+    var diff = (new Date() - new Date(dateStr)) / 60000;
+    if (diff < 60) return Math.floor(diff) + 'm geleden';
+    if (diff < 1440) return Math.floor(diff / 60) + 'u geleden';
+    return Math.floor(diff / 1440) + 'd geleden';
+  }
+  function renderNewsLive(items) {
+    var container = document.getElementById('news-container');
+    if (!items.length) { container.innerHTML = '<div style="color:#555;font-size:0.85rem">Geen nieuws gevonden.</div>'; return; }
+    var html = '<div class="news-list">';
+    for (var i = 0; i < items.length; i++) {
+      var n = items[i];
+      html += '<a class="news-item" href="' + n.link + '" target="_blank">';
+      html += '<img class="news-favicon" src="https://www.google.com/s2/favicons?domain=' + encodeURIComponent(n.src) + '&sz=32" alt="" onerror="this.style.display=\'none\'">';
+      html += '<span class="news-item-title">' + n.title + '</span>';
+      html += '<span class="news-item-meta">' + n.src + ' · ' + timeAgo(n.pub) + '</span>';
+      html += '</a>';
+    }
+    html += '</div>';
+    container.innerHTML = html;
+  }
+  function showAllNews() {
+    renderNewsLive(allNieuws_live);
+    document.getElementById('news-more-btn').style.display = 'none';
+    document.getElementById('news-less-btn').style.display = 'inline-block';
+  }
+  function showLessNews() {
+    renderNewsLive(allNieuws_live.slice(0, 8));
+    document.getElementById('news-more-btn').style.display = 'inline-block';
+    document.getElementById('news-less-btn').style.display = 'none';
+  }
+  async function loadNews() {
     try {
-      const url = 'https://api.open-meteo.com/v1/forecast?latitude=51.9225&longitude=4.4792&hourly=temperature_2m,precipitation_probability,weathercode&timezone=Europe/Amsterdam&start_date=2026-04-19&end_date=2026-04-19';
-      const res = await fetch(url);
-      const data = await res.json();
-      const hours = data.hourly;
+      var queries = ['NEC+Nijmegen+bekerfinale', 'NEC+Nijmegen'];
+      var items = [];
+      var seen = {};
+      for (var q = 0; q < queries.length; q++) {
+        var rssUrl = 'https://news.google.com/rss/search?q=' + queries[q] + '&hl=nl&gl=NL&ceid=NL:nl';
+        var res = await fetch('https://corsproxy.io/?' + encodeURIComponent(rssUrl));
+        var text = await res.text();
+        var xml = new DOMParser().parseFromString(text, 'text/xml');
+        var nodes = xml.querySelectorAll('item');
+        for (var i = 0; i < nodes.length; i++) {
+          var el = nodes[i];
+          var title = el.querySelector('title') ? el.querySelector('title').textContent : '';
+          var link = el.querySelector('link') ? el.querySelector('link').textContent : '';
+          var pub = el.querySelector('pubDate') ? el.querySelector('pubDate').textContent : '';
+          var src = el.querySelector('source') ? el.querySelector('source').textContent : '';
+          if (!src && link) { try { src = new URL(link).hostname.replace('www.',''); } catch(e) { src = ''; } }
+          if (title && link && !seen[title]) { seen[title] = true; items.push({title:title, link:link, pub:pub, src:src}); }
+        }
+      }
+      items.sort(function(a,b) { return new Date(b.pub) - new Date(a.pub); });
+      allNieuws_live = items;
+      renderNewsLive(items.slice(0, 8));
+      if (items.length > 8) document.getElementById('news-more-btn').style.display = 'inline-block';
+    } catch(e) {
+      document.getElementById('news-container').innerHTML = '<div style="color:#555;font-size:0.85rem">Nieuws kon niet worden geladen.</div>';
+    }
+  }
+  loadNews();
 
-      const wmoIcon = code => {
+  // WEATHER
+  async function loadWeather() {
+    var container = document.getElementById('weather-hourly');
+    try {
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=51.9225&longitude=4.4792&hourly=temperature_2m,precipitation_probability,weathercode&timezone=Europe/Amsterdam&start_date=2026-04-19&end_date=2026-04-19';
+      var res = await fetch(url);
+      var data = await res.json();
+      var hours = data.hourly;
+      function wmoIcon(code) {
         if (code === 0) return '☀️';
         if (code <= 2) return '⛅';
         if (code <= 3) return '🌥';
         if (code <= 48) return '🌫';
-        if (code <= 57) return '🌧';
         if (code <= 67) return '🌧';
         if (code <= 77) return '❄️';
         if (code <= 82) return '🌦';
         if (code <= 99) return '⛈';
         return '🌥';
-      };
-
-      const groups = [
-        { label:'🌅 Ochtend',  start:9,  end:13 },
-        { label:'☀️ Middag',   start:13, end:18 },
-        { label:'🌙 Avond',    start:18, end:23 },
+      }
+      var groups = [
+        {label:'🌅 Ochtend', start:9, end:13},
+        {label:'☀️ Middag', start:13, end:18},
+        {label:'🌙 Avond', start:18, end:23}
       ];
-
       container.innerHTML = '';
-      groups.forEach(group => {
-        const groupEl = document.createElement('div');
-        groupEl.innerHTML = `<div class="weather-group-title">${group.label}</div>`;
-        const grid = document.createElement('div');
+      for (var g = 0; g < groups.length; g++) {
+        var group = groups[g];
+        var groupEl = document.createElement('div');
+        groupEl.innerHTML = '<div class="weather-group-title">' + group.label + '</div>';
+        var grid = document.createElement('div');
         grid.className = 'weather-grid';
-        for (let i = group.start; i < group.end; i++) {
-          const temp = Math.round(hours.temperature_2m[i]);
-          const rain = hours.precipitation_probability[i];
-          const icon = wmoIcon(hours.weathercode[i]);
-          const timeStr = `${String(i).padStart(2,'0')}:00`;
-          const kickoff = i === 18;
-          const el = document.createElement('div');
-          el.className = 'wh-block' + (kickoff ? ' kickoff' : '');
-          el.innerHTML = `<div class="wh-time">${timeStr}</div><div class="wh-icon">${icon}</div><div class="wh-temp">${temp}°</div><div class="wh-rain">💧${rain}%</div>`;
+        for (var i = group.start; i < group.end; i++) {
+          var temp = Math.round(hours.temperature_2m[i]);
+          var rain = hours.precipitation_probability[i];
+          var icon = wmoIcon(hours.weathercode[i]);
+          var timeStr = String(i).padStart(2,'0') + ':00';
+          var el = document.createElement('div');
+          el.className = 'wh-block' + (i === 18 ? ' kickoff' : '');
+          el.innerHTML = '<div class="wh-time">' + timeStr + '</div><div class="wh-icon">' + icon + '</div><div class="wh-temp">' + temp + '°</div><div class="wh-rain">💧' + rain + '%</div>';
           grid.appendChild(el);
         }
         groupEl.appendChild(grid);
         container.appendChild(groupEl);
-      });
+      }
     } catch(e) {
-      container.innerHTML = '<div style="color:#555;font-size:0.85rem">Kon weerdata niet laden. Probeer de pagina te vernieuwen.</div>';
+      container.innerHTML = '<div style="color:#555;font-size:0.85rem">Weerdata kon niet worden geladen.</div>';
     }
   }
   loadWeather();
 
-  // NIEUWS
-  const allNieuws = [
-    {titel:'Bekerfinale in gevaar voor AZ\'er Kasius',bron:'voetbalprimeur.nl',tijd:'2u geleden',url:'https://www.voetbalprimeur.nl/nieuws/1100000/bekerfinale-in-gevaar-voor-az-er-kasius.html'},
-    {titel:'Over RoodGroenZwart: NEC gaat Feyenoord achterna in De Kuip',bron:'gelderlander.nl',tijd:'3u geleden',url:'https://www.gelderlander.nl/nijmegen/over-roodgroenzwart-nec-gaat-feyenoord-achterna-in-de-kuip'},
-    {titel:'Iedereen kan op de elftalfoto van NEC, zo doe je mee',bron:'rn7.nl',tijd:'5u geleden',url:'https://www.rn7.nl/sport/voetbal/nec/iedereen-kan-op-de-elftalfoto-van-nec'},
-    {titel:'Win een volledig verzorgde trip naar de bekerfinale',bron:'nec-nijmegen.nl',tijd:'6u geleden',url:'https://www.nec-nijmegen.nl/nieuws/win-een-volledig-verzorgde-trip-naar-de-bekerfinale'},
-    {titel:'Hans betaalt 150 euro voor kaartje bekerfinale',bron:'gelderlander.nl',tijd:'8u geleden',url:'https://www.gelderlander.nl/nijmegen/hans-betaalt-150-euro-voor-kaartje-bekerfinale'},
-    {titel:'Aanmoedigen! In deze Nijmeegse kroegen kijk je de bekerfinale',bron:'rn7.nl',tijd:'10u geleden',url:'https://www.rn7.nl/sport/voetbal/nec/aanmoedigen-in-deze-nijmeegse-kroegen-kijk-je-de-bekerfinale'},
-    {titel:'Nieuwe prijsstijging seizoenkaarten NEC bekendgemaakt',bron:'nec-nijmegen.nl',tijd:'1d geleden',url:'https://www.nec-nijmegen.nl/nieuws/nieuwe-prijsstijging-seizoenkaarten-nec'},
-    {titel:'De strijd om plek twee: gaat NEC de Champions League in?',bron:'voetbalzone.nl',tijd:'1d geleden',url:'https://www.voetbalzone.nl/doc.asp?uid=600000'},
-    {titel:'NEC treft AZ in bekerfinale: tickets uitverkocht in recordtijd',bron:'ad.nl',tijd:'2d geleden',url:'https://www.ad.nl/nec/nec-treft-az-in-bekerfinale'},
-    {titel:'Trainer NEC: \'We gaan er alles aan doen om die beker mee te nemen\'',bron:'vi.nl',tijd:'2d geleden',url:'https://www.vi.nl/nieuws/nec-trainer-we-gaan-er-alles-aan-doen'},
-    {titel:'KNVB bevestigt: bekerfinale AZ - NEC op 19 april in De Kuip',bron:'knvb.nl',tijd:'3d geleden',url:'https://www.knvb.nl/competities/beker/nieuws/bekerfinale-az-nec'},
-  ];
-  const favicons = {};
-  ['gelderlander.nl','nec-nijmegen.nl','voetbalzone.nl','voetbalprimeur.nl','rn7.nl','vi.nl','ad.nl','knvb.nl','nos.nl'].forEach(d => favicons[d] = `https://www.google.com/s2/favicons?domain=${d}&sz=32`);
-
-  // NIEUWS — live via Google News RSS (werkt op GitHub Pages)
-  async function loadNews() {
-    const container = document.getElementById('news-container');
-    container.innerHTML = '<div style="color:#555;font-size:0.85rem;padding:10px 0">Nieuws laden...</div>';
-    try {
-      const queries = ['NEC+Nijmegen+bekerfinale', 'NEC+Nijmegen'];
-      let items = [];
-      for (const q of queries) {
-        const rssUrl = `https://news.google.com/rss/search?q=${q}&hl=nl&gl=NL&ceid=NL:nl`;
-        const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(rssUrl)}`);
-        const text = await res.text();
-        const xml = new DOMParser().parseFromString(text, 'text/xml');
-        Array.from(xml.querySelectorAll('item')).forEach(el => {
-          const title = el.querySelector('title')?.textContent || '';
-          const link  = el.querySelector('link')?.textContent || '';
-          const pub   = el.querySelector('pubDate')?.textContent || '';
-          const src   = el.querySelector('source')?.textContent || new URL(link).hostname.replace('www.','');
-          if (title && link) items.push({title, link, pub, src});
-        });
-      }
-      // Dedupliceer en sorteer
-      const seen = new Set();
-      items = items
-        .filter(i => { if (seen.has(i.title)) return false; seen.add(i.title); return true; })
-        .sort((a,b) => new Date(b.pub) - new Date(a.pub));
-
-      allNieuws_live = items;
-      renderNewsLive(items.slice(0, 8));
-      if (items.length > 8) {
-        document.getElementById('news-more-btn').style.display = 'inline-block';
-      }
-    } catch(e) {
-      // Fallback naar hardcoded nieuws
-      renderNews(allNieuws.slice(0, 8));
-      if (allNieuws.length > 8) document.getElementById('news-more-btn').style.display = 'inline-block';
-    }
-  }
-
-  let allNieuws_live = [];
-
-  function timeAgo(dateStr) {
-    const diff = (new Date() - new Date(dateStr)) / 60000;
-    if (diff < 60) return `${Math.floor(diff)}m geleden`;
-    if (diff < 1440) return `${Math.floor(diff/60)}u geleden`;
-    return `${Math.floor(diff/1440)}d geleden`;
-  }
-
-  function renderNewsLive(items) {
-    const container = document.getElementById('news-container');
-    container.innerHTML = '<div class="news-list">' +
-      items.map(n => `
-        <a class="news-item" href="${n.link}" target="_blank">
-          <img class="news-favicon" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(n.src)}&sz=32" alt="" onerror="this.style.display='none'">
-          <span class="news-item-title">${n.title}</span>
-          <span class="news-item-meta">${n.src} · ${timeAgo(n.pub)}</span>
-        </a>`).join('') +
-    '</div>';
-  }
-
-  function showAllNews() {
-    if (allNieuws_live.length) renderNewsLive(allNieuws_live);
-    else renderNews(allNieuws);
-    document.getElementById('news-more-btn').style.display = 'none';
-    document.getElementById('news-less-btn').style.display = 'inline-block';
-  }
-  function showLessNews() {
-    if (allNieuws_live.length) renderNewsLive(allNieuws_live.slice(0, 8));
-    else renderNews(allNieuws.slice(0, 8));
-    document.getElementById('news-more-btn').style.display = 'inline-block';
-    document.getElementById('news-less-btn').style.display = 'none';
-  }
-
-  loadNews();
-
-  // ACTIVE NAV
-  const sections = ['aftellen','nieuws','podcasts','muziek','weer','blessures','poll','suggestie'];
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 80) current = id;
-    });
-    document.querySelectorAll('.nav-link').forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-  });
-
   // BLESSURES
-  const dotColor = { out:'#D0021B', doubt:'#f5a623', fit:'#008A3C' };
-  const statusLabel = { out:'Afwezig', doubt:'Twijfelachtig', fit:'Fit' };
-
+  // ============================================
+  // BLESSURES — HIER AANPASSEN
+  // status: "out" = afwezig, "doubt" = twijfelachtig, "fit" = fit
+  // ============================================
+  var necBlessures = [
+  ];
+  var azBlessures = [
+    {name:'Koopmeiners', detail:'Kuitblessure', status:'doubt'},
+    {name:'Kasius', detail:'Bovenbeenblessure', status:'doubt'}
+  ];
+  // ============================================
+  var injuries = {nec: necBlessures.slice(), az: azBlessures.slice()};
+  var dotColor = {out:'#D0021B', doubt:'#f5a623', fit:'#008A3C'};
+  var statusLabel = {out:'Afwezig', doubt:'Twijfelachtig', fit:'Fit'};
   function renderInjuries() {
-    const now = new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long'});
-    const clubs = [
-      {key:'nec',name:'N.E.C. Nijmegen',icon:'🟢',cls:'injury-header-nec'},
-      {key:'az', name:'AZ Alkmaar',      icon:'🔴',cls:'injury-header-az'},
+    var now = new Date().toLocaleDateString('nl-NL', {day:'numeric', month:'long'});
+    var clubs = [
+      {key:'nec', name:'N.E.C. Nijmegen', icon:'🟢', cls:'injury-header-nec'},
+      {key:'az', name:'AZ Alkmaar', icon:'🔴', cls:'injury-header-az'}
     ];
-    document.getElementById('injury-grid').innerHTML = clubs.map(c => `
-      <div class="injury-team">
-        <div class="injury-header ${c.cls}">
-          <span style="font-size:1rem">${c.icon}</span>
-          <span class="injury-club-name">${c.name}</span>
-          <span class="injury-date">${now}</span>
-        </div>
-        <div class="injury-list">
-          ${injuries[c.key].length === 0
-            ? `<div class="injury-row" style="color:#444;font-size:0.8rem">Geen blessures ingevoerd</div>`
-            : injuries[c.key].map((p,i) => `
-              <div class="injury-row">
-                <div class="injury-dot" style="background:${dotColor[p.status]}"></div>
-                <div style="flex:1"><div class="injury-name">${p.name}</div><div class="injury-detail">${p.detail} · ${statusLabel[p.status]}</div></div>
-                <button class="injury-remove" onclick="removeInjury('${c.key}',${i})">✕</button>
-              </div>`).join('')}
-        </div>
-      </div>`).join('');
+    var html = '';
+    for (var c = 0; c < clubs.length; c++) {
+      var club = clubs[c];
+      html += '<div class="injury-team"><div class="injury-header ' + club.cls + '">';
+      html += '<span style="font-size:1rem">' + club.icon + '</span>';
+      html += '<span class="injury-club-name">' + club.name + '</span>';
+      html += '<span class="injury-date">' + now + '</span></div>';
+      html += '<div class="injury-list">';
+      if (injuries[club.key].length === 0) {
+        html += '<div class="injury-row" style="color:#444;font-size:0.8rem">Geen blessures ingevoerd</div>';
+      } else {
+        for (var p = 0; p < injuries[club.key].length; p++) {
+          var player = injuries[club.key][p];
+          html += '<div class="injury-row">';
+          html += '<div class="injury-dot" style="background:' + dotColor[player.status] + '"></div>';
+          html += '<div style="flex:1"><div class="injury-name">' + player.name + '</div>';
+          html += '<div class="injury-detail">' + player.detail + ' · ' + statusLabel[player.status] + '</div></div>';
+          html += '<button class="injury-remove" onclick="removeInjury(\'' + club.key + '\',' + p + ')">✕</button>';
+          html += '</div>';
+        }
+      }
+      html += '</div></div>';
+    }
+    document.getElementById('injury-grid').innerHTML = html;
   }
   renderInjuries();
-
-  const WACHTWOORD = 'nec2026';
-  let isUnlocked = false;
-  function toggleEmbed(id) {
-    const el = document.getElementById(id);
-    el.style.display = el.style.display === 'none' ? 'block' : 'none';
-  }
+  var WACHTWOORD = 'nec2026';
+  var isUnlocked = false;
+  function toggleForm() {
     if (!isUnlocked) {
-      const invoer = prompt('🔒 Voer het wachtwoord in:');
+      var invoer = prompt('🔒 Voer het wachtwoord in:');
       if (invoer === WACHTWOORD) { isUnlocked = true; document.getElementById('injury-form').classList.add('open'); }
       else if (invoer !== null) { alert('Verkeerd wachtwoord.'); }
     } else {
@@ -655,26 +538,35 @@
     }
   }
   function addInjury() {
-    const name = document.getElementById('f-name').value.trim();
-    const detail = document.getElementById('f-detail').value.trim();
-    const club = document.getElementById('f-club').value;
-    const status = document.getElementById('f-status').value;
+    var name = document.getElementById('f-name').value.trim();
+    var detail = document.getElementById('f-detail').value.trim();
+    var club = document.getElementById('f-club').value;
+    var status = document.getElementById('f-status').value;
     if (!name) return;
-    injuries[club].push({name,detail,status});
+    injuries[club].push({name:name, detail:detail, status:status});
     document.getElementById('f-name').value = '';
     document.getElementById('f-detail').value = '';
     renderInjuries();
   }
   function removeInjury(club, idx) {
-    injuries[club].splice(idx,1);
+    injuries[club].splice(idx, 1);
     renderInjuries();
   }
 
+  // MUZIEK
+  function toggleEmbed(id) {
+    var el = document.getElementById(id);
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+
   // POLL
-  let votes = [12,8,15], selected = null, hasVoted = false;
+  var votes = [12, 8, 15];
+  var selected = null;
+  var hasVoted = false;
   function selectPoll(el) {
     if (hasVoted) return;
-    document.querySelectorAll('.poll-option').forEach(o => o.classList.remove('selected'));
+    var opts = document.querySelectorAll('.poll-option');
+    for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
     el.classList.add('selected');
     selected = parseInt(el.dataset.val);
     document.getElementById('poll-btn').disabled = false;
@@ -683,86 +575,100 @@
     if (selected === null || hasVoted) return;
     hasVoted = true;
     votes[selected]++;
-    const total = votes.reduce((a,b)=>a+b,0);
-    document.querySelectorAll('.poll-option').forEach((opt,i) => {
-      const pct = Math.round(votes[i]/total*100);
-      opt.querySelector('.poll-bar').style.width = pct+'%';
-      const p = opt.querySelector('.poll-pct');
-      p.style.display='block'; p.textContent=pct+'%';
-      opt.classList.add('voted'); opt.onclick=null;
-    });
+    var total = votes.reduce(function(a,b) { return a+b; }, 0);
+    var opts = document.querySelectorAll('.poll-option');
+    for (var i = 0; i < opts.length; i++) {
+      var pct = Math.round(votes[i] / total * 100);
+      opts[i].querySelector('.poll-bar').style.width = pct + '%';
+      var p = opts[i].querySelector('.poll-pct');
+      p.style.display = 'block';
+      p.textContent = pct + '%';
+      opts[i].classList.add('voted');
+      opts[i].onclick = null;
+    }
     document.getElementById('poll-btn').disabled = true;
-    document.getElementById('poll-votes').textContent = `${total} stemmen uitgebracht`;
+    document.getElementById('poll-votes').textContent = total + ' stemmen uitgebracht';
     startConfetti();
-    // Clublied direct afspelen
-    const audio = new Audio('https://www.nec-nijmegen.nl/media/clublied.mp3');
+    var audio = new Audio('https://www.nec-nijmegen.nl/media/clublied.mp3');
     audio.volume = 0.6;
-    audio.play().catch(()=>{});
+    audio.play().catch(function(){});
   }
 
   // CONFETTI
   function startConfetti() {
-    const canvas = document.createElement('canvas');
+    var canvas = document.createElement('canvas');
     canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999';
     document.body.appendChild(canvas);
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const ctx = canvas.getContext('2d');
-    const colors = ['#D0021B','#008A3C','#ffffff','#D0021B','#008A3C','#333'];
-    const pieces = Array.from({length:200},()=>({
-      x:Math.random()*canvas.width, y:-20-Math.random()*canvas.height,
-      w:8+Math.random()*10, h:5+Math.random()*7,
-      color:colors[Math.floor(Math.random()*colors.length)],
-      speed:4+Math.random()*5, angle:Math.random()*360,
-      spin:(Math.random()-.5)*8, drift:(Math.random()-.5)*2,
-    }));
-    const start = Date.now();
-    (function draw() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      pieces.forEach(p => {
-        p.y+=p.speed; p.x+=p.drift; p.angle+=p.spin;
-        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle*Math.PI/180);
-        ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var ctx = canvas.getContext('2d');
+    var colors = ['#D0021B','#008A3C','#ffffff','#D0021B','#008A3C','#333'];
+    var pieces = [];
+    for (var i = 0; i < 200; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * canvas.height,
+        w: 8 + Math.random() * 10,
+        h: 5 + Math.random() * 7,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speed: 4 + Math.random() * 5,
+        angle: Math.random() * 360,
+        spin: (Math.random() - 0.5) * 8,
+        drift: (Math.random() - 0.5) * 2
       });
-      if (Date.now()-start<5000) requestAnimationFrame(draw); else canvas.remove();
-    })();
-  }
-
-  // CLUBLIED
-  function playClublied() {
-    const audio = new Audio('https://www.nec-nijmegen.nl/media/clublied.mp3');
-    audio.volume = 0.6;
-    audio.play().catch(()=>{
-      const btn = document.createElement('a');
-      btn.href='https://www.youtube.com/results?search_query=NEC+Nijmegen+clublied';
-      btn.target='_blank'; btn.textContent='🎵 Speel het clublied af!';
-      btn.style.cssText='display:block;margin-top:10px;color:#00C853;font-weight:600;font-size:0.85rem;';
-      document.getElementById('poll-votes').after(btn);
-    });
+    }
+    var start = Date.now();
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (var i = 0; i < pieces.length; i++) {
+        var p = pieces[i];
+        p.y += p.speed; p.x += p.drift; p.angle += p.spin;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        ctx.restore();
+      }
+      if (Date.now() - start < 5000) requestAnimationFrame(draw);
+      else canvas.remove();
+    }
+    draw();
   }
 
   // SUGGESTIE
   async function submitSuggestie() {
-    const name = document.getElementById('suggest-name').value.trim() || 'Anoniem';
-    const text = document.getElementById('suggest-text').value.trim();
+    var name = document.getElementById('suggest-name').value.trim() || 'Anoniem';
+    var text = document.getElementById('suggest-text').value.trim();
     if (!text) return;
     try {
-      const res = await fetch('https://formspree.io/f/xzdkqyyn', {
+      var res = await fetch('https://formspree.io/f/xzdkqyyn', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ naam: name, suggestie: text })
+        headers: {'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({naam:name, suggestie:text})
       });
       if (res.ok) {
         document.getElementById('suggest-text').value = '';
         document.getElementById('suggest-name').value = '';
         document.getElementById('suggest-thanks').style.display = 'block';
-        setTimeout(() => document.getElementById('suggest-thanks').style.display = 'none', 3000);
+        setTimeout(function() { document.getElementById('suggest-thanks').style.display = 'none'; }, 3000);
       } else { alert('Er ging iets mis. Probeer het opnieuw.'); }
-    } catch(e) { alert('Er ging iets mis. Controleer je internetverbinding.'); }
+    } catch(e) { alert('Er ging iets mis.'); }
   }
 
-  // TODO: laatste afleveringstitel live tonen via Spotify oEmbed
-  // Werkt na hosten op GitHub Pages
-  // Shows: Jarda=6UxgSyyJdWKCNHiRH6HMd9 | RGZ=0Y8GrJXVyiqMYaJeJjbpmb | RN7=4pBHkxC4pPj3Dsbg7BgBjI
+  // ACTIVE NAV
+  var navSections = ['aftellen','nieuws','podcasts','muziek','weer','blessures','poll','suggestie'];
+  window.addEventListener('scroll', function() {
+    var current = '';
+    for (var i = 0; i < navSections.length; i++) {
+      var el = document.getElementById(navSections[i]);
+      if (el && window.scrollY >= el.offsetTop - 80) current = navSections[i];
+    }
+    var links = document.querySelectorAll('.nav-link');
+    for (var i = 0; i < links.length; i++) {
+      links[i].classList.toggle('active', links[i].getAttribute('href') === '#' + current);
+    }
+  });
 </script>
 </body>
 </html>
