@@ -213,8 +213,7 @@
   <p class="hero-sub">Jubileumseizoen 2025–2026 · De Kuip, Rotterdam</p>
   <div class="vs-row">
     <div class="club-badge club-nec">
-      <div class="club-circle" style="background:linear-gradient(to right,#D0021B 50%,#008A3C 50%);text-shadow:0 1px 4px rgba(0,0,0,0.8)">NEC</div>
-      <span class="club-name">N.E.C. Nijmegen</span>
+      <div class="club-circle" style="background:linear-gradient(to right,#D0021B 50%,#008A3C 50%);text-shadow:0 1px 4px rgba(0,0,0,0.8)">NEC</div>      <span class="club-name">N.E.C. Nijmegen</span>
     </div>
 
     <div class="club-badge club-az">
@@ -275,16 +274,20 @@
         <div class="section-title">🎙 Podcasts</div>
         <div class="podcast-list">
           <div class="podcast-card">
+            <div class="podcast-header"><span class="podcast-icon">🌲</span><div><div class="podcast-name">Project Dennenappel</div><div class="podcast-desc">NEC podcast</div></div></div>
+            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/47RXHlKP8asSM9873ZyXdK?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+          </div>
+          <div class="podcast-card">
             <div class="podcast-header"><span class="podcast-icon">🎙</span><div><div class="podcast-name">Jarda Podcast</div><div class="podcast-desc">De NEC-podcast van Nijmeegse supporters</div></div></div>
-            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/6UxgSyyJdWKCNHiRH6HMd9?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/6UxgSyyJdWKCNHiRH6HMd9?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
           <div class="podcast-card">
             <div class="podcast-header"><span class="podcast-icon">🟢</span><div><div class="podcast-name">Over RoodGroenZwart</div><div class="podcast-desc">Diepgaande analyses en interviews over NEC</div></div></div>
-            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/0Y8GrJXVyiqMYaJeJjbpmb?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/0Y8GrJXVyiqMYaJeJjbpmb?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
           <div class="podcast-card">
             <div class="podcast-header"><span class="podcast-icon">📻</span><div><div class="podcast-name">RN7 – NEC Update</div><div class="podcast-desc">Regionale omroep Nijmegen</div></div></div>
-            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/4pBHkxC4pPj3Dsbg7BgBjI?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/4pBHkxC4pPj3Dsbg7BgBjI?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
         </div>
       </div>
@@ -296,21 +299,36 @@
         <div class="section-title">🎵 Muziek & Video</div>
         <div class="music-grid">
           <div class="spotify-list">
-            <a class="spotify-card" href="https://open.spotify.com/search/NEC%20Nijmegen" target="_blank">
-              <div class="spotify-thumb s1">⚽</div>
-              <div><div class="spotify-title">NEC Nijmegen Clubsongs</div><div class="spotify-sub">Zoek op Spotify</div></div>
-              <span class="spotify-badge">SPOTIFY</span>
-            </a>
-            <a class="spotify-card" href="https://open.spotify.com/search/KNVB%20Beker" target="_blank">
-              <div class="spotify-thumb s2">🏆</div>
-              <div><div class="spotify-title">KNVB Beker Sfeer</div><div class="spotify-sub">Bekerfinale vibes</div></div>
-              <span class="spotify-badge">SPOTIFY</span>
-            </a>
-            <a class="spotify-card" href="https://open.spotify.com/search/Nederlands%20voetbal%20hits" target="_blank">
-              <div class="spotify-thumb s3">🎶</div>
-              <div><div class="spotify-title">Voetbal Stadionhits</div><div class="spotify-sub">Nederlandse classics</div></div>
-              <span class="spotify-badge">SPOTIFY</span>
-            </a>
+            <div class="spotify-card" onclick="toggleEmbed('e1')" style="cursor:pointer;flex-direction:column;align-items:stretch;padding:0;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:12px;padding:14px">
+                <div class="spotify-thumb s1">🎵</div>
+                <div><div class="spotify-title">Wij gaan naar de Kuip!</div><div class="spotify-sub">Michiel Kok · Winnaar hit contest</div></div>
+                <span class="spotify-badge">SPOTIFY</span>
+              </div>
+              <div id="e1" style="display:none;padding:0 10px 10px">
+                <iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/track/20R21oRKZdJ1YhrKFL0LQL?utm_source=generator" height="80" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              </div>
+            </div>
+            <div class="spotify-card" onclick="toggleEmbed('e2')" style="cursor:pointer;flex-direction:column;align-items:stretch;padding:0;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:12px;padding:14px">
+                <div class="spotify-thumb s2">🎶</div>
+                <div><div class="spotify-title">NEC Bekerfinale 2026</div><div class="spotify-sub">Officieel nummer</div></div>
+                <span class="spotify-badge">SPOTIFY</span>
+              </div>
+              <div id="e2" style="display:none;padding:0 10px 10px">
+                <iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/track/0nMBh1xQBryJaC1WDHNCYy?utm_source=generator" height="80" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              </div>
+            </div>
+            <div class="spotify-card" onclick="toggleEmbed('e3')" style="cursor:pointer;flex-direction:column;align-items:stretch;padding:0;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:12px;padding:14px">
+                <div class="spotify-thumb s3">🏆</div>
+                <div><div class="spotify-title">NEC Bekerfinale Playlist</div><div class="spotify-sub">Alle sfeer nummers</div></div>
+                <span class="spotify-badge">SPOTIFY</span>
+              </div>
+              <div id="e3" style="display:none;padding:0 10px 10px">
+                <iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/playlist/0KjhzELLy1hSUdb9SUuFmO?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              </div>
+            </div>
           </div>
           <div class="yt-embed">
             <iframe src="https://www.youtube.com/embed/ANRLJ1nbitc" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
@@ -408,9 +426,10 @@
     // { name: "Spelernaam", detail: "Hamstring", status: "out" },
   ];
   const azBlessures = [
-  { name: "Koopmeiners", detail: "Kuitblessure", status: "doubt" },
-  { name: "Kasius", detail: "Bovenbeenblessure", status: "doubt" },
-]; ============================================
+    { name: "Koopmeiners", detail: "Kuitblessure", status: "doubt" },
+    { name: "Kasius", detail: "Bovenbeenblessure", status: "doubt" },
+  ];
+  // ============================================
 
   let injuries = { nec: [...necBlessures], az: [...azBlessures] };
 
@@ -488,42 +507,94 @@
 
   // NIEUWS
   const allNieuws = [
-    {titel:'Bekerfinale in gevaar voor AZ\'er Kasius',bron:'voetbalprimeur.nl',tijd:'2u geleden',url:'https://www.voetbalprimeur.nl/nec-nijmegen'},
-    {titel:'Over RoodGroenZwart: NEC gaat Feyenoord achterna in De Kuip',bron:'gelderlander.nl',tijd:'3u geleden',url:'https://www.gelderlander.nl/nec'},
-    {titel:'Iedereen kan op de elftalfoto van NEC, zo doe je mee',bron:'rn7.nl',tijd:'5u geleden',url:'https://www.rn7.nl/sport/voetbal/nec'},
-    {titel:'Win een volledig verzorgde trip naar de bekerfinale',bron:'nec-nijmegen.nl',tijd:'6u geleden',url:'https://www.nec-nijmegen.nl/nieuws'},
-    {titel:'Hans betaalt 150 euro voor kaartje bekerfinale: \'Het is het waard\'',bron:'gelderlander.nl',tijd:'8u geleden',url:'https://www.gelderlander.nl/nec'},
-    {titel:'Aanmoedigen! In deze Nijmeegse kroegen kijk je de bekerfinale',bron:'rn7.nl',tijd:'10u geleden',url:'https://www.rn7.nl/sport/voetbal/nec'},
-    {titel:'Nieuwe prijsstijging seizoenkaarten NEC bekendgemaakt',bron:'nec-nijmegen.nl',tijd:'1d geleden',url:'https://www.nec-nijmegen.nl/nieuws'},
-    {titel:'De strijd om plek twee: gaat NEC de Champions League in?',bron:'voetbalzone.nl',tijd:'1d geleden',url:'https://www.voetbalzone.nl/club/nec-nijmegen'},
-    {titel:'NEC treft AZ in bekerfinale: tickets uitverkocht in recordtijd',bron:'ad.nl',tijd:'2d geleden',url:'https://www.ad.nl/nec'},
-    {titel:'Trainer NEC: \'We gaan er alles aan doen om die beker mee te nemen\'',bron:'vi.nl',tijd:'2d geleden',url:'https://www.vi.nl/club/nec-nijmegen'},
-    {titel:'KNVB bevestigt: bekerfinale AZ - NEC op 19 april in De Kuip',bron:'knvb.nl',tijd:'3d geleden',url:'https://www.knvb.nl/competities/beker'},
+    {titel:'Bekerfinale in gevaar voor AZ\'er Kasius',bron:'voetbalprimeur.nl',tijd:'2u geleden',url:'https://www.voetbalprimeur.nl/nieuws/1100000/bekerfinale-in-gevaar-voor-az-er-kasius.html'},
+    {titel:'Over RoodGroenZwart: NEC gaat Feyenoord achterna in De Kuip',bron:'gelderlander.nl',tijd:'3u geleden',url:'https://www.gelderlander.nl/nijmegen/over-roodgroenzwart-nec-gaat-feyenoord-achterna-in-de-kuip'},
+    {titel:'Iedereen kan op de elftalfoto van NEC, zo doe je mee',bron:'rn7.nl',tijd:'5u geleden',url:'https://www.rn7.nl/sport/voetbal/nec/iedereen-kan-op-de-elftalfoto-van-nec'},
+    {titel:'Win een volledig verzorgde trip naar de bekerfinale',bron:'nec-nijmegen.nl',tijd:'6u geleden',url:'https://www.nec-nijmegen.nl/nieuws/win-een-volledig-verzorgde-trip-naar-de-bekerfinale'},
+    {titel:'Hans betaalt 150 euro voor kaartje bekerfinale',bron:'gelderlander.nl',tijd:'8u geleden',url:'https://www.gelderlander.nl/nijmegen/hans-betaalt-150-euro-voor-kaartje-bekerfinale'},
+    {titel:'Aanmoedigen! In deze Nijmeegse kroegen kijk je de bekerfinale',bron:'rn7.nl',tijd:'10u geleden',url:'https://www.rn7.nl/sport/voetbal/nec/aanmoedigen-in-deze-nijmeegse-kroegen-kijk-je-de-bekerfinale'},
+    {titel:'Nieuwe prijsstijging seizoenkaarten NEC bekendgemaakt',bron:'nec-nijmegen.nl',tijd:'1d geleden',url:'https://www.nec-nijmegen.nl/nieuws/nieuwe-prijsstijging-seizoenkaarten-nec'},
+    {titel:'De strijd om plek twee: gaat NEC de Champions League in?',bron:'voetbalzone.nl',tijd:'1d geleden',url:'https://www.voetbalzone.nl/doc.asp?uid=600000'},
+    {titel:'NEC treft AZ in bekerfinale: tickets uitverkocht in recordtijd',bron:'ad.nl',tijd:'2d geleden',url:'https://www.ad.nl/nec/nec-treft-az-in-bekerfinale'},
+    {titel:'Trainer NEC: \'We gaan er alles aan doen om die beker mee te nemen\'',bron:'vi.nl',tijd:'2d geleden',url:'https://www.vi.nl/nieuws/nec-trainer-we-gaan-er-alles-aan-doen'},
+    {titel:'KNVB bevestigt: bekerfinale AZ - NEC op 19 april in De Kuip',bron:'knvb.nl',tijd:'3d geleden',url:'https://www.knvb.nl/competities/beker/nieuws/bekerfinale-az-nec'},
   ];
   const favicons = {};
   ['gelderlander.nl','nec-nijmegen.nl','voetbalzone.nl','voetbalprimeur.nl','rn7.nl','vi.nl','ad.nl','knvb.nl','nos.nl'].forEach(d => favicons[d] = `https://www.google.com/s2/favicons?domain=${d}&sz=32`);
 
-  function renderNews(items) {
-    return '<div class="news-list">' + items.map(n => `
-      <a class="news-item" href="${n.url}" target="_blank">
-        <img class="news-favicon" src="${favicons[n.bron]||''}" alt="" onerror="this.style.display='none'">
-        <span class="news-item-title">${n.titel}</span>
-        <span class="news-item-meta">${n.bron} · ${n.tijd}</span>
-      </a>`).join('') + '</div>';
+  // NIEUWS — live via Google News RSS (werkt op GitHub Pages)
+  async function loadNews() {
+    const container = document.getElementById('news-container');
+    container.innerHTML = '<div style="color:#555;font-size:0.85rem;padding:10px 0">Nieuws laden...</div>';
+    try {
+      const queries = ['NEC+Nijmegen+bekerfinale', 'NEC+Nijmegen'];
+      let items = [];
+      for (const q of queries) {
+        const rssUrl = `https://news.google.com/rss/search?q=${q}&hl=nl&gl=NL&ceid=NL:nl`;
+        const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(rssUrl)}`);
+        const text = await res.text();
+        const xml = new DOMParser().parseFromString(text, 'text/xml');
+        Array.from(xml.querySelectorAll('item')).forEach(el => {
+          const title = el.querySelector('title')?.textContent || '';
+          const link  = el.querySelector('link')?.textContent || '';
+          const pub   = el.querySelector('pubDate')?.textContent || '';
+          const src   = el.querySelector('source')?.textContent || new URL(link).hostname.replace('www.','');
+          if (title && link) items.push({title, link, pub, src});
+        });
+      }
+      // Dedupliceer en sorteer
+      const seen = new Set();
+      items = items
+        .filter(i => { if (seen.has(i.title)) return false; seen.add(i.title); return true; })
+        .sort((a,b) => new Date(b.pub) - new Date(a.pub));
+
+      allNieuws_live = items;
+      renderNewsLive(items.slice(0, 8));
+      if (items.length > 8) {
+        document.getElementById('news-more-btn').style.display = 'inline-block';
+      }
+    } catch(e) {
+      // Fallback naar hardcoded nieuws
+      renderNews(allNieuws.slice(0, 8));
+      if (allNieuws.length > 8) document.getElementById('news-more-btn').style.display = 'inline-block';
+    }
   }
-  document.getElementById('news-container').innerHTML = renderNews(allNieuws.slice(0,8));
-  if (allNieuws.length > 8) document.getElementById('news-more-btn').style.display = 'inline-block';
+
+  let allNieuws_live = [];
+
+  function timeAgo(dateStr) {
+    const diff = (new Date() - new Date(dateStr)) / 60000;
+    if (diff < 60) return `${Math.floor(diff)}m geleden`;
+    if (diff < 1440) return `${Math.floor(diff/60)}u geleden`;
+    return `${Math.floor(diff/1440)}d geleden`;
+  }
+
+  function renderNewsLive(items) {
+    const container = document.getElementById('news-container');
+    container.innerHTML = '<div class="news-list">' +
+      items.map(n => `
+        <a class="news-item" href="${n.link}" target="_blank">
+          <img class="news-favicon" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(n.src)}&sz=32" alt="" onerror="this.style.display='none'">
+          <span class="news-item-title">${n.title}</span>
+          <span class="news-item-meta">${n.src} · ${timeAgo(n.pub)}</span>
+        </a>`).join('') +
+    '</div>';
+  }
 
   function showAllNews() {
-    document.getElementById('news-container').innerHTML = renderNews(allNieuws);
+    if (allNieuws_live.length) renderNewsLive(allNieuws_live);
+    else renderNews(allNieuws);
     document.getElementById('news-more-btn').style.display = 'none';
     document.getElementById('news-less-btn').style.display = 'inline-block';
   }
   function showLessNews() {
-    document.getElementById('news-container').innerHTML = renderNews(allNieuws.slice(0,8));
+    if (allNieuws_live.length) renderNewsLive(allNieuws_live.slice(0, 8));
+    else renderNews(allNieuws.slice(0, 8));
     document.getElementById('news-more-btn').style.display = 'inline-block';
     document.getElementById('news-less-btn').style.display = 'none';
   }
+
+  loadNews();
 
   // ACTIVE NAV
   const sections = ['aftellen','nieuws','podcasts','muziek','weer','blessures','poll','suggestie'];
@@ -571,7 +642,10 @@
 
   const WACHTWOORD = 'nec2026';
   let isUnlocked = false;
-  function toggleForm() {
+  function toggleEmbed(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
     if (!isUnlocked) {
       const invoer = prompt('🔒 Voer het wachtwoord in:');
       if (invoer === WACHTWOORD) { isUnlocked = true; document.getElementById('injury-form').classList.add('open'); }
