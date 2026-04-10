@@ -581,13 +581,7 @@ var pollLabels = ['NEC na 90 min ⚽','NEC verlengingen ⏱','NEC penalty\'s �
 var injDot = {out:'#D0021B',doubt:'#f5a623',fit:'#008A3C'};
 var injLbl = {out:'Afwezig',doubt:'Twijfelachtig',fit:'Fit'};
 
-// ============================================
-// BLESSURES — HIER AANPASSEN
-// ============================================
-var necInj = [];
-var azInj = [{name:'Koopmeiners',detail:'Kuitblessure',status:'doubt'},{name:'Kasius',detail:'Bovenbeenblessure',status:'doubt'}];
-// ============================================
-var injuries = {nec:necInj.slice(), az:azInj.slice()};
+var injuries = {nec:[], az:[]};
 
 // AUTH
 function toggleAuth() { document.getElementById('auth-overlay').classList.toggle('open'); }
@@ -768,21 +762,51 @@ function loadWeather() {
 loadWeather();
 
 // BLESSURES
+function wIcon(c){if(c===0)return'☀️';if(c<=2)return'⛅';if(c<=3)return'🌥';if(c<=48)return'🌫';if(c<=67)return'🌧';if(c<=77)return'❄️';if(c<=82)return'🌦';if(c<=99)return'⛈';return'🌥';}
 function renderInj() {
   var now=new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long'});
   var clubs=[{k:'nec',n:'N.E.C. Nijmegen',i:'🟢',c:'inj-hdr-nec'},{k:'az',n:'AZ Alkmaar',i:'🔴',c:'inj-hdr-az'}];
   var h='';
   for(var c=0;c<clubs.length;c++){
     var cl=clubs[c]; h+='<div class="inj-team"><div class="inj-hdr '+cl.c+'"><span style="font-size:1rem">'+cl.i+'</span><span class="inj-cname">'+cl.n+'</span><span class="inj-date">'+now+'</span></div><div class="inj-list">';
-    if(!injuries[cl.k].length){h+='<div class="inj-row" style="color:#444;font-size:0.8rem">Geen blessures</div>';}
-    else{for(var p=0;p<injuries[cl.k].length;p++){var pl=injuries[cl.k][p];h+='<div class="inj-row"><div class="inj-dot" style="background:'+injDot[pl.status]+'"></div><div style="flex:1"><div class="inj-name">'+pl.name+'</div><div class="inj-detail">'+pl.detail+' · '+injLbl[pl.status]+'</div></div><button class="inj-rm" onclick="rmInj(\''+cl.k+'\','+p+')" style="display:'+(isUnlocked?'inline':'none')+'">✕</button></div>';}}
+    var clubInj = injuries[cl.k];
+    if(!clubInj||!clubInj.length){h+='<div class="inj-row" style="color:#444;font-size:0.8rem">Geen blessures</div>';}
+    else{for(var p=0;p<clubInj.length;p++){var pl=clubInj[p];h+='<div class="inj-row"><div class="inj-dot" style="background:'+injDot[pl.status]+'"></div><div style="flex:1"><div class="inj-name">'+pl.name+'</div><div class="inj-detail">'+pl.detail+' · '+injLbl[pl.status]+'</div></div><button class="inj-rm" onclick="rmInj(\''+pl.id+'\',\''+cl.k+'\')" style="display:'+(isUnlocked?'inline':'none')+'">✕</button></div>';}}
     h+='</div></div>';
   }
   document.getElementById('inj-grid').innerHTML=h;
 }
-renderInj();
-function addInj(){var n=document.getElementById('f-name').value.trim(),d=document.getElementById('f-detail').value.trim(),c=document.getElementById('f-club').value,s=document.getElementById('f-status').value;if(!n)return;injuries[c].push({name:n,detail:d,status:s});document.getElementById('f-name').value='';document.getElementById('f-detail').value='';renderInj();}
-function rmInj(c,i){injuries[c].splice(i,1);renderInj();}
+
+function loadInj() {
+  sb.from('blessures').select('*').order('created_at',{ascending:true}).then(function(r){
+    if(r.error||!r.data) return;
+    injuries = {nec:[], az:[]};
+    for(var i=0;i<r.data.length;i++){
+      var row=r.data[i];
+      if(injuries[row.club]) injuries[row.club].push({id:row.id,name:row.name,detail:row.detail,status:row.status});
+    }
+    renderInj();
+    if(document.getElementById('ad-inj')) renderAdminInj();
+  });
+}
+loadInj();
+
+function addInj(){
+  var n=document.getElementById('f-name').value.trim();
+  var d=document.getElementById('f-detail').value.trim();
+  var c=document.getElementById('f-club').value;
+  var s=document.getElementById('f-status').value;
+  if(!n)return;
+  sb.from('blessures').insert({club:c,name:n,detail:d,status:s}).then(function(r){
+    if(r.error){alert('Fout: '+r.error.message);return;}
+    document.getElementById('f-name').value='';
+    document.getElementById('f-detail').value='';
+    loadInj();
+  });
+}
+function rmInj(id,club){
+  sb.from('blessures').delete().eq('id',id).then(function(){loadInj();});
+}
 
 // MUZIEK
 function togEmbed(id){var el=document.getElementById(id);el.style.display=el.style.display==='none'?'block':'none';}
@@ -868,11 +892,31 @@ function adDelCom(id){
 function renderAdminInj(){
   var clubs=[{k:'nec',n:'N.E.C. Nijmegen',i:'🟢',c:'inj-hdr-nec'},{k:'az',n:'AZ Alkmaar',i:'🔴',c:'inj-hdr-az'}];
   var h='<div class="inj-grid">';
-  for(var c=0;c<clubs.length;c++){var cl=clubs[c];h+='<div class="inj-team"><div class="inj-hdr '+cl.c+'"><span style="font-size:1rem">'+cl.i+'</span><span class="inj-cname">'+cl.n+'</span></div><div class="inj-list">';if(!injuries[cl.k].length){h+='<div class="inj-row" style="color:#444;font-size:0.8rem">Geen blessures</div>';}else{for(var p=0;p<injuries[cl.k].length;p++){var pl=injuries[cl.k][p];h+='<div class="inj-row"><div class="inj-dot" style="background:'+injDot[pl.status]+'"></div><div style="flex:1"><div class="inj-name">'+pl.name+'</div><div class="inj-detail">'+pl.detail+' · '+injLbl[pl.status]+'</div></div><button class="admin-del" onclick="rmInjAdmin(\''+cl.k+'\','+p+')">✕</button></div>';}}h+='</div></div>';}
+  for(var c=0;c<clubs.length;c++){
+    var cl=clubs[c]; var clubInj=injuries[cl.k]||[];
+    h+='<div class="inj-team"><div class="inj-hdr '+cl.c+'"><span style="font-size:1rem">'+cl.i+'</span><span class="inj-cname">'+cl.n+'</span></div><div class="inj-list">';
+    if(!clubInj.length){h+='<div class="inj-row" style="color:#444;font-size:0.8rem">Geen blessures</div>';}
+    else{for(var p=0;p<clubInj.length;p++){var pl=clubInj[p];h+='<div class="inj-row"><div class="inj-dot" style="background:'+injDot[pl.status]+'"></div><div style="flex:1"><div class="inj-name">'+pl.name+'</div><div class="inj-detail">'+pl.detail+' · '+injLbl[pl.status]+'</div></div><button class="admin-del" onclick="rmInjAdmin(\''+pl.id+'\')">✕</button></div>';}}
+    h+='</div></div>';
+  }
   h+='</div>'; document.getElementById('ad-inj').innerHTML=h;
 }
-function addInjAdmin(){var n=document.getElementById('af-name').value.trim(),d=document.getElementById('af-detail').value.trim(),c=document.getElementById('af-club').value,s=document.getElementById('af-status').value;if(!n)return;injuries[c].push({name:n,detail:d,status:s});document.getElementById('af-name').value='';document.getElementById('af-detail').value='';renderInj();renderAdminInj();}
-function rmInjAdmin(c,i){injuries[c].splice(i,1);renderInj();renderAdminInj();}
+function addInjAdmin(){
+  var n=document.getElementById('af-name').value.trim();
+  var d=document.getElementById('af-detail').value.trim();
+  var c=document.getElementById('af-club').value;
+  var s=document.getElementById('af-status').value;
+  if(!n)return;
+  sb.from('blessures').insert({club:c,name:n,detail:d,status:s}).then(function(r){
+    if(r.error){alert('Fout: '+r.error.message);return;}
+    document.getElementById('af-name').value='';
+    document.getElementById('af-detail').value='';
+    loadInj();
+  });
+}
+function rmInjAdmin(id){
+  sb.from('blessures').delete().eq('id',id).then(function(){loadInj();});
+}
 
 // NAV
 var secs=['aftellen','nieuws','blessures','weer','route','muziek','podcasts','poll','suggestie'];
