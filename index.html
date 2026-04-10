@@ -778,7 +778,7 @@ function renderInj() {
 }
 
 function loadInj() {
-  sb.from('blessures').select('*').order('created_at',{ascending:true}).then(function(r){
+  sb.from('Blessures').select('*').order('created_at',{ascending:true}).then(function(r){
     if(r.error||!r.data) return;
     injuries = {nec:[], az:[]};
     for(var i=0;i<r.data.length;i++){
@@ -797,7 +797,7 @@ function addInj(){
   var c=document.getElementById('f-club').value;
   var s=document.getElementById('f-status').value;
   if(!n)return;
-  sb.from('blessures').insert({club:c,name:n,detail:d,status:s}).then(function(r){
+  sb.from('Blessures').insert({club:c,name:n,detail:d,status:s}).then(function(r){
     if(r.error){alert('Fout: '+r.error.message);return;}
     document.getElementById('f-name').value='';
     document.getElementById('f-detail').value='';
@@ -805,7 +805,7 @@ function addInj(){
   });
 }
 function rmInj(id,club){
-  sb.from('blessures').delete().eq('id',id).then(function(){loadInj();});
+  sb.from('Blessures').delete().eq('id',id).then(function(){loadInj();});
 }
 
 // MUZIEK
@@ -907,7 +907,7 @@ function addInjAdmin(){
   var c=document.getElementById('af-club').value;
   var s=document.getElementById('af-status').value;
   if(!n)return;
-  sb.from('blessures').insert({club:c,name:n,detail:d,status:s}).then(function(r){
+  sb.from('Blessures').insert({club:c,name:n,detail:d,status:s}).then(function(r){
     if(r.error){alert('Fout: '+r.error.message);return;}
     document.getElementById('af-name').value='';
     document.getElementById('af-detail').value='';
@@ -915,7 +915,7 @@ function addInjAdmin(){
   });
 }
 function rmInjAdmin(id){
-  sb.from('blessures').delete().eq('id',id).then(function(){loadInj();});
+  sb.from('Blessures').delete().eq('id',id).then(function(){loadInj();});
 }
 
 // NAV
