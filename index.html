@@ -215,7 +215,15 @@ section:last-child{border-bottom:none;}
 .sh-x{background:#000;border:1px solid #333;}
 .sh-fb{background:#1877F2;}
 .sh-cp{background:var(--gray);border:1px solid var(--border);}
-/* FOOTER */
+/* RESET WACHTWOORD MODAL */
+.reset-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:3000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.reset-overlay.open{display:flex;}
+.reset-modal{background:#0d0d0d;border:1px solid #222;border-radius:12px;width:320px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.7);}
+.reset-stripe{height:3px;background:linear-gradient(to right,var(--red) 50%,var(--green) 50%);}
+.reset-hdr{padding:18px 18px 0;display:flex;align-items:center;justify-content:space-between;}
+.reset-ttl{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.reset-body{padding:18px;}
+.reset-sub{font-size:0.8rem;color:#888;margin-bottom:16px;line-height:1.5;}
 footer{text-align:center;padding:32px 24px 24px;color:#333;font-size:0.78rem;position:relative;z-index:1;}
 .ft-stripe{display:flex;height:4px;width:100%;margin-bottom:22px;}
 .ft-stripe div{flex:1;}
@@ -499,6 +507,21 @@ footer{text-align:center;padding:32px 24px 24px;color:#333;font-size:0.78rem;pos
   </div>
 </div>
 
+<!-- RESET WACHTWOORD MODAL -->
+<div class="reset-overlay" id="reset-overlay">
+  <div class="reset-modal">
+    <div class="reset-stripe"></div>
+    <div class="reset-hdr"><span class="reset-ttl">Nieuw wachtwoord</span></div>
+    <div class="reset-body">
+      <div class="reset-sub">Kies een nieuw wachtwoord voor je account.</div>
+      <div class="af"><label>Nieuw wachtwoord</label><input type="password" id="new-pw" placeholder="••••••••" autocomplete="new-password"/></div>
+      <div class="af"><label>Bevestig wachtwoord</label><input type="password" id="new-pw2" placeholder="••••••••" autocomplete="new-password"/></div>
+      <button class="auth-sub" onclick="saveNewPw()">Wachtwoord opslaan</button>
+      <div class="auth-fb" id="fb-reset"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ADMIN PAGE -->
 <div class="admin-page" id="admin-page">
   <div class="admin-hdr">
@@ -585,7 +608,12 @@ function showForgot() { document.getElementById('p-login').style.display='none';
 function hideForgot() { document.getElementById('p-forgot').style.display='none'; document.getElementById('p-login').style.display='block'; }
 function fb(id,msg,type) { var el=document.getElementById(id); el.textContent=msg; el.className='auth-fb '+type; }
 
+// Check voor wachtwoord reset in URL
 sb.auth.onAuthStateChange(function(ev, sess) {
+  if(ev === 'PASSWORD_RECOVERY') {
+    document.getElementById('reset-overlay').classList.add('open');
+    return;
+  }
   if(sess && sess.user) {
     curUser = sess.user;
     curName = (sess.user.user_metadata && sess.user.user_metadata.username) ? sess.user.user_metadata.username : sess.user.email.split('@')[0];
@@ -699,8 +727,9 @@ function loadComments() {
     for(var i=0;i<r.data.length;i++){
       var c=r.data[i];
       var dt=new Date(c.created_at).toLocaleString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+      var isOwn = curUser && curUser.id === c.user_id;
       h+='<div class="com-item">';
-      if(isUnlocked) h+='<button onclick="delCom(\''+c.id+'\')" style="float:right;background:none;border:none;color:#444;cursor:pointer" onmouseover="this.style.color=\'#D0021B\'" onmouseout="this.style.color=\'#444\'">✕</button>';
+      if(isUnlocked || isOwn) h+='<button onclick="delCom(\''+c.id+'\')" style="float:right;background:none;border:none;color:#444;cursor:pointer;font-size:0.8rem" onmouseover="this.style.color=\'#D0021B\'" onmouseout="this.style.color=\'#444\'">✕</button>';
       h+='<span class="com-author">'+(c.username||'Anoniem')+'</span><span class="com-time">'+dt+'</span><div class="com-text">'+c.comment+'</div></div>';
     }
     list.innerHTML=h;
@@ -793,6 +822,20 @@ function sendSug(){
   .catch(function(){alert('Er ging iets mis.');});
 }
 
+function saveNewPw() {
+  var pw = document.getElementById('new-pw').value;
+  var pw2 = document.getElementById('new-pw2').value;
+  if(!pw || pw.length < 6) { fb('fb-reset','Wachtwoord moet minimaal 6 tekens zijn.','err'); return; }
+  if(pw !== pw2) { fb('fb-reset','Wachtwoorden komen niet overeen.','err'); return; }
+  sb.auth.updateUser({password: pw}).then(function(r) {
+    if(r.error) { fb('fb-reset', r.error.message, 'err'); }
+    else {
+      document.getElementById('reset-overlay').classList.remove('open');
+      fb('fb-reset','','ok');
+    }
+  });
+}
+
 // BEHEER
 function openBeheer(){
   if(!isUnlocked){var p=prompt('🔒 Wachtwoord:');if(p===PW){isUnlocked=true;document.getElementById('admin-page').classList.add('open');renderInj();loadAdmin();}else if(p!==null)alert('Verkeerd wachtwoord.');}
@@ -815,7 +858,13 @@ function loadAdmin(){
     renderAdminInj();
   });
 }
-function adDelCom(id){sb.from('Comments').delete().eq('id',id).then(function(){loadComments();loadAdmin();});}
+function adDelCom(id){
+  if(!confirm('Reactie verwijderen?')) return;
+  sb.from('Comments').delete().eq('id',id).then(function(r){
+    if(r.error) alert('Fout: '+r.error.message);
+    else { loadComments(); loadAdmin(); }
+  });
+}
 function renderAdminInj(){
   var clubs=[{k:'nec',n:'N.E.C. Nijmegen',i:'🟢',c:'inj-hdr-nec'},{k:'az',n:'AZ Alkmaar',i:'🔴',c:'inj-hdr-az'}];
   var h='<div class="inj-grid">';
