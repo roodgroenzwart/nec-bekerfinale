@@ -283,7 +283,22 @@ footer .g { color:var(--green); }
             <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password" />
           </div>
           <button class="auth-submit" onclick="signIn()">Doorgaan</button>
+          <div style="text-align:center;margin-top:10px">
+            <span onclick="showForgotPassword()" style="font-size:0.72rem;color:#555;cursor:pointer;text-decoration:underline">Wachtwoord vergeten?</span>
+          </div>
           <div class="auth-feedback" id="auth-msg"></div>
+        </div>
+        <div id="panel-forgot" style="display:none">
+          <div style="font-size:0.78rem;color:#888;margin-bottom:14px;line-height:1.5">Vul je e-mailadres in en we sturen je een resetlink.</div>
+          <div class="auth-field">
+            <label>E-mailadres</label>
+            <input type="email" id="forgot-email" placeholder="jouw@email.nl" autocomplete="email" />
+          </div>
+          <button class="auth-submit" onclick="sendPasswordReset()">Resetlink versturen</button>
+          <div style="text-align:center;margin-top:10px">
+            <span onclick="hideForgotPassword()" style="font-size:0.72rem;color:#555;cursor:pointer;text-decoration:underline">← Terug naar inloggen</span>
+          </div>
+          <div class="auth-feedback" id="forgot-msg"></div>
         </div>
         <div id="panel-register" style="display:none">
           <div class="auth-field">
@@ -519,6 +534,58 @@ footer .g { color:var(--green); }
   </div>
 </div>
 
+<!-- BEHEERPAGINA -->
+<div class="admin-page" id="admin-page">
+  <div class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-title">⚙️ Beheerpagina</div>
+      <div style="display:flex;gap:10px">
+        <button class="admin-refresh" onclick="loadAdminData()">↻ Vernieuwen</button>
+        <button class="admin-close" onclick="closeAdmin()">✕ Sluiten</button>
+      </div>
+    </div>
+  </div>
+  <div class="admin-body">
+
+    <!-- STATS -->
+    <div class="admin-grid" id="admin-stats">
+      <div class="admin-stat"><div class="admin-stat-icon">💬</div><div class="admin-stat-val" id="stat-comments">–</div><div class="admin-stat-label">Reacties</div></div>
+      <div class="admin-stat"><div class="admin-stat-icon">🗳</div><div class="admin-stat-val" id="stat-votes">–</div><div class="admin-stat-label">Poll stemmen</div></div>
+      <div class="admin-stat"><div class="admin-stat-icon">🏆</div><div class="admin-stat-val" id="stat-winner">–</div><div class="admin-stat-label">Poll winnaar</div></div>
+      <div class="admin-stat"><div class="admin-stat-icon">💡</div><div class="admin-stat-val" id="stat-suggestions">–</div><div class="admin-stat-label">Suggesties</div></div>
+    </div>
+
+    <!-- POLL RESULTATEN -->
+    <div class="admin-section">
+      <div class="admin-section-title">🗳 Poll resultaten</div>
+      <div id="admin-poll-results"></div>
+    </div>
+
+    <!-- REACTIES -->
+    <div class="admin-section">
+      <div class="admin-section-title">💬 Alle reacties</div>
+      <div class="admin-comment-list" id="admin-comment-list"></div>
+    </div>
+
+    <!-- BLESSURES BEHEER -->
+    <div class="admin-section">
+      <div class="admin-section-title">🏥 Blessures beheren</div>
+      <div class="injury-form" style="display:block;margin-bottom:0">
+        <h3 style="margin-bottom:12px">Speler toevoegen</h3>
+        <div class="form-row">
+          <select id="af-club"><option value="nec">NEC Nijmegen</option><option value="az">AZ Alkmaar</option></select>
+          <input id="af-name" type="text" placeholder="Naam speler" />
+          <input id="af-detail" type="text" placeholder="Blessure / reden" />
+          <select id="af-status"><option value="out">Afwezig</option><option value="doubt">Twijfelachtig</option><option value="fit">Fit</option></select>
+          <button class="form-add-btn" onclick="addInjuryAdmin()">+ Voeg toe</button>
+        </div>
+      </div>
+      <div style="margin-top:16px" id="admin-injury-grid"></div>
+    </div>
+
+  </div>
+</div>
+
 <footer>
   <div class="footer-stripe"><div class="fs-r"></div><div class="fs-g"></div></div>
   <p>Gemaakt met ❤️ voor <span class="r">NEC</span> <span class="g">Nijmegen</span> supporters</p>
@@ -530,8 +597,7 @@ footer .g { color:var(--green); }
     <button class="share-btn share-copy" onclick="copyLink()">🔗 Kopieer link</button>
   </div>
   <p style="margin-top:20px">
-    <button onclick="toggleForm()" style="background:none;border:none;color:#1a1a1a;font-size:0.65rem;cursor:pointer;padding:0;letter-spacing:1px">beheer</button>
-  </p>
+    <button onclick="toggleForm()" style="background:none;border:none;color:#1a1a1a;font-size:0.65rem;cursor:pointer;padding:0;letter-spacing:1px">beheer</button>  </p>
 </footer>
 
 <script>
@@ -759,7 +825,123 @@ function renderInjuries(){
   document.getElementById('injury-grid').innerHTML=h;
 }
 renderInjuries();
-function toggleForm(){
+function showForgotPassword() {
+  document.getElementById('panel-login').style.display = 'none';
+  document.getElementById('panel-forgot').style.display = 'block';
+}
+function hideForgotPassword() {
+  document.getElementById('panel-forgot').style.display = 'none';
+  document.getElementById('panel-login').style.display = 'block';
+}
+async function sendPasswordReset() {
+  var email = document.getElementById('forgot-email').value.trim();
+  if (!email) { setFeedback('forgot-msg','Vul je e-mailadres in.','error'); return; }
+  var r = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://roodgroenzwart.github.io/nec-bekerfinale'
+  });
+  if (r.error) setFeedback('forgot-msg', r.error.message, 'error');
+  else setFeedback('forgot-msg', '✅ Resetlink verstuurd! Check je e-mail.', 'success');
+}
+
+// BEHEERPAGINA
+var adminPollVotes = [12,8,15];
+var adminPollLabels = ['NEC wint na 90 min. ⚽','NEC wint na verlengingen ⏱','NEC wint na penalty\'s 🎯'];
+
+function openAdmin() {
+  document.getElementById('admin-page').classList.add('open');
+  loadAdminData();
+}
+function closeAdmin() {
+  document.getElementById('admin-page').classList.remove('open');
+}
+
+async function loadAdminData() {
+  // Reacties laden
+  var r = await sb.from('Comments').select('*').order('created_at',{ascending:false});
+  var comments = (r.data && !r.error) ? r.data : [];
+
+  // Stats
+  document.getElementById('stat-comments').textContent = comments.length;
+  var totalVotes = adminPollVotes.reduce(function(a,b){return a+b;},0);
+  document.getElementById('stat-votes').textContent = totalVotes;
+  var maxIdx = adminPollVotes.indexOf(Math.max.apply(null,adminPollVotes));
+  document.getElementById('stat-winner').textContent = ['90 min','Verleng.','Penalty\'s'][maxIdx];
+  document.getElementById('stat-suggestions').textContent = '–';
+
+  // Poll
+  var pollHtml = '';
+  for (var i=0;i<adminPollLabels.length;i++) {
+    var pct = totalVotes ? Math.round(adminPollVotes[i]/totalVotes*100) : 0;
+    pollHtml += '<div class="poll-bar-row"><div class="poll-bar-label">'+adminPollLabels[i]+'</div><div class="poll-bar-track"><div class="poll-bar-fill" style="width:'+pct+'%"></div></div><div class="poll-bar-pct">'+pct+'% <span style="color:#555;font-size:0.7rem">('+adminPollVotes[i]+')</span></div></div>';
+  }
+  document.getElementById('admin-poll-results').innerHTML = pollHtml;
+
+  // Reacties
+  if (!comments.length) {
+    document.getElementById('admin-comment-list').innerHTML = '<div class="admin-empty">Nog geen reacties.</div>';
+  } else {
+    var html = '';
+    for (var j=0;j<comments.length;j++) {
+      var c = comments[j];
+      var date = new Date(c.created_at).toLocaleString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+      var initials = (c.username||'?').substring(0,2).toUpperCase();
+      html += '<div class="admin-comment">';
+      html += '<div class="admin-comment-avatar">'+initials+'</div>';
+      html += '<div class="admin-comment-body"><div class="admin-comment-meta"><span class="admin-comment-name">'+(c.username||'Anoniem')+'</span><span class="admin-comment-time">'+date+'</span></div>';
+      html += '<div class="admin-comment-text">'+c.comment+'</div></div>';
+      html += '<button class="admin-delete-btn" onclick="adminDeleteComment(\''+c.id+'\')">✕ Verwijder</button>';
+      html += '</div>';
+    }
+    document.getElementById('admin-comment-list').innerHTML = html;
+  }
+
+  // Blessures
+  renderAdminInjuries();
+}
+
+async function adminDeleteComment(id) {
+  await sb.from('Comments').delete().eq('id',id);
+  loadComments();
+  loadAdminData();
+}
+
+function renderAdminInjuries() {
+  var clubs = [{key:'nec',name:'N.E.C. Nijmegen',icon:'🟢',cls:'injury-header-nec'},{key:'az',name:'AZ Alkmaar',icon:'🔴',cls:'injury-header-az'}];
+  var h = '<div class="injury-grid">';
+  for (var c=0;c<clubs.length;c++) {
+    var club = clubs[c];
+    h += '<div class="injury-team"><div class="injury-header '+club.cls+'"><span style="font-size:1rem">'+club.icon+'</span><span class="injury-club-name">'+club.name+'</span></div><div class="injury-list">';
+    if (!injuries[club.key].length) {
+      h += '<div class="injury-row" style="color:#444;font-size:0.8rem">Geen blessures</div>';
+    } else {
+      for (var p=0;p<injuries[club.key].length;p++) {
+        var pl = injuries[club.key][p];
+        h += '<div class="injury-row"><div class="injury-dot" style="background:'+dotColor[pl.status]+'"></div><div style="flex:1"><div class="injury-name">'+pl.name+'</div><div class="injury-detail">'+pl.detail+' · '+statusLabel[pl.status]+'</div></div><button class="admin-delete-btn" onclick="removeInjuryAdmin(\''+club.key+'\','+p+')">✕</button></div>';
+      }
+    }
+    h += '</div></div>';
+  }
+  h += '</div>';
+  document.getElementById('admin-injury-grid').innerHTML = h;
+}
+
+function addInjuryAdmin() {
+  var name = document.getElementById('af-name').value.trim();
+  var detail = document.getElementById('af-detail').value.trim();
+  var club = document.getElementById('af-club').value;
+  var status = document.getElementById('af-status').value;
+  if (!name) return;
+  injuries[club].push({name:name,detail:detail,status:status});
+  document.getElementById('af-name').value='';
+  document.getElementById('af-detail').value='';
+  renderInjuries();
+  renderAdminInjuries();
+}
+function removeInjuryAdmin(club,idx) {
+  injuries[club].splice(idx,1);
+  renderInjuries();
+  renderAdminInjuries();
+}
   if(!isUnlocked){var i=prompt('🔒 Voer het wachtwoord in:');if(i===WACHTWOORD){isUnlocked=true;document.getElementById('injury-form').classList.add('open');renderInjuries();}else if(i!==null){alert('Verkeerd wachtwoord.');}}
   else{document.getElementById('injury-form').classList.toggle('open');}
 }
