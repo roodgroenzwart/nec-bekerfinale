@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEC Bekerfinale 2026 🏆</title>
-<!-- Google tag (gtag.js) -->
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LRYWE31EEM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,181 +12,316 @@
   gtag('js', new Date());
   gtag('config', 'G-LRYWE31EEM');
 </script>
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
-  :root { --red:#D0021B; --green:#008A3C; --black:#0d0d0d; --gray:#1a1a1a; --white:#f0f0f0; --border:#2a2a2a; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { background:var(--black); color:var(--white); font-family:'Open Sans',sans-serif; min-height:100vh; }
-  body::before { content:''; position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%); width:80px; background:linear-gradient(to right,var(--red) 50%,var(--green) 50%); opacity:0.25; pointer-events:none; z-index:0; }
-  .stripe-bar { display:flex; height:5px; width:100%; }
-  .stripe-bar .s-red { flex:1; background:var(--red); }
-  .stripe-bar .s-green { flex:1; background:var(--green); }
-  .hero { position:relative; background:var(--black); text-align:center; padding:60px 24px 50px; overflow:hidden; z-index:1; }
-  .hero-badge { position:relative; z-index:1; display:inline-block; background:var(--red); color:#fff; font-family:'Oswald',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:6px 20px; border-radius:2px; margin-bottom:22px; }
-  .hero h1 { position:relative; z-index:1; font-family:'Oswald',sans-serif; font-size:clamp(2.4rem,7vw,4.5rem); font-weight:700; line-height:1.05; text-transform:uppercase; letter-spacing:3px; }
-  .stripe-text { display:inline-block; background:linear-gradient(to right,var(--red) 50%,var(--green) 50%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .hero-sub { position:relative; z-index:1; font-size:1rem; color:#888; margin-top:12px; letter-spacing:1px; }
-  .vs-row { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:40px; margin-top:35px; flex-wrap:nowrap; margin-left:-3px; }
-  .club-badge { display:flex; flex-direction:column; align-items:center; gap:10px; }
-  .club-circle { width:88px; height:88px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:1.5rem; font-weight:700; border:3px solid #fff; flex-shrink:0; }
-  .club-az .club-circle { background:#c8102e; color:#fff; }
-  .club-name { font-size:0.75rem; color:#888; letter-spacing:2px; text-transform:uppercase; }
-  /* SHARE */
-  .share-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:24px; position:relative; z-index:1; }
-  .share-btn { display:flex; align-items:center; gap:7px; padding:8px 16px; border-radius:4px; font-family:'Oswald',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; color:#fff; border:none; cursor:pointer; transition:opacity 0.2s; }
-  .share-btn:hover { opacity:0.85; }
-  .share-wa { background:#25D366; }
-  .share-x { background:#000; border:1px solid #333; }
-  .share-fb { background:#1877F2; }
-  .share-copy { background:var(--gray); border:1px solid var(--border); }
-  .page-layout { display:flex; align-items:flex-start; max-width:1100px; margin:0 auto; position:relative; z-index:1; }
-  .sidenav { width:170px; flex-shrink:0; position:sticky; top:24px; padding:24px 0 24px 16px; }
-  .sidenav-title { font-family:'Oswald',sans-serif; font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; color:#444; margin-bottom:12px; padding-left:10px; }
-  .sidenav a { display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:4px; text-decoration:none; color:#666; font-size:0.8rem; transition:background 0.15s,color 0.15s; border-left:2px solid transparent; margin-bottom:2px; }
-  .sidenav a:hover { color:var(--white); background:#1a1a1a; }
-  .sidenav a.active { color:var(--white); border-left-color:var(--red); background:#1a1a1a; }
-  .nav-icon { font-size:0.9rem; flex-shrink:0; width:18px; text-align:center; }
-  @media(max-width:700px){ .sidenav { display:none; } }
-  .main-content { flex:1; min-width:0; }
-  .container { max-width:820px; padding:0 24px; }
-  section { padding:48px 0; border-bottom:1px solid #1e1e1e; scroll-margin-top:24px; position:relative; z-index:1; }
-  section:last-child { border-bottom:none; }
-  .section-title { font-family:'Oswald',sans-serif; font-size:1.2rem; font-weight:700; text-transform:uppercase; letter-spacing:3px; color:#fff; margin-bottom:22px; display:flex; align-items:center; gap:12px; }
-  .section-title::before { content:''; display:inline-block; width:4px; height:20px; background:linear-gradient(to bottom,var(--red) 50%,var(--green) 50%); flex-shrink:0; }
-  .countdown-grid { display:flex; gap:12px; justify-content:flex-start; flex-wrap:wrap; }
-  .cd-block { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:20px 16px 14px; min-width:86px; text-align:center; position:relative; overflow:hidden; }
-  .cd-block::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--red),var(--green)); }
-  .cd-num { font-family:'Oswald',sans-serif; font-size:2.8rem; font-weight:700; line-height:1; }
-  .cd-days .cd-num, .cd-hours .cd-num { color:var(--red); }
-  .cd-label { font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-top:6px; }
-  /* NIEUWS */
-  .news-list { display:flex; flex-direction:column; }
-  .news-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #1e1e1e; text-decoration:none; color:var(--white); transition:padding-left 0.15s; }
-  .news-item:first-child { border-top:1px solid #1e1e1e; }
-  .news-item:hover { padding-left:5px; }
-  .news-favicon { width:18px; height:18px; border-radius:3px; flex-shrink:0; object-fit:contain; }
-  .news-item-title { flex:1; font-size:0.85rem; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .news-item-meta { font-size:0.68rem; color:#555; flex-shrink:0; white-space:nowrap; }
-  .news-btn-row { display:flex; gap:10px; margin-top:14px; }
-  .news-more-btn { background:none; border:1px solid var(--border); color:#666; padding:8px 16px; border-radius:4px; font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:border-color 0.2s,color 0.2s; }
-  .news-more-btn:hover { border-color:var(--red); color:var(--white); }
-  /* REACTIES */
-  .comments-section { margin-top:28px; }
-  .comment-label { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:12px; }
-  .comment-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
-  .comment-item { background:var(--gray); border:1px solid var(--border); border-left:3px solid var(--red); border-radius:4px; padding:12px 14px; }
-  .comment-author { font-family:'Oswald',sans-serif; font-size:0.85rem; font-weight:600; color:var(--red); }
-  .comment-time { font-size:0.65rem; color:#555; margin-left:8px; }
-  .comment-text { font-size:0.85rem; margin-top:5px; line-height:1.5; }
-  .comment-form { display:flex; flex-direction:column; gap:8px; }
-  .comment-form input, .comment-form textarea { background:#111; border:1px solid #333; color:var(--white); padding:10px 12px; border-radius:3px; font-size:0.85rem; font-family:'Open Sans',sans-serif; width:100%; }
-  .comment-form textarea { resize:vertical; min-height:70px; }
-  .comment-btn { background:linear-gradient(to right,var(--red),var(--green)); color:#fff; border:none; padding:10px 22px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.85rem; font-weight:700; cursor:pointer; align-self:flex-start; }
-  /* BLESSURES */
-  .injury-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  @media(max-width:560px){ .injury-grid { grid-template-columns:1fr; } }
-  .injury-team { background:var(--gray); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
-  .injury-header { padding:12px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; }
-  .injury-header-nec { border-top:3px solid var(--red); }
-  .injury-header-az { border-top:3px solid #c8102e; }
-  .injury-club-name { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:700; }
-  .injury-date { margin-left:auto; font-size:0.65rem; color:#555; }
-  .injury-list { display:flex; flex-direction:column; }
-  .injury-row { display:flex; align-items:center; gap:10px; padding:9px 16px; border-bottom:1px solid #1e1e1e; }
-  .injury-row:last-child { border-bottom:none; }
-  .injury-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-  .injury-name { font-size:0.85rem; font-weight:600; flex:1; }
-  .injury-detail { font-size:0.7rem; color:#666; }
-  .injury-legend { display:flex; gap:16px; margin-top:12px; font-size:0.7rem; color:#666; flex-wrap:wrap; }
-  .injury-form { display:none; background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:18px; margin-bottom:16px; }
-  .injury-form.open { display:block; }
-  .injury-form h3 { font-family:'Oswald',sans-serif; font-size:0.9rem; margin-bottom:12px; color:#888; letter-spacing:1px; text-transform:uppercase; }
-  .form-row { display:flex; gap:8px; flex-wrap:wrap; }
-  .form-row select, .form-row input { background:#111; border:1px solid #333; color:var(--white); padding:8px 10px; border-radius:3px; font-size:0.82rem; font-family:'Open Sans',sans-serif; }
-  .form-row input { flex:1; min-width:120px; }
-  .form-row select { min-width:120px; }
-  .form-add-btn { background:var(--red); color:#fff; border:none; padding:8px 16px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer; white-space:nowrap; }
-  .injury-remove { background:none; border:none; color:#333; cursor:pointer; font-size:0.9rem; padding:0 2px; }
-  .injury-remove:hover { color:var(--red); }
-  /* WEATHER */
-  .weather-groups { display:flex; flex-direction:column; gap:20px; }
-  .weather-group-title { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:8px; }
-  .weather-header { display:flex; align-items:center; gap:14px; background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:16px 18px; margin-bottom:14px; position:relative; overflow:hidden; }
-  .weather-header::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--red),var(--green)); }
-  .weather-label { font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:#555; }
-  .weather-val { font-family:'Oswald',sans-serif; font-size:1rem; margin-top:3px; }
-  .weather-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(72px,1fr)); gap:8px; }
-  .wh-block { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:10px 6px; text-align:center; position:relative; overflow:hidden; }
-  .wh-block.kickoff { border-color:var(--red); }
-  .wh-block.kickoff::after { content:'⚽'; position:absolute; top:2px; right:3px; font-size:0.55rem; }
-  .wh-block::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,var(--red),var(--green)); }
-  .wh-time { font-family:'Oswald',sans-serif; font-size:0.78rem; color:var(--red); font-weight:600; }
-  .wh-icon { font-size:1.3rem; margin:3px 0; }
-  .wh-temp { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:700; }
-  .wh-rain { font-size:0.6rem; color:#666; margin-top:2px; }
-  /* ROUTE */
-  .route-card { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:20px 22px; margin-bottom:14px; position:relative; overflow:hidden; }
-  .route-card::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--red),var(--green)); }
-  .route-intro { font-size:0.88rem; color:#aaa; line-height:1.7; margin-bottom:16px; }
-  .route-table { width:100%; border-collapse:collapse; font-size:0.83rem; }
-  .route-table th { text-align:left; font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:#555; padding:0 10px 8px 0; border-bottom:1px solid #2a2a2a; }
-  .route-table td { padding:9px 10px 9px 0; border-bottom:1px solid #1e1e1e; color:#ccc; vertical-align:top; }
-  .route-table tr:last-child td { border-bottom:none; }
-  .route-table td:first-child { color:var(--red); font-family:'Oswald',sans-serif; font-size:0.9rem; white-space:nowrap; }
-  .route-link { display:inline-flex; align-items:center; gap:8px; margin-top:16px; background:var(--red); color:#fff; text-decoration:none; padding:10px 20px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:1px; transition:opacity 0.2s; }
-  .route-link:hover { opacity:0.85; }
-  /* MUZIEK */
-  .spotify-card { background:var(--gray); border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; gap:12px; color:var(--white); transition:border-color 0.2s; overflow:hidden; cursor:pointer; }
-  .spotify-card:hover { border-color:#1DB954; }
-  .spotify-card-inner { display:flex; align-items:center; gap:12px; padding:12px 14px; width:100%; }
-  .spotify-thumb { width:40px; height:40px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
-  .s1 { background:linear-gradient(135deg,var(--red),#800010); }
-  .s2 { background:linear-gradient(135deg,var(--green),#005520); }
-  .s3 { background:linear-gradient(135deg,var(--red) 50%,var(--green) 50%); }
-  .spotify-title { font-weight:600; font-size:0.88rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .spotify-sub { font-size:0.72rem; color:#666; margin-top:2px; }
-  .spotify-badge { margin-left:auto; background:#1DB954; color:#000; font-size:0.58rem; font-weight:700; padding:3px 7px; border-radius:10px; flex-shrink:0; }
-  .yt-embed { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:4px; border:1px solid var(--border); }
-  .yt-embed iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
-  /* PODCASTS */
-  .podcast-list { display:flex; flex-direction:column; gap:16px; }
-  .podcast-card { background:var(--gray); border:1px solid var(--border); border-left:3px solid var(--red); border-radius:4px; overflow:hidden; }
-  .podcast-header { display:flex; align-items:center; gap:12px; padding:10px 14px 8px; }
-  .podcast-icon { font-size:1rem; width:20px; text-align:center; flex-shrink:0; }
-  .podcast-name { font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:600; }
-  .podcast-desc { font-size:0.68rem; color:#666; margin-top:1px; }
-  .podcast-embed { padding:0 10px 10px; }
-  /* POLL */
-  .poll-container { max-width:480px; }
-  .poll-question { font-family:'Oswald',sans-serif; font-size:1.1rem; margin-bottom:16px; color:#ccc; }
-  .poll-options { display:flex; flex-direction:column; gap:8px; }
-  .poll-option { display:flex; align-items:center; gap:12px; background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:11px 14px; cursor:pointer; transition:border-color 0.2s; position:relative; overflow:hidden; user-select:none; }
-  .poll-option:hover { border-color:#444; }
-  .poll-option.selected { border-color:var(--red); }
-  .poll-bar { position:absolute; left:0; top:0; bottom:0; background:rgba(208,2,27,0.1); transition:width 0.6s ease; width:0%; }
-  .poll-text { position:relative; z-index:1; flex:1; font-size:0.88rem; }
-  .poll-pct { position:relative; z-index:1; font-family:'Oswald',sans-serif; font-size:0.95rem; color:var(--red); min-width:38px; text-align:right; display:none; }
-  .poll-btn { margin-top:12px; background:linear-gradient(to right,var(--red),var(--green)); color:#fff; border:none; padding:12px 28px; font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; border-radius:3px; cursor:pointer; transition:opacity 0.2s; }
-  .poll-btn:hover { opacity:0.85; }
-  .poll-btn:disabled { opacity:0.3; cursor:default; }
-  .poll-votes { margin-top:8px; font-size:0.72rem; color:#555; }
-  /* SUGGESTIE */
-  .suggest-box { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:20px; max-width:520px; }
-  .suggest-box p { font-size:0.82rem; color:#666; margin-bottom:14px; line-height:1.6; }
-  .suggest-box input, .suggest-box textarea { width:100%; background:#111; border:1px solid #333; color:var(--white); padding:10px 12px; border-radius:3px; font-size:0.85rem; font-family:'Open Sans',sans-serif; margin-bottom:10px; display:block; }
-  .suggest-box textarea { resize:vertical; min-height:90px; }
-  .suggest-btn { background:linear-gradient(to right,var(--red),var(--green)); color:#fff; border:none; padding:10px 24px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.88rem; font-weight:700; cursor:pointer; }
-  .suggest-thanks { color:var(--green); font-size:0.85rem; margin-top:10px; display:none; font-weight:600; }
-  footer { text-align:center; padding:32px 24px 24px; color:#333; font-size:0.78rem; position:relative; z-index:1; }
-  .footer-stripe { display:flex; height:4px; width:100%; margin-bottom:22px; }
-  .footer-stripe div { flex:1; }
-  .fs-r { background:var(--red); }
-  .fs-g { background:var(--green); }
-  footer .r { color:var(--red); }
-  footer .g { color:var(--green); }
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+:root { --red:#D0021B; --green:#008A3C; --black:#0d0d0d; --gray:#1a1a1a; --white:#f0f0f0; --border:#2a2a2a; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--black); color:var(--white); font-family:'Open Sans',sans-serif; min-height:100vh; }
+body::before { content:''; position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%); width:80px; background:linear-gradient(to right,var(--red) 50%,var(--green) 50%); opacity:0.25; pointer-events:none; z-index:0; }
+
+/* STRIPE */
+.stripe-bar { display:flex; height:5px; width:100%; }
+.stripe-bar .s-red { flex:1; background:var(--red); }
+.stripe-bar .s-green { flex:1; background:var(--green); }
+
+/* AUTH */
+.auth-trigger { position:fixed; top:16px; right:16px; z-index:1000; }
+.auth-trigger-btn { display:flex; align-items:center; gap:8px; background:rgba(13,13,13,0.92); border:1px solid #333; border-radius:24px; padding:7px 16px 7px 8px; cursor:pointer; backdrop-filter:blur(12px); transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s; color:var(--white); font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:1px; text-transform:uppercase; box-shadow:0 2px 12px rgba(0,0,0,0.4); }
+.auth-trigger-btn:hover { border-color:var(--red); transform:translateY(-1px); box-shadow:0 4px 20px rgba(208,2,27,0.3); }
+.auth-avatar { width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,var(--red) 50%,var(--green) 50%); display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700; color:#fff; flex-shrink:0; font-family:'Oswald',sans-serif; }
+.auth-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:999; display:none; align-items:flex-start; justify-content:flex-end; padding:62px 16px 0 0; backdrop-filter:blur(6px); }
+.auth-overlay.open { display:flex; }
+.auth-modal { background:#0d0d0d; border:1px solid #222; border-radius:12px; width:320px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,0.7); animation:slideDown 0.2s ease; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+.auth-modal-stripe { height:3px; background:linear-gradient(to right,var(--red) 50%,var(--green) 50%); }
+.auth-modal-header { padding:18px 18px 0; display:flex; align-items:center; justify-content:space-between; }
+.auth-modal-title { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; }
+.auth-modal-close { background:none; border:none; color:#444; cursor:pointer; font-size:1rem; padding:4px; transition:color 0.2s; border-radius:4px; }
+.auth-modal-close:hover { color:var(--red); }
+.auth-modal-tabs { display:flex; margin:14px 18px 0; border-bottom:1px solid #1e1e1e; }
+.auth-tab { flex:1; text-align:center; padding:8px 0; font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:#444; cursor:pointer; border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s; margin-bottom:-1px; }
+.auth-tab:hover { color:#888; }
+.auth-tab.active { color:var(--white); border-bottom-color:var(--red); }
+.auth-modal-body { padding:18px; }
+.auth-field { margin-bottom:12px; }
+.auth-field label { display:block; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:5px; }
+.auth-field input { width:100%; background:#111; border:1px solid #252525; color:var(--white); padding:11px 14px; border-radius:6px; font-size:0.85rem; font-family:'Open Sans',sans-serif; transition:border-color 0.2s,box-shadow 0.2s; outline:none; }
+.auth-field input:focus { border-color:var(--red); box-shadow:0 0 0 3px rgba(208,2,27,0.1); }
+.auth-field input::placeholder { color:#333; }
+.auth-field.hidden { display:none; }
+.auth-submit { width:100%; background:linear-gradient(to right,var(--red),#a00015); color:#fff; border:none; padding:12px; border-radius:6px; font-family:'Oswald',sans-serif; font-size:0.88rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:opacity 0.2s,transform 0.1s; margin-top:4px; }
+.auth-submit:hover { opacity:0.88; transform:translateY(-1px); }
+.auth-feedback { font-size:0.76rem; margin-top:10px; padding:10px 12px; border-radius:6px; display:none; line-height:1.4; }
+.auth-feedback.success { background:rgba(0,138,60,0.12); border:1px solid rgba(0,138,60,0.25); color:#00C853; display:block; }
+.auth-feedback.error { background:rgba(208,2,27,0.12); border:1px solid rgba(208,2,27,0.25); color:#ff5555; display:block; }
+.auth-logged-in { padding:18px; }
+.auth-user-card { display:flex; align-items:center; gap:12px; background:#111; border:1px solid #1e1e1e; border-radius:8px; padding:14px; margin-bottom:14px; }
+.auth-user-avatar { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--red) 50%,var(--green) 50%); display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:1.1rem; font-weight:700; color:#fff; flex-shrink:0; }
+.auth-user-name { font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; }
+.auth-user-email { font-size:0.68rem; color:#555; margin-top:3px; }
+.auth-signout { width:100%; background:transparent; border:1px solid #252525; color:#555; padding:10px; border-radius:6px; font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:border-color 0.2s,color 0.2s; }
+.auth-signout:hover { border-color:var(--red); color:var(--white); }
+
+/* HERO */
+.hero { position:relative; background:var(--black); text-align:center; padding:60px 24px 50px; overflow:hidden; z-index:1; }
+.hero-badge { position:relative; z-index:1; display:inline-block; background:var(--red); color:#fff; font-family:'Oswald',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:6px 20px; border-radius:2px; margin-bottom:22px; }
+.hero h1 { position:relative; z-index:1; font-family:'Oswald',sans-serif; font-size:clamp(2.4rem,7vw,4.5rem); font-weight:700; line-height:1.05; text-transform:uppercase; letter-spacing:3px; }
+.stripe-text { display:inline-block; background:linear-gradient(to right,var(--red) 50%,var(--green) 50%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-sub { position:relative; z-index:1; font-size:1rem; color:#888; margin-top:12px; letter-spacing:1px; }
+.vs-row { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:40px; margin-top:35px; flex-wrap:nowrap; margin-left:-3px; }
+.club-badge { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.club-circle { width:88px; height:88px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-size:1.5rem; font-weight:700; border:3px solid #fff; flex-shrink:0; }
+.club-az .club-circle { background:#c8102e; color:#fff; }
+.club-name { font-size:0.75rem; color:#888; letter-spacing:2px; text-transform:uppercase; }
+
+/* SHARE */
+.share-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+.share-btn { display:flex; align-items:center; gap:7px; padding:8px 16px; border-radius:4px; font-family:'Oswald',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-decoration:none; color:#fff; border:none; cursor:pointer; transition:opacity 0.2s; }
+.share-btn:hover { opacity:0.85; }
+.share-wa { background:#25D366; }
+.share-x { background:#000; border:1px solid #333; }
+.share-fb { background:#1877F2; }
+.share-copy { background:var(--gray); border:1px solid var(--border); }
+
+/* LAYOUT */
+.page-layout { display:flex; align-items:flex-start; max-width:1100px; margin:0 auto; position:relative; z-index:1; }
+.sidenav { width:170px; flex-shrink:0; position:sticky; top:24px; padding:24px 0 24px 16px; }
+.sidenav-title { font-family:'Oswald',sans-serif; font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; color:#444; margin-bottom:12px; padding-left:10px; }
+.sidenav a { display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:4px; text-decoration:none; color:#666; font-size:0.8rem; transition:background 0.15s,color 0.15s; border-left:2px solid transparent; margin-bottom:2px; }
+.sidenav a:hover { color:var(--white); background:#1a1a1a; }
+.sidenav a.active { color:var(--white); border-left-color:var(--red); background:#1a1a1a; }
+.nav-icon { font-size:0.9rem; flex-shrink:0; width:18px; text-align:center; }
+@media(max-width:700px){ .sidenav { display:none; } }
+.main-content { flex:1; min-width:0; }
+.container { max-width:820px; padding:0 24px; }
+section { padding:48px 0; border-bottom:1px solid #1e1e1e; scroll-margin-top:24px; position:relative; z-index:1; }
+section:last-child { border-bottom:none; }
+.section-title { font-family:'Oswald',sans-serif; font-size:1.2rem; font-weight:700; text-transform:uppercase; letter-spacing:3px; color:#fff; margin-bottom:22px; display:flex; align-items:center; gap:12px; }
+.section-title::before { content:''; display:inline-block; width:4px; height:20px; background:linear-gradient(to bottom,var(--red) 50%,var(--green) 50%); flex-shrink:0; }
+
+/* COUNTDOWN */
+.countdown-grid { display:flex; gap:12px; justify-content:flex-start; flex-wrap:wrap; }
+.cd-block { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:20px 16px 14px; min-width:86px; text-align:center; position:relative; overflow:hidden; }
+.cd-block::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--red),var(--green)); }
+.cd-num { font-family:'Oswald',sans-serif; font-size:2.8rem; font-weight:700; line-height:1; }
+.cd-days .cd-num, .cd-hours .cd-num { color:var(--red); }
+.cd-label { font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-top:6px; }
+
+/* NIEUWS */
+.news-list { display:flex; flex-direction:column; }
+.news-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #1e1e1e; text-decoration:none; color:var(--white); transition:padding-left 0.15s; }
+.news-item:first-child { border-top:1px solid #1e1e1e; }
+.news-item:hover { padding-left:5px; }
+.news-favicon { width:18px; height:18px; border-radius:3px; flex-shrink:0; object-fit:contain; }
+.news-item-title { flex:1; font-size:0.85rem; line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.news-item-meta { font-size:0.68rem; color:#555; flex-shrink:0; white-space:nowrap; }
+.news-btn-row { display:flex; gap:10px; margin-top:14px; }
+.news-more-btn { background:none; border:1px solid var(--border); color:#666; padding:8px 16px; border-radius:4px; font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:border-color 0.2s,color 0.2s; }
+.news-more-btn:hover { border-color:var(--red); color:var(--white); }
+
+/* REACTIES */
+.comments-section { margin-top:28px; }
+.comment-label { font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:12px; }
+.comment-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+.comment-item { background:var(--gray); border:1px solid var(--border); border-left:3px solid var(--red); border-radius:4px; padding:12px 14px; }
+.comment-author { font-family:'Oswald',sans-serif; font-size:0.85rem; font-weight:600; color:var(--red); }
+.comment-time { font-size:0.65rem; color:#555; margin-left:8px; }
+.comment-text { font-size:0.85rem; margin-top:5px; line-height:1.5; }
+.comment-form { display:flex; flex-direction:column; gap:8px; }
+.comment-form textarea { background:#111; border:1px solid #333; color:var(--white); padding:10px 12px; border-radius:3px; font-size:0.85rem; font-family:'Open Sans',sans-serif; width:100%; resize:vertical; min-height:70px; }
+.comment-btn { background:linear-gradient(to right,var(--red),var(--green)); color:#fff; border:none; padding:10px 22px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.85rem; font-weight:700; cursor:pointer; align-self:flex-start; }
+
+/* BLESSURES */
+.injury-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:560px){ .injury-grid { grid-template-columns:1fr; } }
+.injury-team { background:var(--gray); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+.injury-header { padding:12px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; }
+.injury-header-nec { border-top:3px solid var(--red); }
+.injury-header-az { border-top:3px solid #c8102e; }
+.injury-club-name { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:700; }
+.injury-date { margin-left:auto; font-size:0.65rem; color:#555; }
+.injury-list { display:flex; flex-direction:column; }
+.injury-row { display:flex; align-items:center; gap:10px; padding:9px 16px; border-bottom:1px solid #1e1e1e; }
+.injury-row:last-child { border-bottom:none; }
+.injury-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.injury-name { font-size:0.85rem; font-weight:600; flex:1; }
+.injury-detail { font-size:0.7rem; color:#666; }
+.injury-legend { display:flex; gap:16px; margin-top:12px; font-size:0.7rem; color:#666; flex-wrap:wrap; }
+.injury-form { display:none; background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:18px; margin-bottom:16px; }
+.injury-form.open { display:block; }
+.injury-form h3 { font-family:'Oswald',sans-serif; font-size:0.9rem; margin-bottom:12px; color:#888; letter-spacing:1px; text-transform:uppercase; }
+.form-row { display:flex; gap:8px; flex-wrap:wrap; }
+.form-row select, .form-row input { background:#111; border:1px solid #333; color:var(--white); padding:8px 10px; border-radius:3px; font-size:0.82rem; font-family:'Open Sans',sans-serif; }
+.form-row input { flex:1; min-width:120px; }
+.form-row select { min-width:120px; }
+.form-add-btn { background:var(--red); color:#fff; border:none; padding:8px 16px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+.injury-remove { background:none; border:none; color:#333; cursor:pointer; font-size:0.9rem; padding:0 2px; }
+.injury-remove:hover { color:var(--red); }
+
+/* WEATHER */
+.weather-groups { display:flex; flex-direction:column; gap:20px; }
+.weather-group-title { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:#555; margin-bottom:8px; }
+.weather-header { display:flex; align-items:center; gap:14px; background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:16px 18px; margin-bottom:14px; position:relative; overflow:hidden; }
+.weather-header::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--red),var(--green)); }
+.weather-label { font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; color:#555; }
+.weather-val { font-family:'Oswald',sans-serif; font-size:1rem; margin-top:3px; }
+.weather-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(72px,1fr)); gap:8px; }
+.wh-block { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:10px 6px; text-align:center; position:relative; overflow:hidden; }
+.wh-block.kickoff { border-color:var(--red); }
+.wh-block.kickoff::after { content:'⚽'; position:absolute; top:2px; right:3px; font-size:0.55rem; }
+.wh-block::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,var(--red),var(--green)); }
+.wh-time { font-family:'Oswald',sans-serif; font-size:0.78rem; color:var(--red); font-weight:600; }
+.wh-icon { font-size:1.3rem; margin:3px 0; }
+.wh-temp { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:700; }
+.wh-rain { font-size:0.6rem; color:#666; margin-top:2px; }
+
+/* ROUTE */
+.route-card { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:20px 22px; margin-bottom:14px; position:relative; overflow:hidden; }
+.route-card::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,var(--red),var(--green)); }
+.route-intro { font-size:0.88rem; color:#aaa; line-height:1.7; margin-bottom:16px; }
+.route-table { width:100%; border-collapse:collapse; font-size:0.83rem; }
+.route-table th { text-align:left; font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:#555; padding:0 10px 8px 0; border-bottom:1px solid #2a2a2a; }
+.route-table td { padding:9px 10px 9px 0; border-bottom:1px solid #1e1e1e; color:#ccc; vertical-align:top; }
+.route-table tr:last-child td { border-bottom:none; }
+.route-table td:first-child { color:var(--red); font-family:'Oswald',sans-serif; font-size:0.9rem; white-space:nowrap; }
+.route-link { display:inline-flex; align-items:center; gap:8px; margin-top:16px; background:var(--red); color:#fff; text-decoration:none; padding:10px 20px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:1px; transition:opacity 0.2s; }
+.route-link:hover { opacity:0.85; }
+
+/* MUZIEK */
+.spotify-card { background:var(--gray); border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; gap:12px; color:var(--white); transition:border-color 0.2s; overflow:hidden; cursor:pointer; flex-direction:column; align-items:stretch; }
+.spotify-card:hover { border-color:#1DB954; }
+.spotify-card-inner { display:flex; align-items:center; gap:12px; padding:12px 14px; width:100%; }
+.spotify-thumb { width:40px; height:40px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+.s1 { background:linear-gradient(135deg,var(--red),#800010); }
+.s2 { background:linear-gradient(135deg,var(--green),#005520); }
+.s3 { background:linear-gradient(135deg,var(--red) 50%,var(--green) 50%); }
+.spotify-title { font-weight:600; font-size:0.88rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.spotify-sub { font-size:0.72rem; color:#666; margin-top:2px; }
+.spotify-badge { margin-left:auto; background:#1DB954; color:#000; font-size:0.58rem; font-weight:700; padding:3px 7px; border-radius:10px; flex-shrink:0; }
+.yt-wrap { background:var(--gray); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+.yt-header { padding:10px 14px 8px; }
+.yt-title { font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:600; }
+.yt-artist { font-size:0.72rem; color:#666; margin-top:2px; }
+.yt-embed { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; }
+.yt-embed iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+/* PODCASTS */
+.podcast-list { display:flex; flex-direction:column; gap:16px; }
+.podcast-card { background:var(--gray); border:1px solid var(--border); border-left:3px solid var(--red); border-radius:4px; overflow:hidden; }
+.podcast-header { display:flex; align-items:center; gap:12px; padding:10px 14px 8px; }
+.podcast-icon { font-size:1rem; width:20px; text-align:center; flex-shrink:0; }
+.podcast-name { font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:600; }
+.podcast-desc { font-size:0.68rem; color:#666; margin-top:1px; }
+.podcast-embed { padding:0 10px 10px; }
+
+/* POLL */
+.poll-container { max-width:480px; }
+.poll-question { font-family:'Oswald',sans-serif; font-size:1.1rem; margin-bottom:16px; color:#ccc; }
+.poll-options { display:flex; flex-direction:column; gap:8px; }
+.poll-option { display:flex; align-items:center; gap:12px; background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:11px 14px; cursor:pointer; transition:border-color 0.2s; position:relative; overflow:hidden; user-select:none; }
+.poll-option:hover { border-color:#444; }
+.poll-option.selected { border-color:var(--red); }
+.poll-bar { position:absolute; left:0; top:0; bottom:0; background:rgba(208,2,27,0.1); transition:width 0.6s ease; width:0%; }
+.poll-text { position:relative; z-index:1; flex:1; font-size:0.88rem; }
+.poll-pct { position:relative; z-index:1; font-family:'Oswald',sans-serif; font-size:0.95rem; color:var(--red); min-width:38px; text-align:right; display:none; }
+.poll-btn { margin-top:12px; background:linear-gradient(to right,var(--red),var(--green)); color:#fff; border:none; padding:12px 28px; font-family:'Oswald',sans-serif; font-size:0.9rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; border-radius:3px; cursor:pointer; transition:opacity 0.2s; }
+.poll-btn:hover { opacity:0.85; }
+.poll-btn:disabled { opacity:0.3; cursor:default; }
+.poll-votes { margin-top:8px; font-size:0.72rem; color:#555; }
+
+/* SUGGESTIE */
+.suggest-box { background:var(--gray); border:1px solid var(--border); border-radius:4px; padding:20px; max-width:520px; }
+.suggest-box p { font-size:0.82rem; color:#666; margin-bottom:14px; line-height:1.6; }
+.suggest-box input, .suggest-box textarea { width:100%; background:#111; border:1px solid #333; color:var(--white); padding:10px 12px; border-radius:3px; font-size:0.85rem; font-family:'Open Sans',sans-serif; margin-bottom:10px; display:block; }
+.suggest-box textarea { resize:vertical; min-height:90px; }
+.suggest-btn { background:linear-gradient(to right,var(--red),var(--green)); color:#fff; border:none; padding:10px 24px; border-radius:3px; font-family:'Oswald',sans-serif; font-size:0.88rem; font-weight:700; cursor:pointer; }
+.suggest-thanks { color:var(--green); font-size:0.85rem; margin-top:10px; display:none; font-weight:600; }
+
+/* FOOTER */
+footer { text-align:center; padding:32px 24px 24px; color:#333; font-size:0.78rem; position:relative; z-index:1; }
+.footer-stripe { display:flex; height:4px; width:100%; margin-bottom:22px; }
+.footer-stripe div { flex:1; }
+.fs-r { background:var(--red); }
+.fs-g { background:var(--green); }
+footer .r { color:var(--red); }
+footer .g { color:var(--green); }
 </style>
 </head>
 <body>
+
+<!-- AUTH TRIGGER -->
+<div class="auth-trigger">
+  <button class="auth-trigger-btn" onclick="toggleAuthModal()">
+    <div class="auth-avatar" id="auth-avatar-icon">👤</div>
+    <span id="auth-trigger-label">Inloggen</span>
+  </button>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="auth-overlay" onclick="closeAuthOnOverlay(event)">
+  <div class="auth-modal">
+    <div id="auth-panel-guest">
+      <div class="auth-modal-stripe"></div>
+      <div class="auth-modal-header">
+        <span class="auth-modal-title">Account</span>
+        <button class="auth-modal-close" onclick="closeAuth()">✕</button>
+      </div>
+      <div class="auth-modal-tabs">
+        <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Inloggen</div>
+        <div class="auth-tab" id="tab-register" onclick="switchTab('register')">Registreren</div>
+      </div>
+      <div class="auth-modal-body">
+        <div id="panel-login">
+          <div class="auth-field">
+            <label>E-mailadres</label>
+            <input type="email" id="auth-email" placeholder="jouw@email.nl" oninput="onEmailInput('login')" autocomplete="email" />
+          </div>
+          <div class="auth-field hidden" id="login-pw-field">
+            <label>Wachtwoord</label>
+            <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+          <button class="auth-submit" onclick="signIn()">Doorgaan</button>
+          <div class="auth-feedback" id="auth-msg"></div>
+        </div>
+        <div id="panel-register" style="display:none">
+          <div class="auth-field">
+            <label>Gebruikersnaam</label>
+            <input type="text" id="reg-username" placeholder="Jouw naam" autocomplete="username" />
+          </div>
+          <div class="auth-field">
+            <label>E-mailadres</label>
+            <input type="email" id="reg-email" placeholder="jouw@email.nl" oninput="onEmailInput('register')" autocomplete="email" />
+          </div>
+          <div class="auth-field hidden" id="register-pw-field">
+            <label>Wachtwoord <span style="color:#555;font-size:0.6rem">(min. 6 tekens)</span></label>
+            <input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password" />
+          </div>
+          <button class="auth-submit" onclick="signUp()">Account aanmaken</button>
+          <div class="auth-feedback" id="reg-msg"></div>
+        </div>
+      </div>
+    </div>
+    <div id="auth-panel-loggedin" style="display:none">
+      <div class="auth-modal-stripe"></div>
+      <div class="auth-modal-header">
+        <span class="auth-modal-title">Mijn account</span>
+        <button class="auth-modal-close" onclick="closeAuth()">✕</button>
+      </div>
+      <div class="auth-logged-in">
+        <div class="auth-user-card">
+          <div class="auth-user-avatar" id="auth-user-initials">?</div>
+          <div>
+            <div class="auth-user-name" id="auth-username-display"></div>
+            <div class="auth-user-email" id="auth-user-email-display"></div>
+          </div>
+        </div>
+        <button class="auth-signout" onclick="signOut()">Uitloggen</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="stripe-bar"><div class="s-red"></div><div class="s-green"></div></div>
 
@@ -204,7 +339,6 @@
       <span class="club-name">AZ Alkmaar</span>
     </div>
   </div>
-
 </div>
 
 <div class="page-layout">
@@ -243,12 +377,13 @@
           <button class="news-more-btn" id="news-more-btn" onclick="showAllNews()" style="display:none">Meer nieuws →</button>
           <button class="news-more-btn" id="news-less-btn" onclick="showLessNews()" style="display:none">← Minder nieuws</button>
         </div>
-        <!-- REACTIES -->
         <div class="comments-section">
           <div class="comment-label">💬 Reacties</div>
-          <div class="comment-list" id="comment-list"><div style="color:#555;font-size:0.82rem">Nog geen reacties. Wees de eerste!</div></div>
-          <div class="comment-form">
-            <input type="text" id="comment-name" placeholder="Jouw naam" maxlength="40" />
+          <div class="comment-list" id="comment-list"><div style="color:#555;font-size:0.82rem">Reacties laden...</div></div>
+          <div id="comment-login-notice" style="font-size:0.82rem;color:#666;padding:12px 0">
+            <span onclick="toggleAuthModal()" style="color:var(--red);cursor:pointer;font-weight:600">Log in of registreer</span> om een reactie te plaatsen.
+          </div>
+          <div id="comment-form" style="display:none" class="comment-form">
             <textarea id="comment-text" placeholder="Jouw reactie..." maxlength="400"></textarea>
             <button class="comment-btn" onclick="submitComment()">Plaats reactie</button>
           </div>
@@ -293,7 +428,7 @@
       <div class="container">
         <div class="section-title">🗺️ Reisinformatie</div>
         <div class="route-card">
-          <p class="route-intro">NEC organiseert clustervervoer vanuit Nijmegen naar De Kuip in Rotterdam. Hieronder de belangrijkste vertrektijden en informatie. Kijk voor de volledige en meest actuele reisinformatie op de officiële NEC-pagina.</p>
+          <p class="route-intro">NEC organiseert clustervervoer vanuit Nijmegen naar De Kuip in Rotterdam. Hieronder de vertrektijden per cluster.</p>
           <table class="route-table">
             <tr><th>Cluster</th><th>Instap</th><th>Vertrek</th><th>Opstaplocatie</th></tr>
             <tr><td>Cluster 1 Oranje, Lichtblauw, Donkerblauw en Zwart</td><td>11.15 uur</td><td>12.15 uur</td><td>NXP</td></tr>
@@ -304,7 +439,7 @@
             <tr><td>Cluster 6 Roze</td><td>13.30 uur</td><td>14.30 uur</td><td>NXP</td></tr>
             <tr><td>Terugkeer</td><td>–</td><td>Direct na wedstrijd</td><td>Bussen vertrekken direct na het laatste fluitsignaal</td></tr>
           </table>
-          <a class="route-link" href="https://www.nec-nijmegen.nl/nieuws/nieuws/reisinformatie-eurojackpot-knvb-bekerfinale-az-n.e.c..htm" target="_blank">📋 Volledige reisinformatie op nec-nijmegen.nl →</a>
+          <a class="route-link" href="https://www.nec-nijmegen.nl/nieuws/nieuws/reisinformatie-eurojackpot-knvb-bekerfinale-az-n.e.c..htm" target="_blank">📋 Volledige reisinformatie →</a>
         </div>
       </div>
     </section>
@@ -314,26 +449,26 @@
         <div class="section-title">🎵 Muziek & Video</div>
         <div style="display:flex;flex-direction:column;gap:10px;max-width:600px">
           <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:2px">🎵 Nummers & Playlist</div>
-          <div class="spotify-card" onclick="toggleEmbed('e1')" style="flex-direction:column;align-items:stretch">
+          <div class="spotify-card" onclick="toggleEmbed('e1')">
             <div class="spotify-card-inner"><div class="spotify-thumb s1">🎵</div><div style="flex:1;min-width:0"><div class="spotify-title">Weer trekken wij ten strijde</div><div class="spotify-sub">Lily de Vos</div></div><span class="spotify-badge">SPOTIFY</span></div>
             <div id="e1" style="display:none;padding:0 10px 10px"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/track/20R21oRKZdJ1YhrKFL0LQL?utm_source=generator" height="80" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
-          <div class="spotify-card" onclick="toggleEmbed('e2')" style="flex-direction:column;align-items:stretch">
+          <div class="spotify-card" onclick="toggleEmbed('e2')">
             <div class="spotify-card-inner"><div class="spotify-thumb s2">🎶</div><div style="flex:1;min-width:0"><div class="spotify-title">Go N.E.C. - We gaan Europa in</div><div class="spotify-sub">Jochem van Gelder & Fons de Poel</div></div><span class="spotify-badge">SPOTIFY</span></div>
             <div id="e2" style="display:none;padding:0 10px 10px"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/track/0nMBh1xQBryJaC1WDHNCYy?utm_source=generator" height="80" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
-          <div class="spotify-card" onclick="toggleEmbed('e3')" style="flex-direction:column;align-items:stretch">
+          <div class="spotify-card" onclick="toggleEmbed('e3')">
             <div class="spotify-card-inner"><div class="spotify-thumb s3">🏆</div><div style="flex:1;min-width:0"><div class="spotify-title">NEC Bekerfinale Playlist</div><div class="spotify-sub">Alle sfeer nummers</div></div><span class="spotify-badge">SPOTIFY</span></div>
             <div id="e3" style="display:none;padding:0 10px 10px"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/playlist/0KjhzELLy1hSUdb9SUuFmO?utm_source=generator" height="232" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           </div>
           <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#555;margin:8px 0 2px">🎬 Video's</div>
-          <div style="background:var(--gray);border:1px solid var(--border);border-radius:4px;overflow:hidden">
-            <div style="padding:10px 14px 8px"><div style="font-family:'Oswald',sans-serif;font-size:0.9rem;font-weight:600">Wij gaan naar de Kuip!</div><div style="font-size:0.72rem;color:#666;margin-top:2px">Michiel Kok</div></div>
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" src="https://www.youtube.com/embed/ANRLJ1nbitc" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
+          <div class="yt-wrap">
+            <div class="yt-header"><div class="yt-title">Wij gaan naar de Kuip!</div><div class="yt-artist">Michiel Kok</div></div>
+            <div class="yt-embed"><iframe src="https://www.youtube.com/embed/ANRLJ1nbitc" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
           </div>
-          <div style="background:var(--gray);border:1px solid var(--border);border-radius:4px;overflow:hidden">
-            <div style="padding:10px 14px 8px"><div style="font-family:'Oswald',sans-serif;font-size:0.9rem;font-weight:600">Dans je de hele nacht met mij</div><div style="font-size:0.72rem;color:#666;margin-top:2px">Ronnie Ruysdael · Bekerfinale editie</div></div>
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" src="https://www.youtube.com/embed/FDoKGTTjq0c" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
+          <div class="yt-wrap">
+            <div class="yt-header"><div class="yt-title">Dans je de hele nacht met mij</div><div class="yt-artist">Ronnie Ruysdael · Bekerfinale editie</div></div>
+            <div class="yt-embed"><iframe src="https://www.youtube.com/embed/FDoKGTTjq0c" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
           </div>
         </div>
       </div>
@@ -343,26 +478,11 @@
       <div class="container">
         <div class="section-title">🎙 Podcasts</div>
         <div class="podcast-list">
-          <div class="podcast-card">
-            <div class="podcast-header"><span class="podcast-icon">🌲</span><div><div class="podcast-name">Project Dennenappel</div><div class="podcast-desc">NEC podcast</div></div></div>
-            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/47RXHlKP8asSM9873ZyXdK?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-          </div>
-          <div class="podcast-card">
-            <div class="podcast-header"><span class="podcast-icon">⚽</span><div><div class="podcast-name">Gofferpraat</div><div class="podcast-desc">NEC Nijmegen podcast</div></div></div>
-            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/7bcrbb72AglCXRaJryKJfi?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-          </div>
-          <div class="podcast-card">
-            <div class="podcast-header"><span class="podcast-icon">🎙</span><div><div class="podcast-name">Jarda Podcast</div><div class="podcast-desc">De NEC-podcast van Nijmeegse supporters</div></div></div>
-            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/6UxgSyyJdWKCNHiRH6HMd9?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-          </div>
-          <div class="podcast-card">
-            <div class="podcast-header"><span class="podcast-icon">🟢</span><div><div class="podcast-name">Over RoodGroenZwart</div><div class="podcast-desc">Diepgaande analyses en interviews over NEC</div></div></div>
-            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/0Y8GrJXVyiqMYaJeJjbpmb?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-          </div>
-          <div class="podcast-card">
-            <div class="podcast-header"><span class="podcast-icon">📻</span><div><div class="podcast-name">RN7 – NEC Update</div><div class="podcast-desc">Regionale omroep Nijmegen</div></div></div>
-            <div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/4pBHkxC4pPj3Dsbg7BgBjI?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-          </div>
+          <div class="podcast-card"><div class="podcast-header"><span class="podcast-icon">🌲</span><div><div class="podcast-name">Project Dennenappel</div><div class="podcast-desc">NEC podcast</div></div></div><div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/47RXHlKP8asSM9873ZyXdK?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div></div>
+          <div class="podcast-card"><div class="podcast-header"><span class="podcast-icon">⚽</span><div><div class="podcast-name">Gofferpraat</div><div class="podcast-desc">NEC Nijmegen podcast</div></div></div><div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/7bcrbb72AglCXRaJryKJfi?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div></div>
+          <div class="podcast-card"><div class="podcast-header"><span class="podcast-icon">🎙</span><div><div class="podcast-name">Jarda Podcast</div><div class="podcast-desc">De NEC-podcast van Nijmeegse supporters</div></div></div><div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/6UxgSyyJdWKCNHiRH6HMd9?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div></div>
+          <div class="podcast-card"><div class="podcast-header"><span class="podcast-icon">🟢</span><div><div class="podcast-name">Over RoodGroenZwart</div><div class="podcast-desc">Diepgaande analyses en interviews over NEC</div></div></div><div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/0Y8GrJXVyiqMYaJeJjbpmb?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div></div>
+          <div class="podcast-card"><div class="podcast-header"><span class="podcast-icon">📻</span><div><div class="podcast-name">RN7 – NEC Update</div><div class="podcast-desc">Regionale omroep Nijmegen</div></div></div><div class="podcast-embed"><iframe style="border-radius:6px;width:100%;border:0;display:block" src="https://open.spotify.com/embed/show/4pBHkxC4pPj3Dsbg7BgBjI?utm_source=generator" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div></div>
         </div>
       </div>
     </section>
@@ -403,341 +523,303 @@
   <div class="footer-stripe"><div class="fs-r"></div><div class="fs-g"></div></div>
   <p>Gemaakt met ❤️ voor <span class="r">NEC</span> <span class="g">Nijmegen</span> supporters</p>
   <p style="margin-top:6px;letter-spacing:1px">KNVB Beker Finale 2026 · Jubileumseizoen 2025–2026</p>
-  <div class="share-row" style="margin-top:20px;justify-content:center">
-    <a class="share-btn share-wa" href="https://wa.me/?text=NEC%20naar%20de%20Kuip!%20Bekijk%20de%20bekerfinale%20pagina%3A%20https%3A%2F%2Froodgroenzwart.github.io%2Fnec-bekerfinale" target="_blank">📱 WhatsApp</a>
-    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=NEC%20naar%20de%20Kuip!%20%F0%9F%8F%86&url=https%3A%2F%2Froodgroenzwart.github.io%2Fnec-bekerfinale" target="_blank">𝕏 Tweet</a>
+  <div class="share-row" style="margin-top:20px">
+    <a class="share-btn share-wa" href="https://wa.me/?text=NEC%20naar%20de%20Kuip!%20https%3A%2F%2Froodgroenzwart.github.io%2Fnec-bekerfinale" target="_blank">📱 WhatsApp</a>
+    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=NEC%20naar%20de%20Kuip!&url=https%3A%2F%2Froodgroenzwart.github.io%2Fnec-bekerfinale" target="_blank">𝕏 Tweet</a>
     <a class="share-btn share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Froodgroenzwart.github.io%2Fnec-bekerfinale" target="_blank">📘 Facebook</a>
     <button class="share-btn share-copy" onclick="copyLink()">🔗 Kopieer link</button>
   </div>
-  <p style="margin-top:14px">
+  <p style="margin-top:20px">
     <button onclick="toggleForm()" style="background:none;border:none;color:#1a1a1a;font-size:0.65rem;cursor:pointer;padding:0;letter-spacing:1px">beheer</button>
   </p>
 </footer>
 
 <script>
-  // COUNTDOWN
-  var finaleDate = new Date('2026-04-19T18:00:00');
-  function updateCountdown() {
-    var diff = finaleDate - new Date();
-    if (diff <= 0) return;
-    var d = Math.floor(diff/86400000);
-    var h = Math.floor((diff%86400000)/3600000);
-    var m = Math.floor((diff%3600000)/60000);
-    var s = Math.floor((diff%60000)/1000);
-    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+var sb = supabase.createClient('https://zoyenfgnkskhsrsgfitg.supabase.co','sb_publishable_-FOogv-lqlDaaYM7fd2s-g_-E5UfLK7');
+var currentUser = null;
+var currentUsername = '';
+var isUnlocked = false;
+var WACHTWOORD = 'nec2026';
 
-  // SHARE
-  function copyLink() {
-    navigator.clipboard.writeText('https://roodgroenzwart.github.io/nec-bekerfinale').then(function() {
-      alert('Link gekopieerd! 🔗');
-    });
-  }
+function toggleAuthModal() { document.getElementById('auth-overlay').classList.toggle('open'); }
+function closeAuth() { document.getElementById('auth-overlay').classList.remove('open'); }
+function closeAuthOnOverlay(e) { if (e.target===document.getElementById('auth-overlay')) closeAuth(); }
+function switchTab(tab) {
+  document.getElementById('panel-login').style.display = tab==='login'?'block':'none';
+  document.getElementById('panel-register').style.display = tab==='register'?'block':'none';
+  document.getElementById('tab-login').className = 'auth-tab'+(tab==='login'?' active':'');
+  document.getElementById('tab-register').className = 'auth-tab'+(tab==='register'?' active':'');
+}
+function onEmailInput(type) {
+  var val = document.getElementById(type==='login'?'auth-email':'reg-email').value.trim();
+  document.getElementById(type==='login'?'login-pw-field':'register-pw-field').style.display = val.includes('@')?'block':'none';
+}
+function setFeedback(id, msg, type) {
+  var el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'auth-feedback '+type;
+}
 
-  // NIEUWS
-  var allNieuws_live = [];
-  function timeAgo(dateStr) {
-    var diff = (new Date() - new Date(dateStr)) / 60000;
-    if (diff < 60) return Math.floor(diff) + 'm geleden';
-    if (diff < 1440) return Math.floor(diff/60) + 'u geleden';
-    return Math.floor(diff/1440) + 'd geleden';
+sb.auth.onAuthStateChange(function(event, session) {
+  if (session && session.user) {
+    currentUser = session.user;
+    currentUsername = (session.user.user_metadata && session.user.user_metadata.username) ? session.user.user_metadata.username : session.user.email.split('@')[0];
+    var initials = currentUsername.substring(0,2).toUpperCase();
+    document.getElementById('auth-panel-guest').style.display = 'none';
+    document.getElementById('auth-panel-loggedin').style.display = 'block';
+    document.getElementById('auth-username-display').textContent = currentUsername;
+    document.getElementById('auth-user-email-display').textContent = session.user.email;
+    document.getElementById('auth-user-initials').textContent = initials;
+    document.getElementById('auth-avatar-icon').textContent = initials;
+    document.getElementById('auth-trigger-label').textContent = currentUsername;
+    document.getElementById('comment-login-notice').style.display = 'none';
+    document.getElementById('comment-form').style.display = 'block';
+  } else {
+    currentUser = null;
+    currentUsername = '';
+    document.getElementById('auth-panel-guest').style.display = 'block';
+    document.getElementById('auth-panel-loggedin').style.display = 'none';
+    document.getElementById('auth-avatar-icon').textContent = '👤';
+    document.getElementById('auth-trigger-label').textContent = 'Inloggen';
+    document.getElementById('comment-login-notice').style.display = 'block';
+    document.getElementById('comment-form').style.display = 'none';
   }
-  function renderNewsLive(items) {
-    var container = document.getElementById('news-container');
-    if (!items.length) { container.innerHTML = '<div style="color:#555;font-size:0.85rem">Geen nieuws gevonden.</div>'; return; }
-    var html = '<div class="news-list">';
-    for (var i = 0; i < items.length; i++) {
-      var n = items[i];
-      html += '<a class="news-item" href="' + n.link + '" target="_blank">';
-      html += '<img class="news-favicon" src="https://www.google.com/s2/favicons?domain=' + encodeURIComponent(n.src) + '&sz=32" alt="" onerror="this.style.display=\'none\'">';
-      html += '<span class="news-item-title">' + n.title + '</span>';
-      html += '<span class="news-item-meta">' + n.src + ' · ' + timeAgo(n.pub) + '</span>';
-      html += '</a>';
-    }
-    html += '</div>';
-    container.innerHTML = html;
-  }
-  function showAllNews() {
-    renderNewsLive(allNieuws_live);
-    document.getElementById('news-more-btn').style.display = 'none';
-    document.getElementById('news-less-btn').style.display = 'inline-block';
-  }
-  function showLessNews() {
-    renderNewsLive(allNieuws_live.slice(0,8));
-    document.getElementById('news-more-btn').style.display = 'inline-block';
-    document.getElementById('news-less-btn').style.display = 'none';
-  }
-  async function loadNews() {
-    try {
-      var queries = ['NEC+Nijmegen+bekerfinale', 'NEC+Nijmegen'];
-      var items = [];
-      var seen = {};
-      for (var q = 0; q < queries.length; q++) {
-        var rssUrl = 'https://news.google.com/rss/search?q=' + queries[q] + '&hl=nl&gl=NL&ceid=NL:nl';
-        var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(rssUrl);
-        var res = await fetch(proxyUrl);
-        var text = await res.text();
-        var xml = new DOMParser().parseFromString(text, 'text/xml');
-        var nodes = xml.querySelectorAll('item');
-        for (var i = 0; i < nodes.length; i++) {
-          var el = nodes[i];
-          var title = el.querySelector('title') ? el.querySelector('title').textContent : '';
-          var link = el.querySelector('link') ? el.querySelector('link').textContent : '';
-          var pub = el.querySelector('pubDate') ? el.querySelector('pubDate').textContent : '';
-          var src = el.querySelector('source') ? el.querySelector('source').textContent : '';
-          if (!src && link) { try { src = new URL(link).hostname.replace('www.',''); } catch(e) { src=''; } }
-          if (title && link && !seen[title]) { seen[title]=true; items.push({title:title,link:link,pub:pub,src:src}); }
-        }
-      }
-      items.sort(function(a,b) { return new Date(b.pub)-new Date(a.pub); });
-      allNieuws_live = items;
-      if (items.length) {
-        renderNewsLive(items.slice(0,8));
-        if (items.length>8) document.getElementById('news-more-btn').style.display='inline-block';
-      } else {
-        // Fallback: rss2json
-        await loadNewsRss2json();
-      }
-    } catch(e) {
-      await loadNewsRss2json();
-    }
-  }
-  async function loadNewsRss2json() {
-    try {
-      var rssUrl = 'https://news.google.com/rss/search?q=NEC+Nijmegen&hl=nl&gl=NL&ceid=NL:nl';
-      var res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=20');
-      var data = await res.json();
-      var items = [];
-      if (data.items) {
-        for (var i = 0; i < data.items.length; i++) {
-          var item = data.items[i];
-          var src = item.author || '';
-          if (!src && item.link) { try { src = new URL(item.link).hostname.replace('www.',''); } catch(e) { src=''; } }
-          items.push({title:item.title, link:item.link, pub:item.pubDate, src:src});
-        }
-      }
-      allNieuws_live = items;
-      if (items.length) {
-        renderNewsLive(items.slice(0,8));
-        if (items.length>8) document.getElementById('news-more-btn').style.display='inline-block';
-      } else {
-        document.getElementById('news-container').innerHTML = '<div style="color:#555;font-size:0.85rem">Nieuws kon niet worden geladen.</div>';
-      }
-    } catch(e) {
-      document.getElementById('news-container').innerHTML = '<div style="color:#555;font-size:0.85rem">Nieuws kon niet worden geladen.</div>';
-    }
-  }
-  loadNews();
+  loadComments();
+});
 
-  // REACTIES
-  var comments = [];
-  function renderComments() {
-    var list = document.getElementById('comment-list');
-    if (!comments.length) { list.innerHTML = '<div style="color:#555;font-size:0.82rem">Nog geen reacties. Wees de eerste!</div>'; return; }
-    var html = '';
-    for (var i = 0; i < comments.length; i++) {
-      var c = comments[i];
-      html += '<div class="comment-item">';
-      html += '<span class="comment-author">' + c.name + '</span><span class="comment-time">' + c.time + '</span>';
-      if (isUnlocked) html += '<button onclick="deleteComment(' + i + ')" style="float:right;background:none;border:none;color:#444;cursor:pointer;font-size:0.8rem" onmouseover="this.style.color=\'#D0021B\'" onmouseout="this.style.color=\'#444\'">✕ verwijder</button>';
-      html += '<div class="comment-text">' + c.text + '</div>';
-      html += '</div>';
-    }
-    list.innerHTML = html;
-  }
-  function deleteComment(idx) {
-    comments.splice(idx, 1);
-    renderComments();
-  }
-  function submitComment() {
-    var name = document.getElementById('comment-name').value.trim() || 'Anoniem';
-    var text = document.getElementById('comment-text').value.trim();
-    if (!text) return;
-    var now = new Date().toLocaleString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
-    comments.push({name:name, text:text, time:now});
-    document.getElementById('comment-name').value = '';
-    document.getElementById('comment-text').value = '';
-    renderComments();
-  }
+async function signUp() {
+  var username = document.getElementById('reg-username').value.trim();
+  var email = document.getElementById('reg-email').value.trim();
+  var password = document.getElementById('reg-password').value;
+  if (!username||!email||!password) { setFeedback('reg-msg','Vul alle velden in.','error'); return; }
+  var r = await sb.auth.signUp({email:email,password:password,options:{data:{username:username}}});
+  if (r.error) setFeedback('reg-msg',r.error.message,'error');
+  else setFeedback('reg-msg','✅ Check je e-mail om je account te bevestigen!','success');
+}
 
-  // WEATHER
-  async function loadWeather() {
-    var container = document.getElementById('weather-hourly');
-    try {
-      var url = 'https://api.open-meteo.com/v1/forecast?latitude=51.9225&longitude=4.4792&hourly=temperature_2m,precipitation_probability,weathercode&timezone=Europe/Amsterdam&start_date=2026-04-19&end_date=2026-04-19';
-      var res = await fetch(url);
-      var data = await res.json();
-      var hours = data.hourly;
-      function wmoIcon(code) {
-        if (code===0) return '☀️'; if (code<=2) return '⛅'; if (code<=3) return '🌥';
-        if (code<=48) return '🌫'; if (code<=67) return '🌧'; if (code<=77) return '❄️';
-        if (code<=82) return '🌦'; if (code<=99) return '⛈'; return '🌥';
-      }
-      var groups = [{label:'🌅 Ochtend',start:9,end:13},{label:'☀️ Middag',start:13,end:18},{label:'🌙 Avond',start:18,end:23}];
-      container.innerHTML = '';
-      for (var g = 0; g < groups.length; g++) {
-        var group = groups[g];
-        var groupEl = document.createElement('div');
-        groupEl.innerHTML = '<div class="weather-group-title">' + group.label + '</div>';
-        var grid = document.createElement('div');
-        grid.className = 'weather-grid';
-        for (var i = group.start; i < group.end; i++) {
-          var el = document.createElement('div');
-          el.className = 'wh-block' + (i===18?' kickoff':'');
-          el.innerHTML = '<div class="wh-time">' + String(i).padStart(2,'0') + ':00</div><div class="wh-icon">' + wmoIcon(hours.weathercode[i]) + '</div><div class="wh-temp">' + Math.round(hours.temperature_2m[i]) + '°</div><div class="wh-rain">💧' + hours.precipitation_probability[i] + '%</div>';
-          grid.appendChild(el);
-        }
-        groupEl.appendChild(grid);
-        container.appendChild(groupEl);
-      }
-    } catch(e) {
-      container.innerHTML = '<div style="color:#555;font-size:0.85rem">Weerdata kon niet worden geladen.</div>';
-    }
-  }
-  loadWeather();
+async function signIn() {
+  var email = document.getElementById('auth-email').value.trim();
+  var password = document.getElementById('auth-password').value;
+  if (!email||!password) { setFeedback('auth-msg','Vul e-mail en wachtwoord in.','error'); return; }
+  var r = await sb.auth.signInWithPassword({email:email,password:password});
+  if (r.error) setFeedback('auth-msg',r.error.message,'error');
+  else closeAuth();
+}
 
-  // BLESSURES
-  // ============================================
-  // BLESSURES — HIER AANPASSEN
-  // status: "out" = afwezig, "doubt" = twijfelachtig, "fit" = fit
-  // ============================================
-  var necBlessures = [];
-  var azBlessures = [
-    {name:'Koopmeiners', detail:'Kuitblessure', status:'doubt'},
-    {name:'Kasius', detail:'Bovenbeenblessure', status:'doubt'}
-  ];
-  // ============================================
-  var injuries = {nec:necBlessures.slice(), az:azBlessures.slice()};
-  var dotColor = {out:'#D0021B',doubt:'#f5a623',fit:'#008A3C'};
-  var statusLabel = {out:'Afwezig',doubt:'Twijfelachtig',fit:'Fit'};
-  var WACHTWOORD = 'nec2026';
-  var isUnlocked = false;
-  function renderInjuries() {
-    var now = new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long'});
-    var clubs = [{key:'nec',name:'N.E.C. Nijmegen',icon:'🟢',cls:'injury-header-nec'},{key:'az',name:'AZ Alkmaar',icon:'🔴',cls:'injury-header-az'}];
-    var html = '';
-    for (var c = 0; c < clubs.length; c++) {
-      var club = clubs[c];
-      html += '<div class="injury-team"><div class="injury-header ' + club.cls + '"><span style="font-size:1rem">' + club.icon + '</span><span class="injury-club-name">' + club.name + '</span><span class="injury-date">' + now + '</span></div><div class="injury-list">';
-      if (!injuries[club.key].length) {
-        html += '<div class="injury-row" style="color:#444;font-size:0.8rem">Geen blessures ingevoerd</div>';
-      } else {
-        for (var p = 0; p < injuries[club.key].length; p++) {
-          var player = injuries[club.key][p];
-          html += '<div class="injury-row"><div class="injury-dot" style="background:' + dotColor[player.status] + '"></div><div style="flex:1"><div class="injury-name">' + player.name + '</div><div class="injury-detail">' + player.detail + ' · ' + statusLabel[player.status] + '</div></div>';
-          html += '<button class="injury-remove" onclick="removeInjury(\'' + club.key + '\',' + p + ')" style="display:' + (isUnlocked?'inline':'none') + '">✕</button></div>';
-        }
-      }
-      html += '</div></div>';
-    }
-    document.getElementById('injury-grid').innerHTML = html;
+async function signOut() { await sb.auth.signOut(); closeAuth(); }
+
+var finaleDate = new Date('2026-04-19T18:00:00');
+function updateCountdown() {
+  var diff = finaleDate - new Date();
+  if (diff<=0) return;
+  document.getElementById('cd-days').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+function copyLink() { navigator.clipboard.writeText('https://roodgroenzwart.github.io/nec-bekerfinale').then(function(){alert('Link gekopieerd! 🔗');}); }
+
+var allNieuws_live = [];
+function timeAgo(d) {
+  var diff=(new Date()-new Date(d))/60000;
+  if(diff<60) return Math.floor(diff)+'m geleden';
+  if(diff<1440) return Math.floor(diff/60)+'u geleden';
+  return Math.floor(diff/1440)+'d geleden';
+}
+function renderNewsLive(items) {
+  var c = document.getElementById('news-container');
+  if (!items.length) { c.innerHTML='<div style="color:#555;font-size:0.85rem">Geen nieuws gevonden.</div>'; return; }
+  var h='<div class="news-list">';
+  for (var i=0;i<items.length;i++) {
+    var n=items[i];
+    h+='<a class="news-item" href="'+n.link+'" target="_blank"><img class="news-favicon" src="https://www.google.com/s2/favicons?domain='+encodeURIComponent(n.src)+'&sz=32" alt="" onerror="this.style.display=\'none\'"><span class="news-item-title">'+n.title+'</span><span class="news-item-meta">'+n.src+' · '+timeAgo(n.pub)+'</span></a>';
   }
+  c.innerHTML=h+'</div>';
+}
+function showAllNews() { renderNewsLive(allNieuws_live); document.getElementById('news-more-btn').style.display='none'; document.getElementById('news-less-btn').style.display='inline-block'; }
+function showLessNews() { renderNewsLive(allNieuws_live.slice(0,8)); document.getElementById('news-more-btn').style.display='inline-block'; document.getElementById('news-less-btn').style.display='none'; }
+
+async function loadNews() {
+  try {
+    var queries=['NEC+Nijmegen+bekerfinale','NEC+Nijmegen'];
+    var items=[]; var seen={};
+    for (var q=0;q<queries.length;q++) {
+      var rssUrl='https://news.google.com/rss/search?q='+queries[q]+'&hl=nl&gl=NL&ceid=NL:nl';
+      var res=await fetch('https://corsproxy.io/?'+encodeURIComponent(rssUrl));
+      var txt=await res.text();
+      var xml=new DOMParser().parseFromString(txt,'text/xml');
+      var nodes=xml.querySelectorAll('item');
+      for (var i=0;i<nodes.length;i++) {
+        var el=nodes[i];
+        var title=el.querySelector('title')?el.querySelector('title').textContent:'';
+        var link=el.querySelector('link')?el.querySelector('link').textContent:'';
+        var pub=el.querySelector('pubDate')?el.querySelector('pubDate').textContent:'';
+        var src=el.querySelector('source')?el.querySelector('source').textContent:'';
+        if(!src&&link){try{src=new URL(link).hostname.replace('www.','');}catch(e2){src='';}}
+        if(title&&link&&!seen[title]){seen[title]=true;items.push({title:title,link:link,pub:pub,src:src});}
+      }
+    }
+    items.sort(function(a,b){return new Date(b.pub)-new Date(a.pub);});
+    allNieuws_live=items;
+    if(items.length){renderNewsLive(items.slice(0,8));if(items.length>8)document.getElementById('news-more-btn').style.display='inline-block';}
+    else await loadNewsRss2json();
+  } catch(e) { await loadNewsRss2json(); }
+}
+async function loadNewsRss2json() {
+  try {
+    var res=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent('https://news.google.com/rss/search?q=NEC+Nijmegen&hl=nl&gl=NL&ceid=NL:nl')+'&count=20');
+    var data=await res.json();
+    var items=[];
+    if(data.items){for(var i=0;i<data.items.length;i++){var it=data.items[i];var src=it.author||'';if(!src&&it.link){try{src=new URL(it.link).hostname.replace('www.','');}catch(e){src='';}}items.push({title:it.title,link:it.link,pub:it.pubDate,src:src});}}
+    allNieuws_live=items;
+    if(items.length){renderNewsLive(items.slice(0,8));if(items.length>8)document.getElementById('news-more-btn').style.display='inline-block';}
+    else document.getElementById('news-container').innerHTML='<div style="color:#555;font-size:0.85rem">Nieuws kon niet worden geladen.</div>';
+  } catch(e) { document.getElementById('news-container').innerHTML='<div style="color:#555;font-size:0.85rem">Nieuws kon niet worden geladen.</div>'; }
+}
+loadNews();
+
+async function loadComments() {
+  var list=document.getElementById('comment-list');
+  var r=await sb.from('Comments').select('*').order('created_at',{ascending:false});
+  if(r.error||!r.data||!r.data.length){list.innerHTML='<div style="color:#555;font-size:0.82rem">Nog geen reacties. Wees de eerste!</div>';return;}
+  var h='';
+  for(var i=0;i<r.data.length;i++){
+    var c=r.data[i];
+    var date=new Date(c.created_at).toLocaleString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+    h+='<div class="comment-item">';
+    if(isUnlocked) h+='<button onclick="deleteComment(\''+c.id+'\')" style="float:right;background:none;border:none;color:#444;cursor:pointer;font-size:0.8rem" onmouseover="this.style.color=\'#D0021B\'" onmouseout="this.style.color=\'#444\'">✕</button>';
+    h+='<span class="comment-author">'+(c.username||'Anoniem')+'</span><span class="comment-time">'+date+'</span><div class="comment-text">'+c.comment+'</div></div>';
+  }
+  list.innerHTML=h;
+}
+async function submitComment() {
+  if(!currentUser) return;
+  var text=document.getElementById('comment-text').value.trim();
+  if(!text) return;
+  var r=await sb.from('Comments').insert({user_id:currentUser.id,username:currentUsername,comment:text});
+  if(!r.error){document.getElementById('comment-text').value='';loadComments();}
+}
+async function deleteComment(id) { await sb.from('Comments').delete().eq('id',id); loadComments(); }
+
+async function loadWeather() {
+  var container=document.getElementById('weather-hourly');
+  try {
+    var res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=51.9225&longitude=4.4792&hourly=temperature_2m,precipitation_probability,weathercode&timezone=Europe/Amsterdam&start_date=2026-04-19&end_date=2026-04-19');
+    var data=await res.json();
+    var hours=data.hourly;
+    function wmoIcon(code){if(code===0)return'☀️';if(code<=2)return'⛅';if(code<=3)return'🌥';if(code<=48)return'🌫';if(code<=67)return'🌧';if(code<=77)return'❄️';if(code<=82)return'🌦';if(code<=99)return'⛈';return'🌥';}
+    var groups=[{label:'🌅 Ochtend',start:9,end:13},{label:'☀️ Middag',start:13,end:18},{label:'🌙 Avond',start:18,end:23}];
+    container.innerHTML='';
+    for(var g=0;g<groups.length;g++){
+      var group=groups[g];
+      var gEl=document.createElement('div');
+      gEl.innerHTML='<div class="weather-group-title">'+group.label+'</div>';
+      var grid=document.createElement('div');
+      grid.className='weather-grid';
+      for(var i=group.start;i<group.end;i++){
+        var wEl=document.createElement('div');
+        wEl.className='wh-block'+(i===18?' kickoff':'');
+        wEl.innerHTML='<div class="wh-time">'+String(i).padStart(2,'0')+':00</div><div class="wh-icon">'+wmoIcon(hours.weathercode[i])+'</div><div class="wh-temp">'+Math.round(hours.temperature_2m[i])+'°</div><div class="wh-rain">💧'+hours.precipitation_probability[i]+'%</div>';
+        grid.appendChild(wEl);
+      }
+      gEl.appendChild(grid);
+      container.appendChild(gEl);
+    }
+  } catch(e){container.innerHTML='<div style="color:#555;font-size:0.85rem">Weerdata kon niet worden geladen.</div>';}
+}
+loadWeather();
+
+// ============================================
+// BLESSURES — HIER AANPASSEN
+// status: "out" = afwezig, "doubt" = twijfelachtig, "fit" = fit
+// ============================================
+var necBlessures = [];
+var azBlessures = [
+  {name:'Koopmeiners',detail:'Kuitblessure',status:'doubt'},
+  {name:'Kasius',detail:'Bovenbeenblessure',status:'doubt'}
+];
+// ============================================
+var injuries={nec:necBlessures.slice(),az:azBlessures.slice()};
+var dotColor={out:'#D0021B',doubt:'#f5a623',fit:'#008A3C'};
+var statusLabel={out:'Afwezig',doubt:'Twijfelachtig',fit:'Fit'};
+function renderInjuries(){
+  var now=new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long'});
+  var clubs=[{key:'nec',name:'N.E.C. Nijmegen',icon:'🟢',cls:'injury-header-nec'},{key:'az',name:'AZ Alkmaar',icon:'🔴',cls:'injury-header-az'}];
+  var h='';
+  for(var c=0;c<clubs.length;c++){
+    var club=clubs[c];
+    h+='<div class="injury-team"><div class="injury-header '+club.cls+'"><span style="font-size:1rem">'+club.icon+'</span><span class="injury-club-name">'+club.name+'</span><span class="injury-date">'+now+'</span></div><div class="injury-list">';
+    if(!injuries[club.key].length){h+='<div class="injury-row" style="color:#444;font-size:0.8rem">Geen blessures ingevoerd</div>';}
+    else{for(var p=0;p<injuries[club.key].length;p++){var pl=injuries[club.key][p];h+='<div class="injury-row"><div class="injury-dot" style="background:'+dotColor[pl.status]+'"></div><div style="flex:1"><div class="injury-name">'+pl.name+'</div><div class="injury-detail">'+pl.detail+' · '+statusLabel[pl.status]+'</div></div><button class="injury-remove" onclick="removeInjury(\''+club.key+'\','+p+')" style="display:'+(isUnlocked?'inline':'none')+'">✕</button></div>';}}
+    h+='</div></div>';
+  }
+  document.getElementById('injury-grid').innerHTML=h;
+}
+renderInjuries();
+function toggleForm(){
+  if(!isUnlocked){var i=prompt('🔒 Voer het wachtwoord in:');if(i===WACHTWOORD){isUnlocked=true;document.getElementById('injury-form').classList.add('open');renderInjuries();}else if(i!==null){alert('Verkeerd wachtwoord.');}}
+  else{document.getElementById('injury-form').classList.toggle('open');}
+}
+function addInjury(){
+  var name=document.getElementById('f-name').value.trim();
+  var detail=document.getElementById('f-detail').value.trim();
+  var club=document.getElementById('f-club').value;
+  var status=document.getElementById('f-status').value;
+  if(!name)return;
+  injuries[club].push({name:name,detail:detail,status:status});
+  document.getElementById('f-name').value='';
+  document.getElementById('f-detail').value='';
   renderInjuries();
-  function toggleForm() {
-    if (!isUnlocked) {
-      var invoer = prompt('🔒 Voer het wachtwoord in:');
-      if (invoer===WACHTWOORD) { isUnlocked=true; document.getElementById('injury-form').classList.add('open'); }
-      else if (invoer!==null) { alert('Verkeerd wachtwoord.'); }
-    } else {
-      document.getElementById('injury-form').classList.toggle('open');
-    }
-  }
-  function addInjury() {
-    var name = document.getElementById('f-name').value.trim();
-    var detail = document.getElementById('f-detail').value.trim();
-    var club = document.getElementById('f-club').value;
-    var status = document.getElementById('f-status').value;
-    if (!name) return;
-    injuries[club].push({name:name,detail:detail,status:status});
-    document.getElementById('f-name').value='';
-    document.getElementById('f-detail').value='';
-    renderInjuries();
-  }
-  function removeInjury(club,idx) { injuries[club].splice(idx,1); renderInjuries(); }
+}
+function removeInjury(club,idx){injuries[club].splice(idx,1);renderInjuries();}
 
-  // MUZIEK
-  function toggleEmbed(id) {
-    var el = document.getElementById(id);
-    el.style.display = el.style.display==='none'?'block':'none';
-  }
+function toggleEmbed(id){var el=document.getElementById(id);el.style.display=el.style.display==='none'?'block':'none';}
 
-  // POLL
-  var votes=[12,8,15], selected=null, hasVoted=false;
-  function selectPoll(el) {
-    if (hasVoted) return;
-    var opts = document.querySelectorAll('.poll-option');
-    for (var i=0;i<opts.length;i++) opts[i].classList.remove('selected');
-    el.classList.add('selected');
-    selected = parseInt(el.dataset.val);
-    document.getElementById('poll-btn').disabled = false;
-  }
-  function submitPoll() {
-    if (selected===null||hasVoted) return;
-    hasVoted=true; votes[selected]++;
-    var total = votes.reduce(function(a,b){return a+b;},0);
-    var opts = document.querySelectorAll('.poll-option');
-    for (var i=0;i<opts.length;i++) {
-      var pct = Math.round(votes[i]/total*100);
-      opts[i].querySelector('.poll-bar').style.width=pct+'%';
-      var p=opts[i].querySelector('.poll-pct');
-      p.style.display='block'; p.textContent=pct+'%';
-      opts[i].classList.add('voted'); opts[i].onclick=null;
-    }
-    document.getElementById('poll-btn').disabled=true;
-    document.getElementById('poll-votes').textContent=total+' stemmen uitgebracht';
-    startConfetti();
-    var audio=new Audio('https://www.nec-nijmegen.nl/media/clublied.mp3');
-    audio.volume=0.6; audio.play().catch(function(){});
-  }
-
-  // CONFETTI
-  function startConfetti() {
-    var canvas=document.createElement('canvas');
-    canvas.style.cssText='position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999';
-    document.body.appendChild(canvas);
-    canvas.width=window.innerWidth; canvas.height=window.innerHeight;
-    var ctx=canvas.getContext('2d');
-    var colors=['#D0021B','#008A3C','#ffffff','#D0021B','#008A3C','#333'];
-    var pieces=[];
-    for (var i=0;i<200;i++) pieces.push({x:Math.random()*canvas.width,y:-20-Math.random()*canvas.height,w:8+Math.random()*10,h:5+Math.random()*7,color:colors[Math.floor(Math.random()*colors.length)],speed:4+Math.random()*5,angle:Math.random()*360,spin:(Math.random()-.5)*8,drift:(Math.random()-.5)*2});
-    var start=Date.now();
-    function draw() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      for (var i=0;i<pieces.length;i++) {
-        var p=pieces[i]; p.y+=p.speed; p.x+=p.drift; p.angle+=p.spin;
-        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle*Math.PI/180);
-        ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
-      }
-      if (Date.now()-start<5000) requestAnimationFrame(draw); else canvas.remove();
-    }
-    draw();
-  }
-
-  // SUGGESTIE
-  async function submitSuggestie() {
-    var name=document.getElementById('suggest-name').value.trim()||'Anoniem';
-    var text=document.getElementById('suggest-text').value.trim();
-    if (!text) return;
-    try {
-      var res=await fetch('https://formspree.io/f/xzdkqyyn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({naam:name,suggestie:text})});
-      if (res.ok) { document.getElementById('suggest-text').value=''; document.getElementById('suggest-name').value=''; document.getElementById('suggest-thanks').style.display='block'; setTimeout(function(){document.getElementById('suggest-thanks').style.display='none';},3000); }
-      else alert('Er ging iets mis.');
-    } catch(e) { alert('Er ging iets mis.'); }
-  }
-
-  // ACTIVE NAV
-  var navSections=['aftellen','nieuws','blessures','weer','route','muziek','podcasts','poll','suggestie'];
-  window.addEventListener('scroll',function() {
-    var current='';
-    for (var i=0;i<navSections.length;i++) { var el=document.getElementById(navSections[i]); if (el&&window.scrollY>=el.offsetTop-80) current=navSections[i]; }
-    var links=document.querySelectorAll('.nav-link');
-    for (var i=0;i<links.length;i++) links[i].classList.toggle('active',links[i].getAttribute('href')==='#'+current);
-  });
+var votes=[12,8,15],selected=null,hasVoted=false;
+function selectPoll(el){
+  if(hasVoted)return;
+  var opts=document.querySelectorAll('.poll-option');
+  for(var i=0;i<opts.length;i++)opts[i].classList.remove('selected');
+  el.classList.add('selected');
+  selected=parseInt(el.dataset.val);
+  document.getElementById('poll-btn').disabled=false;
+}
+function submitPoll(){
+  if(selected===null||hasVoted)return;
+  hasVoted=true;votes[selected]++;
+  var total=votes.reduce(function(a,b){return a+b;},0);
+  var opts=document.querySelectorAll('.poll-option');
+  for(var i=0;i<opts.length;i++){var pct=Math.round(votes[i]/total*100);opts[i].querySelector('.poll-bar').style.width=pct+'%';var p=opts[i].querySelector('.poll-pct');p.style.display='block';p.textContent=pct+'%';opts[i].classList.add('voted');opts[i].onclick=null;}
+  document.getElementById('poll-btn').disabled=true;
+  document.getElementById('poll-votes').textContent=total+' stemmen uitgebracht';
+  startConfetti();
+  var audio=new Audio('https://www.nec-nijmegen.nl/media/clublied.mp3');
+  audio.volume=0.6;audio.play().catch(function(){});
+}
+function startConfetti(){
+  var canvas=document.createElement('canvas');
+  canvas.style.cssText='position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999';
+  document.body.appendChild(canvas);
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  var ctx=canvas.getContext('2d');
+  var colors=['#D0021B','#008A3C','#ffffff','#D0021B','#008A3C','#333'];
+  var pieces=[];
+  for(var i=0;i<200;i++)pieces.push({x:Math.random()*canvas.width,y:-20-Math.random()*canvas.height,w:8+Math.random()*10,h:5+Math.random()*7,color:colors[Math.floor(Math.random()*colors.length)],speed:4+Math.random()*5,angle:Math.random()*360,spin:(Math.random()-.5)*8,drift:(Math.random()-.5)*2});
+  var start=Date.now();
+  function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);for(var i=0;i<pieces.length;i++){var p=pieces[i];p.y+=p.speed;p.x+=p.drift;p.angle+=p.spin;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle*Math.PI/180);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();}if(Date.now()-start<5000)requestAnimationFrame(draw);else canvas.remove();}
+  draw();
+}
+async function submitSuggestie(){
+  var name=document.getElementById('suggest-name').value.trim()||'Anoniem';
+  var text=document.getElementById('suggest-text').value.trim();
+  if(!text)return;
+  try{var res=await fetch('https://formspree.io/f/xzdkqyyn',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({naam:name,suggestie:text})});if(res.ok){document.getElementById('suggest-text').value='';document.getElementById('suggest-name').value='';document.getElementById('suggest-thanks').style.display='block';setTimeout(function(){document.getElementById('suggest-thanks').style.display='none';},3000);}else{alert('Er ging iets mis.');}}catch(e){alert('Er ging iets mis.');}
+}
+var navSections=['aftellen','nieuws','blessures','weer','route','muziek','podcasts','poll','suggestie'];
+window.addEventListener('scroll',function(){var current='';for(var i=0;i<navSections.length;i++){var el=document.getElementById(navSections[i]);if(el&&window.scrollY>=el.offsetTop-80)current=navSections[i];}var links=document.querySelectorAll('.nav-link');for(var i=0;i<links.length;i++)links[i].classList.toggle('active',links[i].getAttribute('href')==='#'+current);});
 </script>
 </body>
 </html>
