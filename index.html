@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEC Bekerfinale 2026 🏆</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LRYWE31EEM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LRYWE31EEM');
+</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
   :root { --red:#D0021B; --green:#008A3C; --black:#0d0d0d; --gray:#1a1a1a; --white:#f0f0f0; --border:#2a2a2a; }
@@ -405,24 +413,29 @@
       var seen = {};
       for (var q = 0; q < queries.length; q++) {
         var rssUrl = 'https://news.google.com/rss/search?q=' + queries[q] + '&hl=nl&gl=NL&ceid=NL:nl';
-        var res = await fetch('https://corsproxy.io/?' + encodeURIComponent(rssUrl));
-        var text = await res.text();
-        var xml = new DOMParser().parseFromString(text, 'text/xml');
-        var nodes = xml.querySelectorAll('item');
-        for (var i = 0; i < nodes.length; i++) {
-          var el = nodes[i];
-          var title = el.querySelector('title') ? el.querySelector('title').textContent : '';
-          var link = el.querySelector('link') ? el.querySelector('link').textContent : '';
-          var pub = el.querySelector('pubDate') ? el.querySelector('pubDate').textContent : '';
-          var src = el.querySelector('source') ? el.querySelector('source').textContent : '';
-          if (!src && link) { try { src = new URL(link).hostname.replace('www.',''); } catch(e) { src = ''; } }
-          if (title && link && !seen[title]) { seen[title] = true; items.push({title:title, link:link, pub:pub, src:src}); }
+        var apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl) + '&count=15';
+        var res = await fetch(apiUrl);
+        var data = await res.json();
+        if (data.items) {
+          for (var i = 0; i < data.items.length; i++) {
+            var item = data.items[i];
+            var src = item.author || '';
+            if (!src && item.link) { try { src = new URL(item.link).hostname.replace('www.',''); } catch(e) { src=''; } }
+            if (item.title && item.link && !seen[item.title]) {
+              seen[item.title] = true;
+              items.push({title:item.title, link:item.link, pub:item.pubDate, src:src});
+            }
+          }
         }
       }
       items.sort(function(a,b) { return new Date(b.pub) - new Date(a.pub); });
       allNieuws_live = items;
-      renderNewsLive(items.slice(0, 8));
-      if (items.length > 8) document.getElementById('news-more-btn').style.display = 'inline-block';
+      if (items.length) {
+        renderNewsLive(items.slice(0, 8));
+        if (items.length > 8) document.getElementById('news-more-btn').style.display = 'inline-block';
+      } else {
+        document.getElementById('news-container').innerHTML = '<div style="color:#555;font-size:0.85rem">Nieuws kon niet worden geladen.</div>';
+      }
     } catch(e) {
       document.getElementById('news-container').innerHTML = '<div style="color:#555;font-size:0.85rem">Nieuws kon niet worden geladen.</div>';
     }
@@ -517,7 +530,7 @@
           html += '<div class="injury-dot" style="background:' + dotColor[player.status] + '"></div>';
           html += '<div style="flex:1"><div class="injury-name">' + player.name + '</div>';
           html += '<div class="injury-detail">' + player.detail + ' · ' + statusLabel[player.status] + '</div></div>';
-          html += '<button class="injury-remove" onclick="removeInjury(\'' + club.key + '\',' + p + ')">✕</button>';
+          html += '<button class="injury-remove" onclick="removeInjury(\'' + club.key + '\',' + p + ')" style="display:' + (isUnlocked ? 'inline' : 'none') + '">✕</button>';
           html += '</div>';
         }
       }
