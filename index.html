@@ -215,7 +215,62 @@ section:last-child{border-bottom:none;}
 .sh-x{background:#000;border:1px solid #333;}
 .sh-fb{background:#1877F2;}
 .sh-cp{background:var(--gray);border:1px solid var(--border);}
-/* RESET WACHTWOORD MODAL */
+/* PROFIEL PAGINA */
+.profile-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2500;display:none;align-items:flex-start;justify-content:flex-end;padding:62px 16px 0 0;backdrop-filter:blur(6px);}
+.profile-overlay.open{display:flex;}
+.profile-modal{background:#0d0d0d;border:1px solid #222;border-radius:12px;width:380px;max-height:85vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,0.7);animation:sd 0.2s ease;}
+.profile-stripe{height:3px;background:linear-gradient(to right,var(--red) 50%,var(--green) 50%);}
+.profile-hdr{padding:18px 18px 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.profile-ttl{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.profile-tabs{display:flex;border-bottom:1px solid #1e1e1e;margin:0 18px;}
+.ptab{flex:1;text-align:center;padding:8px 0;font-family:'Oswald',sans-serif;font-size:0.68rem;letter-spacing:1px;text-transform:uppercase;color:#444;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 0.2s,border-color 0.2s;}
+.ptab:hover{color:#888;}
+.ptab.active{color:var(--white);border-bottom-color:var(--red);}
+.profile-body{padding:18px;}
+.profile-section{margin-bottom:20px;}
+.profile-section-lbl{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:10px;}
+/* RANK */
+.rank-card{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:16px;position:relative;overflow:hidden;}
+.rank-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--red),var(--green));}
+.rank-badge{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.rank-icon{font-size:2rem;}
+.rank-name{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;}
+.rank-sub{font-size:0.72rem;color:#666;margin-top:2px;}
+.rank-bar-wrap{background:#1a1a1a;border-radius:4px;height:6px;overflow:hidden;margin-bottom:6px;}
+.rank-bar{height:100%;background:linear-gradient(to right,var(--red),var(--green));border-radius:4px;transition:width 0.6s ease;}
+.rank-progress{font-size:0.68rem;color:#555;display:flex;justify-content:space-between;}
+/* AVATAR GRID */
+.avatar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.av-opt{width:100%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;border:2px solid transparent;background:#111;transition:border-color 0.2s,transform 0.2s;}
+.av-opt:hover{transform:scale(1.1);}
+.av-opt.selected{border-color:var(--red);}
+/* TOGGLE */
+.pref-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #1e1e1e;}
+.pref-row:last-child{border-bottom:none;}
+.pref-lbl{font-size:0.85rem;color:#ccc;}
+.pref-sub{font-size:0.68rem;color:#555;margin-top:2px;}
+.toggle{position:relative;width:40px;height:22px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:#2a2a2a;border-radius:22px;cursor:pointer;transition:background 0.2s;}
+.toggle-slider::before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform 0.2s;}
+.toggle input:checked+.toggle-slider{background:var(--red);}
+.toggle input:checked+.toggle-slider::before{transform:translateX(18px);}
+/* DRAG SECTIONS */
+.drag-list{display:flex;flex-direction:column;gap:6px;}
+.drag-item{display:flex;align-items:center;gap:10px;background:#111;border:1px solid #1e1e1e;border-radius:6px;padding:10px 12px;cursor:grab;user-select:none;transition:border-color 0.2s;}
+.drag-item:hover{border-color:#333;}
+.drag-item.dragging{opacity:0.4;}
+.drag-handle{color:#444;font-size:0.9rem;}
+.drag-lbl{font-size:0.85rem;flex:1;}
+/* PROFILE INPUT */
+.p-input{width:100%;background:#111;border:1px solid #252525;color:var(--white);padding:10px 14px;border-radius:6px;font-size:0.85rem;font-family:'Open Sans',sans-serif;outline:none;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:10px;}
+.p-input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(208,2,27,0.1);}
+.p-btn{background:linear-gradient(to right,var(--red),#a00015);color:#fff;border:none;padding:10px;width:100%;border-radius:6px;font-family:'Oswald',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s;}
+.p-btn:hover{opacity:0.88;}
+.p-ok{font-size:0.76rem;color:#00C853;margin-top:8px;display:none;}
+/* LIGHT MODE */
+body.light{--black:#f5f5f5;--gray:#e8e8e8;--white:#111;--border:#ddd;}
+body.light .news-item,.body.light .com-item{color:#111;}
 .reset-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:3000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
 .reset-overlay.open{display:flex;}
 .reset-modal{background:#0d0d0d;border:1px solid #222;border-radius:12px;width:320px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.7);}
@@ -518,6 +573,89 @@ footer{text-align:center;padding:32px 24px 24px;color:#333;font-size:0.78rem;pos
   </div>
 </div>
 
+<!-- PROFIEL MODAL -->
+<div class="profile-overlay" id="profile-overlay" onclick="closeProfileOverlay(event)">
+  <div class="profile-modal">
+    <div class="profile-stripe"></div>
+    <div class="profile-hdr">
+      <span class="profile-ttl">Mijn profiel</span>
+      <button class="auth-x" onclick="closeProfile()">✕</button>
+    </div>
+    <div class="profile-tabs">
+      <div class="ptab active" id="pt-rank" onclick="switchPTab('rank')">Rang</div>
+      <div class="ptab" id="pt-avatar" onclick="switchPTab('avatar')">Avatar</div>
+      <div class="ptab" id="pt-instellingen" onclick="switchPTab('instellingen')">Instellingen</div>
+      <div class="ptab" id="pt-volgorde" onclick="switchPTab('volgorde')">Volgorde</div>
+    </div>
+    <div class="profile-body">
+
+      <!-- RANG TAB -->
+      <div id="pp-rank">
+        <div class="profile-section">
+          <div class="profile-section-lbl">Jouw rang</div>
+          <div class="rank-card">
+            <div class="rank-badge">
+              <div class="rank-icon" id="rank-icon">🌱</div>
+              <div>
+                <div class="rank-name" id="rank-name">Supporter</div>
+                <div class="rank-sub" id="rank-sub">0 reacties geplaatst</div>
+              </div>
+            </div>
+            <div class="rank-bar-wrap"><div class="rank-bar" id="rank-bar" style="width:0%"></div></div>
+            <div class="rank-progress"><span id="rank-cur">0</span><span id="rank-next">Volgende rang bij 3 reacties</span></div>
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-lbl">Alle rangen</div>
+          <div style="display:flex;flex-direction:column;gap:8px" id="rank-list"></div>
+        </div>
+      </div>
+
+      <!-- AVATAR TAB -->
+      <div id="pp-avatar" style="display:none">
+        <div class="profile-section">
+          <div class="profile-section-lbl">Kies een avatar</div>
+          <div class="avatar-grid" id="avatar-grid"></div>
+        </div>
+      </div>
+
+      <!-- INSTELLINGEN TAB -->
+      <div id="pp-instellingen" style="display:none">
+        <div class="profile-section">
+          <div class="profile-section-lbl">Voorkeuren</div>
+          <div class="pref-row">
+            <div><div class="pref-lbl">🌙 Dark mode</div><div class="pref-sub">Schakel tussen licht en donker</div></div>
+            <label class="toggle"><input type="checkbox" id="tog-dark" checked onchange="toggleDark(this)"><span class="toggle-slider"></span></label>
+          </div>
+          <div class="pref-row">
+            <div><div class="pref-lbl">🌍 Taal</div><div class="pref-sub">Nederlands / English</div></div>
+            <select id="lang-sel" onchange="changeLang(this.value)" style="background:#111;border:1px solid #333;color:var(--white);padding:6px 10px;border-radius:4px;font-size:0.8rem;cursor:pointer">
+              <option value="nl">🇳🇱 Nederlands</option>
+              <option value="en">🇬🇧 English</option>
+            </select>
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="profile-section-lbl">Wachtwoord wijzigen</div>
+          <input class="p-input" type="password" id="new-pw-p" placeholder="Nieuw wachtwoord" autocomplete="new-password"/>
+          <input class="p-input" type="password" id="new-pw2-p" placeholder="Bevestig wachtwoord" autocomplete="new-password"/>
+          <button class="p-btn" onclick="changePw()">Wachtwoord opslaan</button>
+          <div class="p-ok" id="pw-ok">✅ Wachtwoord gewijzigd!</div>
+        </div>
+      </div>
+
+      <!-- VOLGORDE TAB -->
+      <div id="pp-volgorde" style="display:none">
+        <div class="profile-section-lbl" style="margin-bottom:10px">Sleep om de volgorde aan te passen</div>
+        <div class="drag-list" id="drag-list"></div>
+        <button class="p-btn" style="margin-top:14px" onclick="applyOrder()">✓ Volgorde opslaan</button>
+        <div class="p-ok" id="order-ok">✅ Volgorde opgeslagen!</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- RESET WACHTWOORD MODAL -->
 <div class="reset-overlay" id="reset-overlay">
   <div class="reset-modal">
@@ -628,10 +766,11 @@ sb.auth.onAuthStateChange(function(ev, sess) {
     document.getElementById('au-init').textContent=ini;
     document.getElementById('au-name').textContent=curName;
     document.getElementById('au-email').textContent=sess.user.email;
-    document.getElementById('auth-av').textContent=ini;
+    document.getElementById('auth-av').textContent=curAvatar||ini;
     document.getElementById('auth-lbl').textContent=curName;
     document.getElementById('com-notice').style.display='none';
     document.getElementById('com-form').style.display='block';
+    loadUserCommentCount();
   } else {
     curUser=null; curName='';
     document.getElementById('ap-guest').style.display='block';
@@ -929,7 +1068,189 @@ function rmInjAdmin(id){
   sb.from('Blessures').delete().eq('id',id).then(function(){loadInj();});
 }
 
-// NAV
+// PROFIEL
+var curAvatar = localStorage.getItem('avatar') || '';
+var curLang = localStorage.getItem('lang') || 'nl';
+var isDark = localStorage.getItem('dark') !== 'false';
+var sectionOrder = JSON.parse(localStorage.getItem('sectionOrder') || 'null');
+var userComCount = 0;
+
+var ranks = [
+  {min:0,  max:2,  name:'Supporter',      icon:'🌱', color:'#666'},
+  {min:3,  max:5,  name:'Trouwe Fan',     icon:'⚽', color:'#888'},
+  {min:6,  max:9,  name:'Clubliefhebber', icon:'🔴', color:'#D0021B'},
+  {min:10, max:14, name:'Fanatiekeling',  icon:'🏆', color:'#f5a623'},
+  {min:15, max:19, name:'Gofferheld',     icon:'⭐', color:'#00C853'},
+  {min:20, max:999,name:'NEC Legend',     icon:'👑', color:'#FFD700'},
+];
+
+var allSections = [
+  {id:'aftellen', lbl:'⏱ Aftellen'},
+  {id:'nieuws',   lbl:'📰 Nieuws'},
+  {id:'blessures',lbl:'🏥 Blessures'},
+  {id:'weer',     lbl:'🌤 Weer'},
+  {id:'route',    lbl:'🗺️ Route'},
+  {id:'muziek',   lbl:'🎵 Muziek'},
+  {id:'podcasts', lbl:'🎙 Podcasts'},
+  {id:'poll',     lbl:'🗳 Poll'},
+  {id:'suggestie',lbl:'💡 Suggestie'},
+];
+
+var avatarOptions = ['⚽','🏆','🟢','🔴','🦁','🐯','🦅','🔥','💪','⭐','🎯','🎤','📻','🎵','👑'];
+
+if(!isDark) document.body.classList.add('light');
+
+function openProfile() {
+  closeAuth();
+  document.getElementById('profile-overlay').classList.add('open');
+  switchPTab('rank');
+}
+function closeProfile() { document.getElementById('profile-overlay').classList.remove('open'); }
+function closeProfileOverlay(e) { if(e.target===document.getElementById('profile-overlay')) closeProfile(); }
+
+function switchPTab(t) {
+  ['rank','avatar','instellingen','volgorde'].forEach(function(n){
+    document.getElementById('pp-'+n).style.display = n===t?'block':'none';
+    document.getElementById('pt-'+n).className = 'ptab'+(n===t?' active':'');
+  });
+  if(t==='avatar') renderAvatars();
+  if(t==='volgorde') renderDragList();
+  if(t==='rank') renderRank();
+  if(t==='instellingen') {
+    document.getElementById('tog-dark').checked = isDark;
+    document.getElementById('lang-sel').value = curLang;
+  }
+}
+
+function loadUserCommentCount() {
+  if(!curUser) return;
+  sb.from('Comments').select('id',{count:'exact'}).eq('user_id',curUser.id).then(function(r){
+    userComCount = r.count || 0;
+    renderRank();
+  });
+}
+
+function getRank(n) {
+  for(var i=ranks.length-1;i>=0;i--) { if(n>=ranks[i].min) return i; }
+  return 0;
+}
+
+function renderRank() {
+  var n = userComCount;
+  var idx = getRank(n);
+  var rank = ranks[idx];
+  var next = ranks[idx+1];
+  document.getElementById('rank-icon').textContent = rank.icon;
+  document.getElementById('rank-name').textContent = rank.name;
+  document.getElementById('rank-name').style.color = rank.color;
+  document.getElementById('rank-sub').textContent = n + ' reactie'+(n===1?'':'s')+' geplaatst';
+  var pct = next ? Math.round((n-rank.min)/(next.min-rank.min)*100) : 100;
+  document.getElementById('rank-bar').style.width = pct+'%';
+  document.getElementById('rank-cur').textContent = n + ' reacties';
+  document.getElementById('rank-next').textContent = next ? 'Volgende rang bij '+next.min+' reacties' : '👑 Maximale rang bereikt!';
+  var h='';
+  for(var i=0;i<ranks.length;i++){
+    var r=ranks[i], active=i<=idx;
+    h+='<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:#111;border:1px solid '+(active?r.color:'#1e1e1e')+';border-radius:6px;opacity:'+(active?1:0.4)+';">';
+    h+='<span style="font-size:1.2rem">'+r.icon+'</span>';
+    h+='<div><div style="font-family:Oswald,sans-serif;font-size:0.88rem;font-weight:600;color:'+(active?r.color:'#555')+'">'+r.name+'</div>';
+    h+='<div style="font-size:0.65rem;color:#555">'+r.min+(r.max<999?'–'+r.max:'+') +' reacties</div></div>';
+    if(i===idx) h+='<span style="margin-left:auto;font-size:0.65rem;color:'+r.color+';font-family:Oswald,sans-serif;letter-spacing:1px">HUIDIG</span>';
+    h+='</div>';
+  }
+  document.getElementById('rank-list').innerHTML=h;
+}
+
+function renderAvatars() {
+  var h='';
+  for(var i=0;i<avatarOptions.length;i++){
+    var av=avatarOptions[i];
+    h+='<div class="av-opt'+(curAvatar===av?' selected':'')+'" onclick="pickAvatar(\''+av+'\')">'+(av)+'</div>';
+  }
+  document.getElementById('avatar-grid').innerHTML=h;
+}
+
+function pickAvatar(av) {
+  curAvatar=av; localStorage.setItem('avatar',av);
+  document.getElementById('auth-av').textContent=av;
+  renderAvatars();
+}
+
+function toggleDark(el) {
+  isDark=el.checked; localStorage.setItem('dark',isDark);
+  document.body.classList.toggle('light',!isDark);
+}
+
+function changeLang(v) {
+  curLang=v; localStorage.setItem('lang',v);
+}
+
+function changePw() {
+  var pw=document.getElementById('new-pw-p').value;
+  var pw2=document.getElementById('new-pw2-p').value;
+  if(!pw||pw.length<6){alert('Wachtwoord minimaal 6 tekens.');return;}
+  if(pw!==pw2){alert('Wachtwoorden komen niet overeen.');return;}
+  sb.auth.updateUser({password:pw}).then(function(r){
+    if(r.error){alert(r.error.message);}
+    else{document.getElementById('pw-ok').style.display='block';document.getElementById('new-pw-p').value='';document.getElementById('new-pw2-p').value='';setTimeout(function(){document.getElementById('pw-ok').style.display='none';},3000);}
+  });
+}
+
+var dragOrder = null;
+var dragSrc = null;
+
+function renderDragList() {
+  var order = sectionOrder || allSections.map(function(s){return s.id;});
+  var h='';
+  for(var i=0;i<order.length;i++){
+    var sec = allSections.find(function(s){return s.id===order[i];});
+    if(!sec) continue;
+    h+='<div class="drag-item" draggable="true" data-id="'+sec.id+'" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="dragDrop(event)">';
+    h+='<span class="drag-handle">☰</span><span class="drag-lbl">'+sec.lbl+'</span></div>';
+  }
+  document.getElementById('drag-list').innerHTML=h;
+}
+
+function dragStart(e){dragSrc=e.currentTarget;e.currentTarget.classList.add('dragging');}
+function dragOver(e){e.preventDefault();}
+function dragDrop(e){
+  e.preventDefault();
+  var target=e.currentTarget;
+  if(dragSrc===target)return;
+  var list=document.getElementById('drag-list');
+  var items=Array.from(list.children);
+  var srcIdx=items.indexOf(dragSrc), tgtIdx=items.indexOf(target);
+  if(srcIdx<tgtIdx) list.insertBefore(dragSrc,target.nextSibling);
+  else list.insertBefore(dragSrc,target);
+  dragSrc.classList.remove('dragging');
+}
+
+function applyOrder() {
+  var items=Array.from(document.getElementById('drag-list').children);
+  var order=items.map(function(el){return el.dataset.id;});
+  sectionOrder=order; localStorage.setItem('sectionOrder',JSON.stringify(order));
+  var main=document.querySelector('.main-content');
+  for(var i=0;i<order.length;i++){
+    var sec=document.getElementById(order[i]);
+    if(sec) main.appendChild(sec);
+  }
+  document.getElementById('order-ok').style.display='block';
+  setTimeout(function(){document.getElementById('order-ok').style.display='none';},2000);
+}
+
+// Apply saved order on load
+if(sectionOrder){
+  var main=document.querySelector('.main-content');
+  for(var i=0;i<sectionOrder.length;i++){
+    var sec=document.getElementById(sectionOrder[i]);
+    if(sec) main.appendChild(sec);
+  }
+}
+
+// Pas auth-knop aan om profiel te openen als ingelogd
+document.getElementById('auth-av').closest('button').onclick = function(){
+  if(curUser) openProfile(); else toggleAuth();
+};
 var secs=['aftellen','nieuws','blessures','weer','route','muziek','podcasts','poll','suggestie'];
 window.addEventListener('scroll',function(){var cur='';for(var i=0;i<secs.length;i++){var el=document.getElementById(secs[i]);if(el&&window.scrollY>=el.offsetTop-80)cur=secs[i];}document.querySelectorAll('.nl').forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});});
 </script>
